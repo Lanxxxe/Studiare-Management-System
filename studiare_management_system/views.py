@@ -6,4 +6,5 @@ def index(request):
     return HttpResponse(f"Pag start ka na earl ha UI {datetime.now()}")
 
 
-
+def index(request):
+    return render(request, 'index.html')
