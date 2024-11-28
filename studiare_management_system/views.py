@@ -7,4 +7,4 @@ def index(request):
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'studiare_management_system/index.html')
