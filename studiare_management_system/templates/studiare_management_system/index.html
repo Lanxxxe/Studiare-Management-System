@@ -1,14 +1,79 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Studiare</title>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <h1 class="text-4xl font-bold text-center">
-        Test
-    </h1>
+
+<body class="bg-[#F5F5F5]">
+
+    <nav class="bg-[#582711] px-4 py-6">
+        <div class="flex justify-between items-center text-white">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Container for all sections -->
+    <div id="sections-container" class="sections-container">
+
+        <!-- Hero Section -->
+        <section id="welcome">
+            <div class="section-content">
+                <h1 class="text-6xl font-bold mb-4">Welcome to Studiare</h1>
+                <p class="text-xl mb-8">Pakyu all.</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-content">
+                <h2 class="text-4xl font-bold mb-4">About Us</h2>
+                <p class="text-lg text-[#745c44]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                    efficitur dolor at lorem sodales, ac facilisis dui dignissim. Proin ornare tincidunt metus, non
+                    volutpat nunc facilisis ac.</p>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu">
+            <div class="section-content">
+                <h2 class="text-4xl font-bold mb-4">Our Menu</h2>
+                <p class="text-lg text-[#745c44] mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+                    faucibus leo ut sapien egestas, eu feugiat ligula varius. Integer scelerisque orci nec tristique
+                    dictum.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-content">
+                <h2 class="text-4xl font-bold mb-4">Contact Us</h2>
+                <p class="text-lg text-[#745c44] mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                    id fermentum eros. Vivamus vel auctor dui, in facilisis risus. Morbi tristique, lectus eget
+                    efficitur gravida.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="arrow arrow-left" onclick="moveSection(-1)">&#x2039;</div>
+    <div class="arrow arrow-right" onclick="moveSection(1)">&#x203A;</div>
+
+    <footer class="bg-black text-white text-center py-4">
+        <p>&copy; 2024 Studiare. Aidk what to put here... this is a placeholder.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+
 </body>
+
 </html>
