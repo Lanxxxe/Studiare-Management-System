@@ -19,7 +19,7 @@ class User(models.Model):
     user_type = models.ForeignKey(UserType, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.username
+        return f"{self.firstname} {self.lastname}"
 
 
 class UserEmail(models.Model):
