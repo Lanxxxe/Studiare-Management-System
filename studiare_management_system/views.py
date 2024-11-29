@@ -4,4 +4,4 @@ from datetime import datetime
 
 
 def index(request):
-    return render(request, 'studiare_management_system/index.html')
+    return render(request, 'index.html')
