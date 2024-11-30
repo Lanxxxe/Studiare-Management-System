@@ -2,7 +2,7 @@ from django.db import models
 
 class UserType(models.Model):
     type_id = models.AutoField(primary_key=True)
-    user_level = models.IntegerField()
+    user_level = models.CharField(max_length=20)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -11,10 +11,10 @@ class UserType(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
-    username = models.CharField(max_length=255, unique=True)
-    user_email = models.EmailField()
+    firstname = models.CharField(max_length=20)
+    lastname = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, unique=True)
+    user_email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     user_type = models.ForeignKey(UserType, on_delete=models.CASCADE)
 
