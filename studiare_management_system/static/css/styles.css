@@ -1,82 +1,31 @@
-body {
-    overflow-x: hidden;
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-/* Container for horizontal scroll sections */
-.sections-container {
-    display: flex;
-    transition: transform 0.6s ease-out;
-    width: 100vw;
-    /* Full screen width */
+/* Fade-out animation */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
-section {
-    min-width: 100vw;
-    /* Make each section take full width */
-    height: 82.7vh;
-    /* Full screen height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+/* Apply fade-in effect */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
 }
 
-.section-content {
-    max-width: 1200px;
-    /* Limit the width of content */
-    margin: 0 auto;
-    /* Center content horizontally */
-    padding: 20px;
-}
-
-/* Arrow styling */
-.arrow {
-    position: fixed;
-    top: 50%;
-    z-index: 10;
-    font-size: 5rem;
-    /* Increased size */
-    cursor: pointer;
-    color: #fff;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.arrow-left {
-    left: 10px;
-}
-
-.arrow-right {
-    right: 10px;
-}
-
-/* Remove background and circles around arrows */
-.arrow-left,
-.arrow-right {
-    background: none;
-    padding: 1rem;
-    /* Increased padding for better clickability */
-}
-
-/* General styles for sections */
-#welcome {
-    background-color: #e09247;
-    color: white;
-}
-
-#about {
-    background-color: #f6d5b4;
-    color: #582711;
-}
-
-#menu {
-    background-color: #e9b47b;
-    color: #582711;
-}
-
-#contact {
-    background-color: #f6d5b4;
-    color: #582711;
+/* Apply fade-out effect */
+.fade-out {
+    opacity: 1;
+    animation: fadeOut 1s forwards;
 }
