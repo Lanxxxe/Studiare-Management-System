@@ -43,7 +43,7 @@ def account_registration(request):
             email = EmailMessage(mail_subject, message, to=[to_email])
             messages.success(request, "Check your email to complete the registration process.")
             return redirect("index")
-    return render("registration.html", {"form": form})
+    return render(request, "registration.html", {"form": form})
 
 
 def activate_account(request, user_id_b64, token):
