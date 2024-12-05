@@ -46,6 +46,7 @@ def account_registration(request):
             email = EmailMessage(mail_subject, message, to=[to_email])
             messages.success(request, "Check your email to complete the registration process.")
             return redirect("index")
+    
     return render(request, "registration.html", {"form": form})
 
 

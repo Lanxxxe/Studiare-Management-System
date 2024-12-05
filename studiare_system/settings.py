@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Apps
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'studiare_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'studiare_management_system/templates'],
+        'DIRS': [BASE_DIR / 'users/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,10 +118,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'studiare_management_system/static/'
+STATIC_URL = 'users/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'studiare_management_system/static',  # Ensure the path to your static folder is correct
+    BASE_DIR / 'users/static',  # Ensure the path to your static folder is correct
 ]
 
 # Default primary key field type
