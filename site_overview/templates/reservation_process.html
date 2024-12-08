@@ -5,5 +5,26 @@ Title
 {% endblock %}
 
 {% block content %}
-<h1>tanginamo</h1>
+<section id="reservation-header"
+    class="h-[93vh] flex flex-col justify-center items-center text-center bg-[#f6d5b4] text-[#582711] fade-out">
+    <!-- Title -->
+    <div class="text-5xl font-bold mb-8">
+        How to Book a Reservation
+    </div>
+    <div class="section-content max-w-[1300px] mx-auto p-4 flex items-center">
+        <!-- Left image -->
+        <div class="w-[1800px] bg-gray-400 h-[500px] transform translate-x-[-200px] fade-out"></div>
+        <!-- Right placeholders -->
+        <div class="flex flex-col justify-between h-[500px] w-[400px] ml-8 fade-out">
+            <div class="bg-gray-300 h-[125px] w-[650px] rounded-md transform translate-x-[-90px]"></div>
+            <div class="bg-gray-300 h-[125px] w-[650px] rounded-md transform translate-x-[-90px]"></div>
+            <div class="bg-gray-300 h-[125px] w-[650px] rounded-md transform translate-x-[-90px]"></div>
+        </div>
+    </div>
+</section>
+
+<section id="centered-rectangle" class="h-[80vh] flex justify-center items-center bg-[#e9b47b] text-[#582711] fade-out">
+    <div class="w-[1700px] bg-gray-400 h-[600px] rounded-md fade-out"></div>
+</section>
+
 {% endblock %}

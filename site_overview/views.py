@@ -8,3 +8,6 @@ def landing_page(request):
 
 def reservation_process(request):
     return render(request, 'reservation_process.html')
+
+def about_us(request):
+    return render(request, 'about_us.html')
