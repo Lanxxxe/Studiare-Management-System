@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Studiare{% endblock %}</title>
+</head>
+<body class="bg-[#2A4D32] overflow-x-hidden">
+    <nav class="bg-[#582711] px-4 py-6 sticky top-0 z-10">
+        <div class="flex justify-between items-center text-white">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
+            </div>
+            <div class="ml-auto">
+                <a href="/login" class="bg-[#f6d5b4] text-[#582711] text-sm px-4 py-2 rounded-md hover:bg-[#e09247] transition-colors">
+                    Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="bg-black text-white text-center py-4">
+        <p>&copy; 2048 Studiare. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
