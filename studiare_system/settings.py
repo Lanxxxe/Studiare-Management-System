@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # Apps
     "users",
+    "site_overview",
+    "sales_management",
+    "reservation",
 ]
 
 MIDDLEWARE = [
@@ -121,7 +124,10 @@ USE_TZ = True
 STATIC_URL = 'users/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'users/static',  # Ensure the path to your static folder is correct
+    BASE_DIR / 'users/static',
+    BASE_DIR / 'site_overview/static',  # Ensure the path to your static folder is correct
+    BASE_DIR / 'sales_management/static',  # Ensure the path to your static folder is correct
+    BASE_DIR / 'reservation/static',  # Ensure the path to your static folder is correct
 ]
 
 # Default primary key field type
