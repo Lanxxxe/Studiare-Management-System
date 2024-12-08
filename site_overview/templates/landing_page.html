@@ -1,12 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Landing Page</title>
-</head>
-<body>
-    
-    <h1>Landing Page</h1>
-</body>
-</html>
+{% extends "base_overview.html" %}
+
+{% block title %}
+Landing Page
+{% endblock %}
+
+{% block content %}
+<section id="welcome" class="h-[90vh] flex justify-center items-center text-center bg-[#e09247] text-white fade-in">
+    <div class="section-content max-w-[1200px] mx-auto p-4">
+        <h1 class="text-6xl font-bold mb-4">Welcome to Studiare</h1>
+        <p class="text-xl mb-8">Pakyu all.</p>
+    </div>
+</section>
+
+<section id="about"
+    class="h-[80vh] flex flex-col justify-between items-center text-center bg-[#f6d5b4] text-[#582711] fade-in">
+    <div class="section-content max-w-[1200px] mx-auto p-4 mt-48">
+        <h2 class="text-4xl font-bold mb-6">About Studiare</h2>
+        <p class="text-lg mb-8">Welcome to STUDIARE—where the blend of a classy aura and aesthetic ambiance
+            creates the perfect environment for collaborative learning. Our space is thoughtfully designed to
+            inspire creativity and foster teamwork, offering a comfortable setting for both educational pursuits
+            and casual relaxation.</p>
+    </div>
+
+    <!-- Circles for Images -->
+    <div class="flex space-x-8 mb-40 mt-4 fade-in">
+        <div class="w-48 h-48 bg-gray-300 rounded-full"></div>
+        <div class="w-48 h-48 bg-gray-300 rounded-full"></div>
+        <div class="w-48 h-48 bg-gray-300 rounded-full"></div>
+    </div>
+</section>
+
+<section id="menu" class="h-[80vh] flex justify-center items-center text-center bg-[#e9b47b] text-[#582711] fade-in">
+    <div class="section-content max-w-[1200px] mx-auto p-4 flex items-center">
+        <div class="w-1/2 text-left pr-8">
+            <h2 class="text-4xl font-bold mb-4">Our Menu</h2>
+            <p class="text-lg mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus
+                leo ut sapien egestas, eu feugiat ligula varius. Integer scelerisque orci nec tristique dictum.
+            </p>
+        </div>
+        <div class="w-1/2 bg-gray-400 min-h-[600px]"></div>
+    </div>
+</section>
+
+<section id="contact" class="h-[80vh] flex justify-center items-center text-center bg-[#c05c1c] text-white fade-in">
+    <div class="section-content max-w-[1200px] mx-auto p-4 flex justify-between items-center w-full">
+        <div class="w-1/2 text-left pr-8">
+            <h2 class="text-4xl font-bold mb-4">Contact Us</h2>
+            <p class="text-lg mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id fermentum
+                eros. Vivamus vel auctor dui, in facilisis risus. Morbi tristique, lectus eget efficitur
+                gravida.</p>
+        </div>
+
+        <div class="w-1/2 flex justify-center space-x-8">
+            <div class="flex flex-col items-center fade-in">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex justify-center items-center mb-2">
+                    <span class="text-white text-3xl">F</span>
+                </div>
+                <p class="text-sm text-white">Facebook</p>
+            </div>
+
+            <div class="flex flex-col items-center fade-in">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex justify-center items-center mb-2">
+                    <span class="text-white text-3xl">P</span>
+                </div>
+                <p class="text-sm text-white">Phone</p>
+            </div>
+
+            <div class="flex flex-col items-center fade-in">
+                <div class="w-24 h-24 bg-gray-400 rounded-full flex justify-center items-center mb-2">
+                    <span class="text-white text-3xl">G</span>
+                </div>
+                <p class="text-sm text-white">Gmail</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

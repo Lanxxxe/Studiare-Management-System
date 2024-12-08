@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,21 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>{% block title %}Studiare{% endblock %}</title>
 </head>
+
 <body class="bg-[#2A4D32] overflow-x-hidden">
     <nav class="bg-[#582711] px-4 py-6 sticky top-0 z-10">
         <div class="flex justify-between items-center text-white">
             <div class="flex items-center space-x-4">
                 <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
+                <!-- Add navigation buttons flushed to the left -->
+                <a href="{% url 'landing_page' %}" class="text-sm hover:text-[#f6d5b4] transition-colors">Home</a>
+                <a href="{% url 'reservation_process' %}"
+                    class="text-sm hover:text-[#f6d5b4] transition-colors">Reservation</a>
             </div>
             <div class="ml-auto">
-                <a href="/login" class="bg-[#f6d5b4] text-[#582711] text-sm px-4 py-2 rounded-md hover:bg-[#e09247] transition-colors">
-                    Login
+                <a href="{% url 'registration' %}"
+                    class="bg-[#f6d5b4] text-[#582711] text-sm px-4 py-2 rounded-md hover:bg-[#e09247] transition-colors">
+                    Sign Up / Login
                 </a>
             </div>
         </div>
@@ -32,4 +39,5 @@
 
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
+
 </html>
