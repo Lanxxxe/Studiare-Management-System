@@ -60,7 +60,10 @@ ROOT_URLCONF = 'studiare_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'users/templates'],
+        'DIRS': [BASE_DIR / 'users/templates', 
+                 BASE_DIR / 'reservation/templates', 
+                 BASE_DIR / 'site_overview/templates',
+                 BASE_DIR / 'sales_management/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
