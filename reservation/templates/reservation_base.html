@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
     <script src="https://cdn.tailwindcss.com"></script>
     {% block local_css %} {% endblock %}
     <title> {% block title %} {% endblock %}</title>
@@ -34,6 +37,8 @@
 
     {% block local_script %} {% endblock %}
 
+    {% load sweetify %}
+    {% sweetify %}
 </body>
 
 </html>

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "site_overview",
     "sales_management",
     "reservation",
+    "sweetify",
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'studiare_system.wsgi.application'
-
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

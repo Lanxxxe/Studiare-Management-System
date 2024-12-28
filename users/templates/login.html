@@ -1,4 +1,4 @@
-{% extends 'base_users.html'%}
+{% extends 'user_base.html'%}
 
 
 {% block title %}Studiare - Login{% endblock %}
@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block content %} 
+
     <h2 class="text-3xl font-bold mb-4 text-[#232b2b] text-center">Login</h2>
 
     <!-- Login Form -->
@@ -24,8 +25,10 @@
     </form>
 
     <div class="mt-4 text-center text-sm text-black">
-        <p>Don't have an account? <a href="/registration" class="text-[#e09247] hover:underline">Sign up here</a></p>
+        <p>Don't have an account? <a href="{% url 'registration' %}" class="text-[#e09247] hover:underline">Sign up here</a></p>
     </div>
-
     
 {% endblock%}
+
+
+

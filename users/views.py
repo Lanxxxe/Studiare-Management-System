@@ -7,10 +7,13 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
-from .tokens import activation_token
 from .forms import RegistrationForm, LoginForm
 from .models import User, UserType
+
+import sweetify
 
 
 def index(request):
@@ -19,27 +22,25 @@ def index(request):
     return render(request, 'login.html', {"message" : display_message})
 
 def login(request):
+    # sweetify.success(request, 'You did it', text='Good job! You successfully showed a SweetAlert message', persistent='Hell yeah')
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             identifier = form.cleaned_data["identifier"]
             password = form.cleaned_data["password"]
-
+            print(identifier, password)
             try:
-                user = User.objects.get(
-                    username=identifier if User.objects.filter(username=identifier).exists() else
-                    User.objects.get(user_email=identifier)
-                )
+                user = User.objects.get(Q(username=identifier) | Q(user_email=identifier))
                 if user.is_active and check_password(password, user.password):
                     # Add session or token logic here as needed
-                    messages.success(request, f"Welcome {user.firstname}!")
-                    return redirect("index")  # Replace with your home URL
+                    sweetify.success(request, f"Welcome {user.firstname}!", persistent="Got it!")
+                    return redirect("reservation_home")  # Replace with your home URL
                 elif not user.is_active:
-                    messages.error(request, "Account is not active. Please confirm your email.")
+                    sweetify.error(request, "Account is not active. Please confirm your email.", persistent="Okay")
                 else:
-                    messages.error(request, "Invalid credentials.")
+                    sweetify.error(request, "Invalid credentials.", persistent="Okay")
             except User.DoesNotExist:
-                messages.error(request, "User not found.")
+                sweetify.error(request, "User not found.", persistent="Okay")
     else:
         form = LoginForm()
     return render(request, "login.html", {"form": form})
@@ -57,7 +58,7 @@ def account_registration(request):
                 default_user_type = UserType.objects.get(user_level="User")
                 user.user_type = default_user_type
             except UserType.DoesNotExist:
-                messages.error(request, "Default user type 'User' is not defined.")
+                sweetify.error(request, "Default user type 'User' is not defined.", persistent="Okay")
                 return redirect("registration")
 
             user.save()
@@ -73,7 +74,7 @@ def account_registration(request):
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[user.user_email],
             )
-            messages.success(request, "Account created. Please check your email to confirm.")
+            sweetify.success(request, "Account created. Please check your email to confirm.", persistent="Okay")
             return redirect("login")
     else:
         form = RegistrationForm()
@@ -86,10 +87,10 @@ def activate_account(request, uid):
         user = User.objects.get(user_id=user_id)
         user.is_active = True
         user.save()
-        messages.success(request, "Account activated. You can now log in.")
+        sweetify.success(request, "Account activated. You can now log in.", persistent="Okay")
         return redirect("login")
     except User.DoesNotExist:
-        messages.error(request, "Invalid activation link.")
+        sweetify.error(request, "Invalid activation link.", persistent="Okay")
         return redirect("registration")
 
 

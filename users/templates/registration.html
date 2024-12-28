@@ -1,4 +1,4 @@
-{% extends 'base_users.html'%}
+{% extends 'user_base.html'%}
 
 
 {% block title %}Studiare - Registration{% endblock %}
@@ -13,22 +13,22 @@
 {% endblock %}
 
 {% block content %} 
-<h2 class="text-3xl font-bold mb-4 text-[#232b2b] text-center">Create Account</h2>
 
-<!-- Registration Form -->
-<form method="post" action="{% url 'registration' %}">
-    {% csrf_token %}
-    <div class="space-y-4">
-      <form method="post">
+    <h2 class="text-3xl font-bold mb-4 text-[#232b2b] text-center">Create Account</h2>
+    <!-- Registration Form -->
+    <form method="post" action="{% url 'registration' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="w-full py-2 mt-24 bg-[#e09247] text-[#582711] text-lg rounded-md hover:bg-[#d68338] transition-colors" type="submit">Register</button>
+        <div class="space-y-4">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="w-full py-2 mt-24 bg-[#e09247] text-[#582711] text-lg rounded-md hover:bg-[#d68338] transition-colors" type="submit">Register</button>
+        </form>
+        </div>
     </form>
-    </div>
-</form>
 
-<div class="mt-4 text-center text-sm text-black">
-    <p>Already have an account? <a href="/login" class="text-[#e09247] hover:underline">Login here</a></p>
-</div>
+    <div class="mt-4 text-center text-sm text-black">
+        <p>Already have an account? <a href="{% url 'login' %}" class="text-[#e09247] hover:underline">Login here</a></p>
+    </div>
 
 {% endblock%}
