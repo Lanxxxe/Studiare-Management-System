@@ -1,0 +1,130 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block local_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+    <!-- Grid container for all 4 sections -->
+    <div class="grid grid-cols-2 gap-4 h-full">
+      <!-- Calendar section -->
+      <div class="p-4 flex items-center justify-center">
+        <!-- <h1 class="text-black">calendar</h1> -->
+        <div class="" id="calendar"></div>
+      </div>
+  
+      <!-- Spaces section -->
+      <div id="spaces" class=" p-4">
+        <table class="table-auto w-full border-collapse border border-purple-900">
+          <thead>
+            <tr class="bg-[#4A003E] text-white">
+              <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example row -->
+            <tr class="hover:bg-gray-100">
+              <td class="border border-gray-300 px-4 py-2">Study Room A</td>
+              <td class="border border-gray-300 px-4 py-2">Round</td>
+              <td class="border border-gray-300 px-4 py-2">4</td>
+              <td class="border border-gray-300 px-4 py-2">Available</td>
+            </tr>
+            <tr class="hover:bg-gray-100">
+              <td class="border border-gray-300 px-4 py-2">Long Table</td>
+              <td class="border border-gray-300 px-4 py-2">Rectangular Table</td>
+              <td class="border border-gray-300 px-4 py-2">80</td>
+              <td class="border border-gray-300 px-4 py-2">Occupied</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Reserve staff section -->
+      <div id="reserve-staff-container" class="flex flex-wrap items-center gap-2">
+        
+        <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+          <div class="">
+            <p class="text-[24px]">Reservation</p>
+            <a class="text-[12px] underline underline-offset-4" href="">View</a>
+          </div>
+
+          <p class="text-[32px] font-bold">10</p>
+        </div>
+
+        <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+          <div class="">
+            <p class="text-[24px]">Staffs</p>
+            <a class="text-[12px] underline underline-offset-4" href="">View</a>
+          </div>
+
+          <p class="text-[32px] font-bold">10</p>
+        </div>
+      </div>
+  
+      <!-- Statistics section -->
+      <div id="statistics" class=" p-4">
+        <div class="chart-container">
+          <h2>Bar Chart Example</h2>
+          <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block local_javascript %} 
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar', // Specify the chart type
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'], // X-axis labels
+        datasets: [{
+          label: 'Monthly Sales', // Label for the dataset
+          data: [12, 19, 3, 5, 8], // Y-axis data points
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1 // Width of the border
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true // Ensure the y-axis starts at zero
+          }
+        }
+      }
+    });
+
+    // Initialize Flatpickr as a permanently visible calendar
+    flatpickr("#calendar", {
+      inline: true, // Makes the calendar always visible
+      enableTime: false, // Disable time selection
+      dateFormat: "d/m/Y", // Custom date format
+      onChange: function(selectedDates, dateStr) {
+        alert("Selected date: " + dateStr);
+      },
+    });
+  </script>
+{% endblock %}

@@ -67,7 +67,7 @@ class LoginForm(forms.Form):
         label="Username or Email",
         widget=forms.TextInput(
             attrs={
-                "class": "w-full mt-2 px-4 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
+                "class": "w-full px-4 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
                 "placeholder": "Enter username or email",
             }
         ),
@@ -75,7 +75,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "class": "w-full mt-2 px-4 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
+                "class": "w-full px-4 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
                 "placeholder": "Enter your password",
             }
         ),

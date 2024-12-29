@@ -3,5 +3,5 @@ from .views import *
 
 
 urlpatterns = [
-    path('', index, name='sales_management'),
+    path('', index, name='admin_dashboard'),
 ]

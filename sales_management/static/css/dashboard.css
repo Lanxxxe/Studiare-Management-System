@@ -1,0 +1,36 @@
+.chart-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  /* Adjust the overall size of the calendar */
+.flatpickr-calendar {
+  width: 500px; /* Set the desired width */
+  height: auto; /* Adjust automatically based on content */
+  display: flex;
+}
+
+/* Use grid layout for the date cells */
+.flatpickr-da {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for each day of the week */
+  gap: 5px; /* Optional: Add spacing between cells */
+}
+
+/* Adjust each day cell */
+.flatpickr-day {
+  width: 100%; /* Ensure cells stretch to fit the grid */
+  height: 50px; /* Set uniform height */
+  line-height: 50px; /* Center the text vertically */
+  font-size: 16px; /* Adjust font size */
+  text-align: center; /* Center the text horizontally */
+}
+/* Adjust header styling */
+.flatpickr-month {
+  font-size: 18px; /* Adjust font size for the month title */
+}
+
+/* Optional: Adjust navigation arrows */
+.flatpickr-prev-month, .flatpickr-next-month {
+  font-size: 18px; /* Adjust arrow size */
+}

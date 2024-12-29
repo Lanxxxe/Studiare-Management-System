@@ -1,0 +1,49 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Staff {% endblock %}
+
+{% block content %}
+<table class="table-auto w-full border-collapse border border-purple-900">
+  <thead>
+    <tr class="bg-[#4A003E] text-white">
+      <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Time In</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Time Out</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Running time</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+      <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Example row -->
+    <tr class="hover:bg-gray-100">
+      <td class="border border-gray-300 px-4 py-2">Study Room A</td>
+      <td class="border border-gray-300 px-4 py-2">Round</td>
+      <td class="border border-gray-300 px-4 py-2">4</td>
+      <td class="border border-gray-300 px-4 py-2">4</td>
+      <td class="border border-gray-300 px-4 py-2">4</td>
+      <td class="border border-gray-300 px-4 py-2">4</td>
+      <td class="border border-gray-300 px-4 py-2">Available</td>
+      <td class="border border-gray-300 px-4 py-2">
+          <button>Check In</button>
+      </td>
+  </tr>
+    <tr class="hover:bg-gray-100">
+      <td class="border border-gray-300 px-4 py-2">Long Table</td>
+      <td class="border border-gray-300 px-4 py-2">Rectangular Table</td>
+      <td class="border border-gray-300 px-4 py-2">80</td>
+      <td class="border border-gray-300 px-4 py-2">80</td>
+      <td class="border border-gray-300 px-4 py-2">80</td>
+      <td class="border border-gray-300 px-4 py-2">80</td>
+      <td class="border border-gray-300 px-4 py-2">Occupied</td>
+      <td class="border border-gray-300 px-4 py-2">
+          <button>Check Out</button>
+      </td>
+    </tr>
+    <!-- Add more rows as needed -->
+  </tbody>
+</table>
+{% endblock %}
