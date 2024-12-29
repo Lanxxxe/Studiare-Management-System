@@ -12,18 +12,72 @@
             <div class="gray-rectangle-container mb-2 mr-20 ml-20">
                 <div class="gray-rectangle h-[500px] bg-gray-500"></div>
             </div>
-            <!-- Container for Purple Rectangles -->
-            <div class="purple-rectangle-container flex mt-10 ml-20"> <!-- Added margin-top (mt-8) -->
-                <!-- First Purple Rectangle -->
-                <div class="small-rectangle w-[350px] h-[142px] bg-[#4a003e] mr-11 ml-1>"></div>
-                <!-- Second Purple Rectangle -->
-                <div class="small-rectangle w-[350px] h-[142px] bg-[#4a003e]  ml-5 mr-25"></div>
+            <!-- Container for Purple Rectangles with Names -->
+            <div class="purple-rectangle-container flex mt-10 ml-20 mr-20 relative">
+                <!-- First Purple Rectangle (Your Reservations) -->
+                <div class="small-rectangle w-[350px] h-[142px] bg-[#4a003e] mr-11 relative rounded-md">
+                    <div class="absolute top-0 left-0 p-2 text-white text-xl ml-2">
+                        Your Reservations
+                    </div>
+                    <!-- "View" text at the bottom left of the first rectangle -->
+                    <div class="absolute bottom-0 left-0 p-2 text-white text-sm ml-6 cursor-pointer mb-4">
+                        <!-- Link to reservation_list view -->
+                        <a href="{% url 'reservation_list' %}">View</a>
+                    </div>
+                    <!-- Dynamic Number on the right side of the first rectangle, centered vertically -->
+                    <div class="absolute top-1/2 right-4 transform -translate-y-1/2 p-4 text-white text-6xl font-bold mb-16">
+                        9
+                    </div>
+                </div>
+                <!-- Second Purple Rectangle (Transactions) -->
+                <div class="small-rectangle w-[350px] h-[142px] bg-[#4a003e] ml-5 relative rounded-md">
+                    <div class="absolute top-0 left-0 p-2 text-white text-xl ml-2">
+                        Transactions
+                    </div>
+                    <!-- "View" text at the bottom left of the second rectangle -->
+                    <div class="absolute bottom-0 left-0 p-2 text-white text-sm ml-6 cursor-pointer mb-4">
+                        <a href="{% url 'reservation_transcation' %}">View</a>
+                    </div>
+                    <!-- Large Number 9 on the right side of the second rectangle -->
+                    <div class="absolute top-1/2 right-4 transform -translate-y-1/2 p-4 text-white text-6xl font-bold mb-16">
+                        9
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- Right Section with Container for Larger Color Block -->
+        <!-- Right Section with Container for Table -->
         <div class="w-1/2">
-            <div class="large-rectangle-container bg-[#4a003e] min-h-[700px] ml-20 mr-20"></div>
+            <div class="large-rectangle-container bg-[#4a003e] min-h-[700px] ml-20 mr-20 relative rounded-md">
+                <!-- Table inside the large rectangle -->
+                <table class="w-full text-white text-sm table-auto">
+                    <thead>
+                        <tr >
+                            <th class="py-4 px-4">Space</th>
+                            <th class="py-4 px-4">Slot</th>
+                            <th class="py-4 px-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Empty rows -->
+                        <tr>
+                            <td class="py-2 px-4"></td>
+                            <td class="py-2 px-4"></td>
+                            <td class="py-2 px-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4"></td>
+                            <td class="py-2 px-4"></td>
+                            <td class="py-2 px-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4"></td>
+                            <td class="py-2 px-4"></td>
+                            <td class="py-2 px-4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>
