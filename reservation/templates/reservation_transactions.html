@@ -1,44 +1,58 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
-    <script src="https://cdn.tailwindcss.com"></script>
-    {% block local_css %} {% endblock %}
-    <title> {% block title %} {% endblock %}</title>
-</head>
+{% extends 'reservation_base.html' %}
 
-<body class="bg-[#F1F1F1] overflow-x-hidden">
+{% block title %} Home {% endblock %}
 
-    <nav class="bg-[#f6d5b4] px-4 py-6 sticky top-0 z-10">
-        <div class="flex justify-between items-center text-black">
-            <!-- Left Section: Logo -->
-            <div class="flex items-center space-x-4">
-                <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
-            </div>
+{% block content %} 
 
-            <!-- Right Section: Sign Up Button -->
-            {% block action %}
-                
-            {% endblock %}
-        </div>
-    </nav>
-
-    <div class="bg-[#F1F1F1] text-[#f6d5b4] min-h-screen">
-        <div class="max-w-md mx-auto mt-20 p-6 bg-[#f6d5b4] rounded-lg shadow-lg">
-            {% block content %} {% endblock %}
-        </div>
+<section id="menu" class="h-[82.7vh] flex flex-col items-start justify-start bg-[#1e1c1f] text-[#FFFFFF] fade-in">
+    <!-- Orange Transactions Text at the Top Left -->
+    <div class="text-orange-500 text-4xl font-bold mt-10 ml-40">
+        <h1>
+            Transactions
+        </h1>
     </div>
 
-    {% block local_script %} {% endblock %}
+    <!-- Purple Table in the Center -->
+    <div class="flex justify-center items-center w-full mt-10">
+        <table class="table-auto w-[90%] min-h-[50vh] bg-[#4a003e] text-white p-4 rounded-lg"> <!-- Minimum height of half the screen -->
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Space</th>
+                    <th class="px-4 py-2">Date</th>
+                    <th class="px-4 py-2">Time In</th>
+                    <th class="px-4 py-2">Time Out</th>
+                    <th class="px-4 py-2">Total Time</th>
+                    <th class="px-4 py-2">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                    <td class="px-4 py-2"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
 
-    {% load sweetify %}
-    {% sweetify %}
-</body>
-
-</html>
+{% endblock %}

@@ -1,44 +1,16 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
-    <script src="https://cdn.tailwindcss.com"></script>
-    {% block local_css %} {% endblock %}
-    <title> {% block title %} {% endblock %}</title>
-</head>
+{% extends 'reservation_base.html' %}
 
-<body class="bg-[#F1F1F1] overflow-x-hidden">
+{% block title %} Home {% endblock %}
 
-    <nav class="bg-[#f6d5b4] px-4 py-6 sticky top-0 z-10">
-        <div class="flex justify-between items-center text-black">
-            <!-- Left Section: Logo -->
-            <div class="flex items-center space-x-4">
-                <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
-            </div>
+{% block content %} 
 
-            <!-- Right Section: Sign Up Button -->
-            {% block action %}
-                
-            {% endblock %}
-        </div>
-    </nav>
-
-    <div class="bg-[#F1F1F1] text-[#f6d5b4] min-h-screen">
-        <div class="max-w-md mx-auto mt-20 p-6 bg-[#f6d5b4] rounded-lg shadow-lg">
-            {% block content %} {% endblock %}
-        </div>
+<section id="menu" class="h-[82.7vh] flex text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
+    <div class="section-content max-w-full mx-20 p-4 mt-20 grid grid-cols-3 gap-4 w-full">
+        <!-- Dynamically Generated Rectangles -->
+        {% for i in range_value %}
+        <div class="small-rectangle h-[150px] bg-[#4a003e] mx-10"></div>
+        {% endfor %} 
     </div>
+</section>
 
-    {% block local_script %} {% endblock %}
-
-    {% load sweetify %}
-    {% sweetify %}
-</body>
-
-</html>
+{% endblock %}
