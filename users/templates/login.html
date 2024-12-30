@@ -15,7 +15,7 @@
 
 {% block content %} 
 
-    <h2 class="text-3xl font-bold text-[#232b2b] text-center">Login</h2>
+    <h2 class="text-3xl font-bold mb-4 text-[#ffffff] text-center">Login</h2>
     <!-- Login Form -->
     <form method="post">
         {% csrf_token %}
@@ -25,7 +25,7 @@
     </form>
 
     <div class="mt-4 text-center text-sm text-black">
-        <p>Don't have an account? <a href="{% url 'registration' %}" class="text-[#e09247] hover:underline">Sign up here</a></p>
+        <p class="text-[#ffffff]">Don't have an account? <a href="{% url 'registration' %}" class="text-[#e09247] hover:underline">Sign up here</a></p>
     </div>
     
 {% endblock%}

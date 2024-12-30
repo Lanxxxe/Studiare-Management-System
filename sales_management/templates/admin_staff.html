@@ -5,45 +5,55 @@
 
 {% block content %}
 <div class="p-4 flex flex-wrap gap-4">
-  <div class="w-[400px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+  <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
     <div>
       <p class="text-[14px]">Position</p>
       <p class="text-[24px] font-bold">Staff Name</p>
-      <p class="text-[12px] italic">Status (rest/duty)</p>
+      <p class="text-[12px]">Status (rest/duty)</p>
     </div>
-    <button class="text-[14px] underline">Update</button>
+    <div class="flex gap-2">
+      <button class="text-[14px] px-2 py-1 rounded bg-fuchsia-800">Update</button>
+      <button class="text-[14px] px-2 py-1 rounded bg-red-800">Remove</button>
+    </div>
   </div>
-  <div class="w-[400px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+  <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
     <div>
       <p class="text-[14px]">Position</p>
       <p class="text-[24px] font-bold">Staff Name</p>
-      <p class="text-[12px] italic">Status (rest/duty)</p>
+      <p class="text-[12px]">Status (rest/duty)</p>
     </div>
-    <button class="text-[14px] underline">Update</button>
+    <button class="text-[14px]">Update</button>
   </div>
-  <div class="w-[400px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+  <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
     <div>
       <p class="text-[14px]">Position</p>
       <p class="text-[24px] font-bold">Staff Name</p>
-      <p class="text-[12px] italic">Status (rest/duty)</p>
+      <p class="text-[12px]">Status (rest/duty)</p>
     </div>
-    <button class="text-[14px] underline">Update</button>
+    <button class="text-[14px]">Update</button>
   </div>
-  <div class="w-[400px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+  <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
     <div>
       <p class="text-[14px]">Position</p>
       <p class="text-[24px] font-bold">Staff Name</p>
-      <p class="text-[12px] italic">Status (rest/duty)</p>
+      <p class="text-[12px]">Status (rest/duty)</p>
     </div>
-    <button class="text-[14px] underline">Update</button>
+    <button class="text-[14px]">Update</button>
   </div>
-  <div class="w-[400px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+  <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
     <div>
       <p class="text-[14px]">Position</p>
       <p class="text-[24px] font-bold">Staff Name</p>
-      <p class="text-[12px] italic">Status (rest/duty)</p>
+      <p class="text-[12px]">Status (rest/duty)</p>
     </div>
-    <button class="text-[14px] underline">Update</button>
+    <button class="text-[14px]">Update</button>
   </div>
 </div>
+
+<script>
+  document.querySelector('#staff').classList.add("bg-white");
+  document.querySelector('#staff').classList.add("text-[#4A003E]");
+</script>
 {% endblock %}
+
+

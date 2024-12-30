@@ -1,10 +1,12 @@
 from django.contrib import admin
-from .models import User, UserEmail, UserType
+from .models import User, UserEmail
 
-# Unregister the existing registration
+class UserEmailAdmin(admin.ModelAdmin):
+    # Make the user_id field readonly
+    readonly_fields = ('user_id', 'user_email',)
 
-# Re-register the model (with custom admin settings, if needed)
+# Register the model
 admin.site.register(User)
-admin.site.register(UserEmail)
-admin.site.register(UserType)
+admin.site.register(UserEmail, UserEmailAdmin)
+
 

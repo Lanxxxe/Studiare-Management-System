@@ -52,7 +52,8 @@
         
         <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
           <div class="">
-            <p class="text-[24px]">Reservation</p>
+            <p class="text-[24px]">Reservations</p>
+            
             <a class="text-[12px] underline underline-offset-4" href="">View</a>
           </div>
 
@@ -61,7 +62,7 @@
 
         <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
           <div class="">
-            <p class="text-[24px]">Staffs</p>
+            <p class="text-[24px]">Active Staffs</p>
             <a class="text-[12px] underline underline-offset-4" href="">View</a>
           </div>
 
@@ -82,6 +83,9 @@
 
 {% block local_javascript %} 
 <script>
+  document.querySelector('#dashboard').classList.add("bg-white");
+  document.querySelector('#dashboard').classList.add("text-[#4A003E]");
+
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
       type: 'bar', // Specify the chart type

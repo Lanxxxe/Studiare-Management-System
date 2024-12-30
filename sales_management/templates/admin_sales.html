@@ -69,6 +69,9 @@
 
 {% block local_javascript %} 
 <script>
+  document.querySelector('#sales').classList.add("bg-white");
+  document.querySelector('#sales').classList.add("text-[#4A003E]");
+  
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
       type: 'bar', // Specify the chart type

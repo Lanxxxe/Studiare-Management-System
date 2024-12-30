@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Studiare Management Login</title>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="flex flex-col items-center justify-center bg-[#4A003E] text-white p-8 rounded-lg shadow-lg h-3/4 w-4/12">
+    <div class="w-full">
+        <h1 class="text-center text-2xl font-bold mb-2">Welcome to Studiare</h1>
+        <h2 class="text-center text-[#E211C0] font-semibold mb-6">Systems Management</h2>
+    </div>
+    
+    <div class="mb-4 w-full">
+        <form class="w-full" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="#" class="text-white text-sm hover:underline">Forgot password?</a>
+      </div> 
+      <button 
+      type="submit" 
+      class="w-full bg-[#C201A3] hover:bg-[#E211C0] text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-pink-400"
+      >
+      Login
+    </button>
+  </form>
+  <div class="my-6">
+  </div>
+
+  {% load sweetify %}
+  {% sweetify %}
+</body>
+</html>
