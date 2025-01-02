@@ -1,0 +1,33 @@
+.flatpickr-calendar {
+  width: 100%;
+}
+
+.flatpickr-rContainer {
+  width: 100%;
+}
+
+.flatpickr-days {
+  all: unset;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dayContainer {
+  all: unset;
+  width: inherit;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  align-items: center;
+  justify-items: center;
+}
+
+.flatpickr-day {
+  width: 100%;
+  text-align: center;
+}
+
+.flatpickr-prev-month, .flatpickr-next-month {
+  font-size: 18px;
+}

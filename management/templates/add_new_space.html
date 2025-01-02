@@ -1,0 +1,29 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Account Registration {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
+  <h1 class="text-2xl text-gray-900 font-bold mb-2"><i class="bi bi-plus-square"></i> Add New Space</h1>
+  
+  <div class="flex gap-2 ">
+    <form class="flex-1 rounded border-2 border-gray-400" method="POST">
+      {% csrf_token %}
+      <div class="flex flex-col p-4 bg-white rounded-lg shadow">
+        {{ forms.as_p }}
+        <div class="flex justify-end gap-4">
+            <button type="submit" name="add_new_space" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Add Space</button>
+            <a href="{% url 'admin_settings' %}" class="self-end bg-gray-600 hover:bg-slate-800 text-white text-center mt-4 py-2 px-4 rounded">Back</a>
+        </div>
+      </div>
+    </form>
+  </div>
+ 
+</div>
+
+<script>
+  document.querySelector('#settings').classList.add("bg-white");
+  document.querySelector('#settings').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}

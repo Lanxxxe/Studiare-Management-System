@@ -6,8 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>{% block title %}Studiare{% endblock %}</title>
 </head>
 
@@ -26,7 +28,7 @@
                 <!-- Increased text size -->
             </div>
             <div class="ml-auto">
-                <a href="{% url 'registration' %}"
+                <a href="{% url 'login' %}"
                     class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
                     Sign Up / Login
                 </a>
@@ -42,6 +44,9 @@
     </footer>
 
     <script src="{% static 'js/scripts.js' %}"></script>
+
+    {% load sweetify %}
+    {% sweetify %}
 </body>
 
 </html>

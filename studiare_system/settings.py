@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "site_overview",
     "sales_management",
     "reservation",
+    "management",
     "sweetify",
 ]
 
@@ -62,6 +63,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'users/templates', 
+                 BASE_DIR / 'management/templates',
                  BASE_DIR / 'reservation/templates', 
                  BASE_DIR / 'site_overview/templates',
                  BASE_DIR / 'sales_management/templates'],
@@ -129,6 +131,7 @@ STATIC_URL = 'users/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'users/static',
+    BASE_DIR / 'management/static',
     BASE_DIR / 'site_overview/static',  # Ensure the path to your static folder is correct
     BASE_DIR / 'sales_management/static',  # Ensure the path to your static folder is correct
     BASE_DIR / 'reservation/static',  # Ensure the path to your static folder is correct

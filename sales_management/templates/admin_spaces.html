@@ -1,0 +1,40 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Staff {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-wrap gap-4">
+  <table class="table-auto w-full border-collapse border border-purple-900">
+    <thead>
+      <tr class="bg-[#4A003E] text-white">
+        <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if spaces %}
+      {% for space in spaces %}
+        <tr class="hover:bg-gray-100">
+          <td class="border border-gray-300 px-4 py-2">{{ space.space_name }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ space.space_type }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td class="text-center" colspan="6">You don't have any spaces. Add <a href="{% url 'add_new_space' %}">here</a></td>
+        </tr>
+    {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.querySelector('#spaces').classList.add("bg-white");
+  document.querySelector('#spaces').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Staff {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-wrap gap-4">
+  {% if staffs %}
+    {% for staff in staffs %}
+    <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+      <div>
+        <p class="text-[14px]">{{ staff.position }}</p>
+        <p class="text-[24px] font-bold">{{ staff.first_name }} {{ staff.last_name }}</p>
+        <p class="text-[12px]">{{ staff.status }}</p>
+      </div>
+      <div class="flex gap-2">
+        <button class="text-[14px] px-2 py-1 rounded bg-fuchsia-800">Update</button>
+        <button class="text-[14px] px-2 py-1 rounded bg-red-800">Remove</button>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+      <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+        <p>You don't have any staffs</p>
+      </div>
+  {% endif %}
+</div>
+
+<script>
+  document.querySelector('#staff').classList.add("bg-white");
+  document.querySelector('#staff').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}
+
+
