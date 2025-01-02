@@ -30,7 +30,8 @@ def login(request):
             print(identifier, password)
             try:
                 user = User.objects.get(Q(username=identifier) | Q(user_email=identifier))
-                if user.is_active and check_password(password, user.password):
+                # if user.is_active and check_password(password, user.password):
+                if user.is_active and password == user.password:
                     # Add session or token logic here as needed
                     request.session['id'] = user.user_id
                     request.session['name'] = f'{user.firstname} {user.lastname}' 
@@ -93,6 +94,7 @@ def activate_account(request, uid):
 def logout(request):
     try:
         request.session.flush()
+        sweetify.success(request, "Logout Successfully.", persistent="Okay")
     except:
         pass
     return redirect("landing_page")

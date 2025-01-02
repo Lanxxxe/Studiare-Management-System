@@ -1,11 +1,26 @@
 from django import forms
-from .models import ManagementUser
+from .models import ManagementUser, HubSpaces
 
 class RegistrationForm(forms.ModelForm):
+    POSITION_CHOICES = [
+        ("", "Select Position"),
+        ("Admin", "Admin"),
+        ("Staff", "Staff"),
+    ]
+
+    position = forms.ChoiceField(
+        choices=POSITION_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400',
+            }
+        ),
+    )
+
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'class': 'mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
+                'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
                 'placeholder': 'Enter the password',
             },
         ), 
@@ -14,7 +29,7 @@ class RegistrationForm(forms.ModelForm):
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                'class': 'mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
+                'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
                 'placeholder': 'Enter the password',
             },
         ), 
@@ -27,31 +42,31 @@ class RegistrationForm(forms.ModelForm):
         widgets = {
             "first_name": forms.TextInput(
                 attrs={
-                    "class": "mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                     "placeholder": "Enter the first name",
                 }
             ),
             "last_name": forms.TextInput(
                 attrs={
-                    "class": "mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                     "placeholder": "Enter the last name",
                 }
             ),
             "contact_number": forms.TextInput(
                 attrs={
-                    "class": "mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                     "placeholder": "Enter the last name",
                 }
             ),
             "email": forms.EmailInput(
                 attrs={
-                    "class": "mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                     "placeholder": "Enter the email",
                 }
             ),
             "username": forms.TextInput(
                 attrs={
-                    "class": "mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                     "placeholder": "Enter the username",
                 }
             ),
@@ -71,7 +86,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "class": "mt-3 block w-full mb-4 px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                "class": "my-3 block w-full mb-4 px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                 "placeholder": "Username",
             }
         ),
@@ -80,7 +95,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "class": "mt-3 block w-full mb-4 px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                "class": "my-3 block w-full mb-4 px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                 "placeholder": "Password",
             }
         ), 
@@ -97,20 +112,20 @@ class UpdateUserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs.update({'class': 'mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300'})
+            field.widget.attrs.update({'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'})
 
 
 class UpdatePasswordForm(forms.Form):
     current_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300'}),
+        widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
         label="Current Password"
     )
     new_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300'}),
+        widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
         label="New Password"
     )
     confirm_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'mt-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300'}),
+        widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
         label="Confirm New Password"
     )
 
@@ -124,6 +139,30 @@ class UpdatePasswordForm(forms.Form):
         return cleaned_data
 
 
+class AddNewSpaceForm(forms.ModelForm):
+    class Meta:
+        model = HubSpaces
+        fields = ["space_name", "space_type", "number_of_seats",]
+        widgets = {
+            "space_name": forms.TextInput(
+                attrs={
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "placeholder": "Enter the space name",
+                }
+            ),
+            "space_type": forms.TextInput(
+                attrs={
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "placeholder": "Enter the space type",
+                }
+            ),
+            "number_of_seats":forms.NumberInput(
+                attrs={
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "placeholder": "Enter the number of seats",
+                }
+            ),
+        }
 
 
 

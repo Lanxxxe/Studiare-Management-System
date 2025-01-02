@@ -2,13 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password, make_password
 from management.utils import login_required_custom
 
-from .models import ManagementUser
-from .forms import LoginForm, UpdatePasswordForm, UpdateUserForm
+from .models import ManagementUser, HubSpaces
+from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm
 
 import sweetify
 
 def management_index(request):
-
     form = LoginForm()
     if request.method == "POST":
         form = LoginForm(request.POST)  # Bind POST data to the form
@@ -46,7 +45,6 @@ def management_index(request):
 
     return render(request, 'manage_login.html', {"form": form})
 
-
 @login_required_custom
 def settings(request):
     # Retrieve the currently logged-in user from the session
@@ -58,6 +56,7 @@ def settings(request):
     # Fetch the user object
     user = get_object_or_404(ManagementUser, id=user_id)
     staffs = ManagementUser.objects.exclude(id=user_id)
+    spaces = HubSpaces.objects.all()
 
     if request.method == 'POST':
         if 'update_info' in request.POST:
@@ -89,11 +88,55 @@ def settings(request):
     context = {
         'user_form': user_form,
         'password_form': password_form,
-        'staffs' : staffs
+        'staffs' : staffs,
+        'spaces' : spaces,
         
     }
     return render(request, 'admin_settings.html', context)
 
+
+@login_required_custom
+def account_registration(request):
+    # Retrieve the currently logged-in user from the session
+    user_id = request.session.get('user_id')
+    if not user_id:
+        sweetify.error(request, "You are not logged in.")
+        return redirect('login')  # Redirect to login if not authenticated
+
+    if request.method == 'POST':
+        if 'register_new_account' in request.POST:
+            registration_form = RegistrationForm(request.POST)
+            if registration_form.is_valid():
+                registration_form.save()
+                sweetify.success(request, "Registration Complete!", text="New account created successfully!", persistent="Okay")
+                return redirect('admin_settings')
+    else:
+        registration_form = RegistrationForm()
+
+    return render(request, 'acc_registration.html', {"forms": registration_form})
+
+
+@login_required_custom
+def add_new_space(request):
+    # Retrieve the currently logged-in user from the session
+    user_id = request.session.get('user_id')
+    if not user_id:
+        sweetify.error(request, "You are not logged in.")
+        return redirect('login')  # Redirect to login if not authenticated
+    
+    if request.method == 'POST':
+        if 'add_new_space' in request.POST:
+            add_new_space_form = AddNewSpaceForm(request.POST)
+            if add_new_space_form.is_valid():
+                add_new_space_form.save()
+                sweetify.success(request, "New Space Added!", text="New space added successfully!", persistent="Okay")
+                return redirect('admin_settings')
+            else:
+                sweetify.error(request, "Form submission failed!", text="Please check the form and try again.")
+    else:
+        add_new_space_form = AddNewSpaceForm()
+
+    return render(request, 'add_new_space.html', {"forms": add_new_space_form})
 
 
 

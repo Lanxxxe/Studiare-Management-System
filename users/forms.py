@@ -80,3 +80,6 @@ class LoginForm(forms.Form):
             }
         ),
     )
+
+
+

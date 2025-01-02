@@ -1,7 +1,7 @@
 {% extends "admin_base.html" %} 
 {% load static %}
 
-{% block title %} Staff {% endblock %}
+{% block title %} Management {% endblock %}
 
 {% block content %}
 <div class="p-4 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
@@ -10,18 +10,18 @@
   <div class="flex gap-2 ">
     <form class="flex-1 rounded border-2 border-gray-400" method="POST">
       {% csrf_token %}
-      <div class="p-4 bg-white rounded-lg shadow">
+      <div class="flex flex-col p-4 bg-white rounded-lg shadow">
         {{ user_form.as_p }}
-        <button type="submit" name="update_info" class="mt-6 px-4 py-2 bg-indigo-500 text-white rounded">Update Information</button>
+        <button type="submit" name="update_info" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Update Information</button>
       </div>
     </form>
   
     <form class="flex-1 rounded border-2 border-gray-400" method="POST">
       {% csrf_token %}
-      <div class="p-4 bg-white rounded-lg shadow">
+      <div class="flex flex-col p-4 bg-white rounded-lg shadow">
         <h3 class="text-lg font-bold mb-2">Update Password</h3>
         {{ password_form.as_p }}
-        <button type="submit" name="update_password" class="mt-6 px-4 py-2 bg-red-500 text-white rounded">Update Password</button>
+        <button type="submit" name="update_password" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Update Password</button>
       </div>
     </form>
   </div>
@@ -40,7 +40,6 @@
           <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Contact</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -53,19 +52,17 @@
               <td class="border border-gray-300 px-4 py-2">{{ staff.email }}</td>
               <td class="border border-gray-300 px-4 py-2">{{ staff.contact_number }}</td>
               <td class="border border-gray-300 px-4 py-2">{{ staff.status }}</td>
-              <td class="border border-gray-300 px-4 py-2">
-                  <button>Check In</button>
-              </td>
           </tr>
           {% endfor %}
         {% else %}
           <tr>
-            <td class="text-center" colspan="6">You don't have any staffs</td>
+            <td class="text-center" colspan="6">You don't have any staffs. href="{% url 'account_registration' %}">here</a></td>
           </tr>
         {% endif %}
       </tbody>
     </table>
   </div>
+  <a href="{% url 'account_registration' %}" class="self-end bg-fuchsia-800 hover:bg-fuchsia-900 text-white text-center w-40 mt-4 py-2 rounded">Add Staff</a>
 </div>
 
 <div class="p-4 mt-8 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
@@ -78,43 +75,29 @@
           <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Time In</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Time Out</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Running time</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Example row -->
-        <tr class="hover:bg-gray-100">
-          <td class="border border-gray-300 px-4 py-2">Study Room A</td>
-          <td class="border border-gray-300 px-4 py-2">Round</td>
-          <td class="border border-gray-300 px-4 py-2">4</td>
-          <td class="border border-gray-300 px-4 py-2">4</td>
-          <td class="border border-gray-300 px-4 py-2">4</td>
-          <td class="border border-gray-300 px-4 py-2">4</td>
-          <td class="border border-gray-300 px-4 py-2">Available</td>
-          <td class="border border-gray-300 px-4 py-2">
-              <button>Check In</button>
-          </td>
-      </tr>
-        <tr class="hover:bg-gray-100">
-          <td class="border border-gray-300 px-4 py-2">Long Table</td>
-          <td class="border border-gray-300 px-4 py-2">Rectangular Table</td>
-          <td class="border border-gray-300 px-4 py-2">80</td>
-          <td class="border border-gray-300 px-4 py-2">80</td>
-          <td class="border border-gray-300 px-4 py-2">80</td>
-          <td class="border border-gray-300 px-4 py-2">80</td>
-          <td class="border border-gray-300 px-4 py-2">Occupied</td>
-          <td class="border border-gray-300 px-4 py-2">
-              <button>Check Out</button>
-          </td>
-        </tr>
-        <!-- Add more rows as needed -->
+        {% if spaces %}
+          {% for space in spaces %}
+            <tr class="hover:bg-gray-100">
+              <td class="border border-gray-300 px-4 py-2">{{ space.space_name }}</td>
+              <td class="border border-gray-300 px-4 py-2">{{ space.space_type }}</td>
+              <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
+              <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td class="text-center" colspan="6">You don't have any spaces. Add <a href="{% url 'add_new_space' %}">here</a></td>
+            </tr>
+        {% endif %}
       </tbody>
     </table>
   </div>
+
+  <a href="{% url 'add_new_space' %}" class="self-end bg-fuchsia-800 hover:bg-fuchsia-900 text-white text-center w-40 mt-4 py-2 rounded">Add Space</a>
 </div>
 
 <script>

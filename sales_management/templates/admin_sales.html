@@ -9,54 +9,31 @@
 {% block title %} Sales {% endblock %}
 
 {% block content %}
-  <!-- Grid container for all 4 sections -->
   <div class="grid grid-cols-2 gap-4 h-full">
-    <!-- Calendar section -->
     <div class="p-4 flex items-center justify-center">
-      <!-- <h1 class="text-black">calendar</h1> -->
       <div class="" id="calendar"></div>
     </div>
 
-    <!-- Spaces section -->
     <div id="spaces" class="flex flex-wrap items-center justify-center gap-2">
-      <div class="min-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+      <div class="w-[350px]  h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
-          <p class="text-[24px]">Reservation</p>
-          <a class="text-[12px] underline underline-offset-4" href="">View</a>
+          <p class="text-[24px]">Reservations</p>
+          <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
         </div>
 
         <p class="text-[32px] font-bold">10</p>
       </div>
       
-      <div class="min-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+      <div class="w-[350px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
-          <p class="text-[24px]">Reservation</p>
-          <a class="text-[12px] underline underline-offset-4" href="">View</a>
-        </div>
-
-        <p class="text-[32px] font-bold">10</p>
-      </div>
-
-      <div class="min-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-        <div class="">
-          <p class="text-[24px]">Reservation</p>
-          <a class="text-[12px] underline underline-offset-4" href="">View</a>
-        </div>
-
-        <p class="text-[32px] font-bold">10</p>
-      </div>
-
-      <div class="min-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-        <div class="">
-          <p class="text-[24px]">Reservation</p>
-          <a class="text-[12px] underline underline-offset-4" href="">View</a>
+          <p class="text-[24px]">Occupied Spaces</p>
+          <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
         </div>
 
         <p class="text-[32px] font-bold">10</p>
       </div>
     </div>
 
-    <!-- Statistics section -->
     <div id="statistics" class="col-span-2 flex flex p-4">
       <div class="chart-container">
         <h2>Bar Chart Example</h2>

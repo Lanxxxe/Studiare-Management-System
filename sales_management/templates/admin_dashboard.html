@@ -29,20 +29,20 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Example row -->
-            <tr class="hover:bg-gray-100">
-              <td class="border border-gray-300 px-4 py-2">Study Room A</td>
-              <td class="border border-gray-300 px-4 py-2">Round</td>
-              <td class="border border-gray-300 px-4 py-2">4</td>
-              <td class="border border-gray-300 px-4 py-2">Available</td>
-            </tr>
-            <tr class="hover:bg-gray-100">
-              <td class="border border-gray-300 px-4 py-2">Long Table</td>
-              <td class="border border-gray-300 px-4 py-2">Rectangular Table</td>
-              <td class="border border-gray-300 px-4 py-2">80</td>
-              <td class="border border-gray-300 px-4 py-2">Occupied</td>
-            </tr>
-            <!-- Add more rows as needed -->
+            {% if spaces %}
+              {% for space in spaces %}
+                <tr class="hover:bg-gray-100">
+                  <td class="border border-gray-300 px-4 py-2">{{ space.space_name }}</td>
+                  <td class="border border-gray-300 px-4 py-2">{{ space.space_type }}</td>
+                  <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
+                  <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
+                </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td class="text-center" colspan="6">You don't have any spaces. Add <a href="{% url 'add_new_space' %}">here</a></td>
+                </tr>
+            {% endif %}
           </tbody>
         </table>
       </div>
@@ -53,7 +53,6 @@
         <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
           <div class="">
             <p class="text-[24px]">Reservations</p>
-            
             <a class="text-[12px] underline underline-offset-4" href="">View</a>
           </div>
 
@@ -63,10 +62,10 @@
         <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
           <div class="">
             <p class="text-[24px]">Active Staffs</p>
-            <a class="text-[12px] underline underline-offset-4" href="">View</a>
+            <a href="{% url 'admin_staff' %}" class="text-[12px] underline underline-offset-4" href="">View</a>
           </div>
 
-          <p class="text-[32px] font-bold">10</p>
+          <p class="text-[32px] font-bold">{{ active_staffs }}</p>
         </div>
       </div>
   
@@ -121,11 +120,10 @@
       }
     });
 
-    // Initialize Flatpickr as a permanently visible calendar
     flatpickr("#calendar", {
-      inline: true, // Makes the calendar always visible
-      enableTime: false, // Disable time selection
-      dateFormat: "d/m/Y", // Custom date format
+      inline: true, 
+      enableTime: true,
+      dateFormat: "d/m/Y",
       onChange: function(selectedDates, dateStr) {
         alert("Selected date: " + dateStr);
       },
