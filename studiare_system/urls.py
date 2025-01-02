@@ -25,4 +25,5 @@ urlpatterns = [
     path("management/", include("management.urls")),
     path("sales_management/", include("sales_management.urls")),
     path("reservation/", include("reservation.urls")),
+    path("staff/", include("staff.urls")),
 ]
