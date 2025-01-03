@@ -66,6 +66,7 @@ TEMPLATES = [
                  BASE_DIR / 'management/templates',
                  BASE_DIR / 'reservation/templates', 
                  BASE_DIR / 'site_overview/templates',
+                 BASE_DIR / 'staff/templates',
                  BASE_DIR / 'sales_management/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -135,6 +136,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'site_overview/static',  # Ensure the path to your static folder is correct
     BASE_DIR / 'sales_management/static',  # Ensure the path to your static folder is correct
     BASE_DIR / 'reservation/static',  # Ensure the path to your static folder is correct
+    BASE_DIR / 'staff/static',
 ]
 
 # Default primary key field type
