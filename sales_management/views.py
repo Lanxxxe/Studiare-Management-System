@@ -1,14 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from management.utils import login_required_custom
 # Create your views here.
 
 # from sales_management
 from management.models import ManagementUser, HubSpaces
+from reservation.models import Reservation
+
+import sweetify
 
 @login_required_custom
 def index(request):
     spaces = HubSpaces.objects.all()
+    reservations = Reservation.objects.all().count()
     active_staffs = ManagementUser.objects.filter(status="Duty").count()
     context = {
         "user_id" : request.session.get("user_id"),
@@ -17,12 +21,18 @@ def index(request):
         "email" : request.session.get("email"),
         'spaces' : spaces,
         "active_staffs" : active_staffs,
+        "reservations" : reservations,
     }
     return render(request, 'admin_dashboard.html', context)
 
 @login_required_custom
 def sales(request):
-    return render(request, 'admin_sales.html')
+    reservations = Reservation.objects.all().count()
+
+    context = {
+        'reservations' : reservations,
+    }
+    return render(request, 'admin_sales.html', context)
 
 @login_required_custom
 def spaces(request):
@@ -43,3 +53,39 @@ def staff(request):
     }
     return render(request, 'admin_staff.html', context)
 
+
+
+@login_required_custom
+def admin_reservations(request):
+    reservations = Reservation.objects.all()
+
+    context = {
+        'reservations' : reservations,
+    }
+    return render(request, 'admin_reservations.html', context)
+
+
+@login_required_custom
+def update_reservation(request, action, reservation_id):
+    
+
+    update_reservation = get_object_or_404(Reservation, reservation_id=reservation_id)
+    if action == 'CONFIRM':
+        update_reservation.status = 'Confirmed'
+        update_reservation.save()
+        sweetify.toast(request, "Reservation Confirmed", icon="success", timer=3000)
+        
+    elif action == 'DECLINED':
+        update_reservation.status = 'Cancelled'
+        update_reservation.save()
+        sweetify.toast(request, "Reservation Cancelled", icon="success", timer=3000)
+    
+    elif action == 'UNDO':
+        update_reservation.status = 'Pending'
+        update_reservation.save()
+        sweetify.toast(request, "Action Reverted", icon="success", timer=3000)
+
+    else:
+        sweetify.toast(request, "Invalid Action", icon="error", timer=3000)
+
+    return redirect('admin_reservations')
