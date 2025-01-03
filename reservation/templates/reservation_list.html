@@ -5,11 +5,33 @@
 {% block content %} 
 
 <section id="menu" class="min-h-dvh flex text-center text-[#FFFFFF] fade-in">
-    <div class="section-content flex flex-col mx-20 p-4 mt-8 w-full gap-4">
+    <div class="section-content flex flex-wrap mx-20 p-4 mt-8 w-full gap-6">
         <!-- Dynamically Generated Rectangles -->
-        <div class="small-rectangle w-[400px] h-[150px] bg-[#4a003e] rounded-md"></div>
+        {% if reservations %}
+            {% for reservation in reservations %}
+                <div class="w-[400px] h-[150px] bg-[#4a003e] flex justify-between items-center px-8 rounded-md">
+                    <div class="w-full flex flex-col justify-start items-start">
+                        <p class="text-2xl font-bold">{{ reservation.space.space_name }}</p>
+                        <p class="mt-2">{{ reservation.reservation_date }}</p>
+                        <p class="mt-4 italic text-xs font-thin">
+                            {{ reservation.reservation_start_time }} -
+                            {{ reservation.reservation_end_time }}
+                        </p>
+                    </div>
+                    <h1 class="text-3xl italic font-bold">
+                        Pending
+                    </h1>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div>
+                <p>You don't have any reservation. Book a reservation <a href="">here</a></p>
+            </div>
+        {% endif %}
 
-        <a href="{% url 'reservation_home' %}" class="self-end mt-auto bg-gray-600 hover:bg-slate-800 text-white text-center mt-4 py-2 px-8 rounded">Back</a>
+        <div class="w-full flex">
+            <a href="{% url 'reservation_home' %}" class="mt-auto bg-gray-600 hover:bg-slate-800 text-white py-2 px-8 rounded ms-auto">Back</a>
+        </div>
     </div>
 </section>
 

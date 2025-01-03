@@ -26,7 +26,7 @@
                         <a class="text-[12px] text-start underline underline-offset-4 block mt-4" href="{% url 'reservation_list' %}">View</a>
                     </div>
             
-                    <p class="text-5xl font-bold">10</p>
+                    <p class="text-5xl font-bold">{{ reservation }}</p>
                 </div>
 
                 <div class="small-rectangle w-[350px] h-[142px] bg-[#4a003e] flex flex-1 justify-between items-center py-4 px-6 rounded-md">
@@ -50,16 +50,20 @@
                             <th class="border border-gray-300 px-4 py-2 text-start">Type</th>
                             <th class="border border-gray-300 px-4 py-2 text-start">Seats</th>
                             <th class="border border-gray-300 px-4 py-2 text-start">Status</th>
+                            <th class="border border-gray-300 px-4 py-2 text-start">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% if spaces %}
                             {% for space in spaces %}
                                 <tr class="text-black hover:bg-gray-100">
-                                    <td class="border border-gray-300 px-4 py-2 text-start">[{{ space.id }}] {{ space.space_name }}</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-start">{{ space.space_type }}</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-start">{{ space.number_of_seats }}</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-start">{{ space.status }}</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-start">[{{ space.id }}] {{ space.space_name }}</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-start">{{ space.space_type }}</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-start">{{ space.number_of_seats }}</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-start">{{ space.status }}</td>
+                                    <td class="border border-gray-300 px-4 py-3 text-start">
+                                        <a href="{% url 'reserve_space' space.id %}" class="underline underline-offset-4 text-fuchsia-900">Reserve</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         {% else %}
@@ -78,8 +82,9 @@
     // Initialize Flatpickr as a permanently visible calendar
     flatpickr("#calendar", {
         inline: true, // Makes the calendar always visible
-        enableTime: true, // Disable time selection
+        enableTime: false, // Disable time selection
         dateFormat: "d/m/Y", // Custom date format
+        minDate : 'today',
         onChange: function(selectedDates, dateStr) {
           alert("Selected date: " + dateStr);
         },
