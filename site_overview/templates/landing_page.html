@@ -1,4 +1,5 @@
 {% extends "base_overview.html" %}
+{% load static %}
 
 {% block title %}
 Landing Page
@@ -8,7 +9,7 @@ Landing Page
 <section id="welcome" class="h-[90vh] flex justify-center items-center text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4">
         <h1 class="text-6xl font-bold mb-4">Welcome to Studiare</h1>
-        <p class="text-xl mb-8">Where learning meets style.</p>
+        <p class="text-xl mb-8">Where learning meets comfort.</p>
     </div>
 </section>
 
@@ -17,28 +18,40 @@ Landing Page
     <div class="section-content max-w-[1200px] mx-auto p-4 mt-48">
         <h2 class="text-4xl font-bold mb-6">About Studiare</h2>
         <p class="text-lg mb-8">
-            Welcome to STUDIARE—where the blend of a classy aura and aesthetic ambiance creates the perfect environment
-            for collaborative learning. Our space is thoughtfully designed to inspire creativity and foster teamwork.
+            Welcome to STUDIARE — your ultimate study hub, where modern design meets functionality to create the perfect environment for focus and collaboration. Our thoughtfully crafted spaces are designed to inspire creativity, enhance productivity, and foster a sense of community for learners and professionals alike.
+
         </p>
     </div>
 
     <div class="flex space-x-8 mb-40 mt-4 fade-in">
-        <div class="w-48 h-48 bg-[#4a003e] rounded-full"></div>
-        <div class="w-48 h-48 bg-[#4a003e] rounded-full"></div>
-        <div class="w-48 h-48 bg-[#4a003e] rounded-full"></div>
+        <!-- Replace placeholder circles with images -->
+        <div class="w-48 h-48 rounded-full overflow-hidden">
+            <img src="{% static 'images/landpage1.jpg' %}" alt="Landing Page 1" class="h-full w-full object-cover">
+        </div>
+        <div class="w-48 h-48 rounded-full overflow-hidden">
+            <img src="{% static 'images/landpage2.jpg' %}" alt="Landing Page 2" class="h-full w-full object-cover">
+        </div>
+        <div class="w-48 h-48 rounded-full overflow-hidden">
+            <img src="{% static 'images/landpage3.jpg' %}" alt="Landing Page 3" class="h-full w-full object-cover">
+        </div>
     </div>
 </section>
 
 <section id="menu" class="h-[80vh] flex justify-center items-center text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4 flex items-center">
         <div class="w-1/2 text-left pr-8">
-            <h2 class="text-4xl font-bold mb-4">Our Menu</h2>
+            <h2 class="text-4xl font-bold mb-4">Our Services</h2>
             <p class="text-lg mb-8">
-                Explore a variety of offerings tailored to meet your tastes, all while enjoying the calm ambiance of our
-                space.
+                At Studiare, we provide the ideal environment for learners, professionals, and creative minds. Whether you need a quiet space to focus, a collaborative zone to brainstorm with your team, or a comfortable spot to unwind while staying productive, our services are tailored to meet your needs. 
+            </p>
+            <p class="text-lg mb-8">
+                Book your slot at an hourly rate and enjoy access to the study hub, including high-speed internet, ergonomic seating, and aesthetically pleasing workspaces. Our goal is to make every visit both productive and enjoyable.
             </p>
         </div>
-        <div class="w-1/2 bg-[#4a003e] min-h-[600px]"></div>
+        
+        <div class="w-[70%] h-[600px] bg-[#4a003e] overflow-hidden relative">
+            <img src="{% static 'images/aboutstud.jpg' %}" alt="About Studiare" class="absolute top-0 left-0 w-full h-full object-cover">
+        </div>
     </div>
 </section>
 
