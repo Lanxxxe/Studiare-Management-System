@@ -1,4 +1,5 @@
 {% extends "base_overview.html" %}
+{% load static %}
 
 {% block title %}
 About Us
@@ -10,14 +11,28 @@ About Us
         <!-- Left text content -->
         <div class="w-1/2 text-left pr-8">
             <h2 class="text-4xl font-bold mb-4">About Us</h2>
-            <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin interdum enim at
-                magna tempor, et dignissim felis dictum.</p>
-            <p class="text-lg">Suspendisse potenti. Fusce euismod velit id orci congue, at malesuada turpis dignissim.
+            <p class="text-lg mb-4">
+                Welcome to <strong>Studiare</strong>, your go-to hub for productive and focused study sessions. 
+                At Studiare, we understand the importance of having a conducive environment for learning, 
+                whether you're preparing for exams, working on a project, or simply seeking a quiet space to focus. 
+            </p>
+            <p class="text-lg mb-4">
+                Our innovative platform allows you to book study spaces or slots on an hourly basis, giving you 
+                flexibility and affordability. Designed with comfort and functionality in mind, our spaces 
+                are equipped with everything you need to achieve your goals, including high-speed internet, 
+                ergonomic seating, and distraction-free zones.
+            </p>
+            <p class="text-lg">
+                Join us at Studiare and experience a new way to study, collaborate, and grow. Whether you're a student, 
+                professional, or lifelong learner, we're here to help you make the most of your time. 
+                Let's create success—one focused hour at a time!
             </p>
         </div>
-        <!-- Right circle placeholder -->
+        <!-- Right circle with image -->
         <div class="w-1/2 flex justify-center">
-            <div class="bg-gray-300 h-[500px] w-[500px] rounded-full"></div>
+            <div class="h-[500px] w-[500px] rounded-full overflow-hidden bg-gray-300">
+                <img src="{% static 'images/about_us.jpg' %}" alt="About Us" class="h-full w-full object-cover">
+            </div>
         </div>
     </div>
 </section>
