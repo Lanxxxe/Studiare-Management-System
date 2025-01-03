@@ -41,7 +41,6 @@ class HubSpaces(models.Model):
     def __str__(self):
         return f"{self.space_name} ({self.space_type}) - {self.status}"
 
-
 class AuditLog(models.Model):
     log_id = models.AutoField(primary_key=True)
     action = models.CharField(max_length=255)
