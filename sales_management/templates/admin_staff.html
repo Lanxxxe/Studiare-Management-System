@@ -9,13 +9,13 @@
     {% for staff in staffs %}
     <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
       <div>
-        <p class="text-[14px]">{{ staff.position }}</p>
+        <p class="text-[14px]">{{ staff.position }} {{ staff.id }}</p>
         <p class="text-[24px] font-bold">{{ staff.first_name }} {{ staff.last_name }}</p>
         <p class="text-[12px]">{{ staff.status }}</p>
       </div>
       <div class="flex gap-2">
-        <button class="text-[14px] px-2 py-1 rounded bg-fuchsia-800">Update</button>
-        <button class="text-[14px] px-2 py-1 rounded bg-red-800">Remove</button>
+        <a href="{% url 'update_staff_account' staff.id %}" class="text-[14px] px-2 py-1 rounded bg-fuchsia-800">Update</a>
+        <a href="{% url 'remove_staff' staff.id %}" class="text-[14px] px-2 py-1 rounded bg-red-800">Remove</a>
       </div>
     </div>
     {% endfor %}

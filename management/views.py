@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from management.utils import login_required_custom
 
 from .models import ManagementUser, HubSpaces
-from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm
+from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm, UpdateStaffAccountForm
 
 import sweetify
 
@@ -114,6 +114,45 @@ def account_registration(request):
         registration_form = RegistrationForm()
 
     return render(request, 'acc_registration.html', {"forms": registration_form})
+
+
+@login_required_custom
+def update_staff_account(request, staff_id):
+    #Retrieve staff
+    staff = ManagementUser.objects.get(id=staff_id)
+
+    if request.method == "POST":
+        form = UpdateStaffAccountForm(request.POST, instance=staff)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, "Updated", text=f"Staff {staff.first_name} {staff.last_name} updated successfully!", persistent="Okay")
+            return redirect('admin_staff')  # Replace 'staff_list' with your desired redirect URL
+        else:
+            sweetify.error(request, "Failed to update staff details. Please check the form.")
+    else:
+        form = UpdateStaffAccountForm(instance=staff)
+    context = {
+        'staff' : staff,
+        'form' : form,
+    }    
+
+    return render(request, 'update_staff.html', context)
+
+
+@login_required_custom
+def remove_staff_account(request, staff_id):
+    
+    staff = get_object_or_404(ManagementUser, id=staff_id)
+    
+    try:
+        staff.delete()
+        sweetify.toast(request, f"Staff {staff.first_name} {staff.last_name} has been removed.", icon="success")
+    
+    except:
+        sweetify.error(request, "Failed to remove staff account. Please check the staff details.")
+    
+    return redirect('admin_staff') 
+
 
 
 @login_required_custom

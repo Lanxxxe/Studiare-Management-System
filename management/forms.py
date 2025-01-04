@@ -124,6 +124,7 @@ class UpdatePasswordForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
         label="New Password"
     )
+
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
         label="Confirm New Password"
@@ -165,10 +166,21 @@ class AddNewSpaceForm(forms.ModelForm):
         }
 
 
+class UpdateStaffAccountForm(forms.ModelForm):
 
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
+        label="Password"
+    )
 
+    class Meta:
+        model = ManagementUser
+        fields = ['first_name', 'last_name', 'contact_number', 'email', 'username', 'position']
 
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'})
 
 
 

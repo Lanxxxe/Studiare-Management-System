@@ -41,6 +41,7 @@
             {% endif %}
           </tbody>
         </table>
+
       </div>
   
       <!-- Reserve staff section -->
@@ -49,7 +50,7 @@
         <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
           <div class="">
             <p class="text-[24px]">Reservations</p>
-            <a class="text-[12px] underline underline-offset-4" href="">View</a>
+            <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_reservations' %}">View</a>
           </div>
 
           <p class="text-[32px] font-bold">{{ reservations }}</p>
@@ -58,7 +59,7 @@
         <div class="h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
           <div class="">
             <p class="text-[24px]">Active Staffs</p>
-            <a href="{% url 'admin_staff' %}" class="text-[12px] underline underline-offset-4" href="">View</a>
+            <a href="{% url 'admin_staff' %}" class="text-[12px] underline underline-offset-4" href="{% url 'admin_staff' %}">View</a>
           </div>
 
           <p class="text-[32px] font-bold">{{ active_staffs }}</p>
