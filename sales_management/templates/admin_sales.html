@@ -14,17 +14,17 @@
       <div class="" id="calendar"></div>
     </div>
 
-    <div id="spaces" class="flex flex-wrap items-center justify-center gap-2">
-      <div class="w-[350px]  h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+    <div id="spaces" class="flex flex-wrap items-center justify-start gap-2">
+      <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
           <p class="text-[24px]">Reservations</p>
           <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
         </div>
 
-        <p class="text-[32px] font-bold">10</p>
+        <p class="text-[32px] font-bold">{{ reservations }}</p>
       </div>
-      
-      <div class="w-[350px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+
+      <div class="min-w-[300px] max-w-[300px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
           <p class="text-[24px]">Occupied Spaces</p>
           <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
@@ -32,6 +32,17 @@
 
         <p class="text-[32px] font-bold">10</p>
       </div>
+
+      <div class="min-w-[300px] max-w-[300px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+        <div class="">
+          <p class="text-[24px]">Sales</p>
+          <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
+        </div>
+
+        <p class="text-[32px] font-bold">{{ reservations }}</p>
+      </div>
+      
+
     </div>
 
     <div id="statistics" class="col-span-2 flex flex p-4">

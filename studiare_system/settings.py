@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Apps
     "users",
+    "staff",
     "site_overview",
     "sales_management",
     "reservation",

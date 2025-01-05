@@ -1,0 +1,55 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Reservations {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-wrap gap-4">
+  <table class="table-auto w-full border-collapse border border-purple-900">
+    <thead>
+      <tr class="bg-[#4A003E] text-white">
+        <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Check In Date</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Start Time</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">End Time</th>
+        <th class="border border-gray-300 px-4 py-2 text-left w-[150px]">Status</th>
+        <th class="border border-gray-300 px-4 py-2 text-left w-[200px]">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if reservations %}
+      {% for reservation in reservations %}
+        <tr class="hover:bg-gray-100">
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.user.firstname }} {{ reservation.user.lastname }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.user.user_email }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_date }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_start_time }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_end_time }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.status }}</td>
+            <td class="border border-gray-300 px-4 py-2">
+                {% if reservation.status == 'Pending' %}
+                    <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_reservation' 'CONFIRM' reservation.reservation_id %}">Accept</a>
+                    <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'update_reservation' 'DECLINED' reservation.reservation_id %}">Decline</a>
+                {% elif reservation.status == 'Completed' %}
+                    <p>Paid</p>
+                {% else %}
+                    <a class="text-gray-700 underline underline-offset-4" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}">Revert Action</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td class="text-center" colspan="6">No reservations for now.</td>
+        </tr>
+    {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.querySelector('#reservations').classList.add("bg-white");
+  document.querySelector('#reservations').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}
