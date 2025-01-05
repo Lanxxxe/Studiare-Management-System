@@ -6,46 +6,27 @@
   <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
 {% endblock %}
 
-{% block title %}Staff Dashboard{% endblock %}
+{% block title %}Staff Reservations{% endblock %}
 
 {% block content %}
 <div class="grid grid-cols-2 gap-4 h-full">
-    <div class="p-4 flex items-center justify-center">
-        <div class="" id="calendar"></div>
-    </div>
-
-    <div class="flex flex-wrap items-center justify-start gap-2">
-        <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-            <div class="">
-              <p class="text-[24px]">Reservations</p>
-              <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
-            </div>
-    
-            <p class="text-[32px] font-bold">{{ reservations }}</p>
-        </div>
-
-        <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-            <div class="">
-              <p class="text-[24px]">Vacants</p>
-              <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
-            </div>
-    
-            <p class="text-[32px] font-bold">{{ reservations }}</p>
-        </div>
-    </div>
 
     <div class="col-span-2 p-4 w-full">
         <table class="table-auto w-full border-collapse border border-purple-900">
             <thead>
               <tr class="bg-[#4A003E] text-white">
+                <th class="border border-gray-300 px-4 py-2 text-left">Guest</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Space</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Vacants</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Check In</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Check Out</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
               </tr>
             </thead>
             <tbody>
                   <tr class="hover:bg-gray-100">
+                    <td class="border border-gray-300 px-4 py-2"></td>
+                    <td class="border border-gray-300 px-4 py-2"></td>
                     <td class="border border-gray-300 px-4 py-2"></td>
                     <td class="border border-gray-300 px-4 py-2"></td>
                     <td class="border border-gray-300 px-4 py-2"></td>
@@ -61,8 +42,8 @@
 
 {% block local_js %} 
 <script>
-    document.querySelector('#dashboard').classList.add("bg-white");
-    document.querySelector('#dashboard').classList.add("text-[#4A003E]");
+    document.querySelector('#reservations').classList.add("bg-white");
+    document.querySelector('#reservations').classList.add("text-[#4A003E]");
 
     flatpickr("#calendar", {
         inline: true, // Makes the calendar always visible

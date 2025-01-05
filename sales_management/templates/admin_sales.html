@@ -15,7 +15,7 @@
     </div>
 
     <div id="spaces" class="flex flex-wrap items-center justify-start gap-2">
-      <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+      <div class="min-w-[280px] max-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
           <p class="text-[24px]">Reservations</p>
           <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
@@ -24,7 +24,7 @@
         <p class="text-[32px] font-bold">{{ reservations }}</p>
       </div>
 
-      <div class="min-w-[300px] max-w-[300px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+      <div class="min-w-[280px] max-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
           <p class="text-[24px]">Occupied Spaces</p>
           <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
@@ -33,7 +33,7 @@
         <p class="text-[32px] font-bold">10</p>
       </div>
 
-      <div class="min-w-[300px] max-w-[300px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+      <div class="min-w-[280px] max-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
         <div class="">
           <p class="text-[24px]">Sales</p>
           <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
@@ -45,10 +45,10 @@
 
     </div>
 
-    <div id="statistics" class="col-span-2 flex flex p-4">
-      <div class="chart-container">
+    <div id="statistics" class="col-span-2 flex border-2 border-red-900 p-4 mt-6">
+      <div class="chart-container border-2 border-blue-800 w-full">
         <h2>Bar Chart Example</h2>
-        <canvas id="myChart" width="400" height="200"></canvas>
+        <canvas id="myChart" ></canvas>
       </div>
     </div>
   </div>

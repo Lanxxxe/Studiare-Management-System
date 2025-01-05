@@ -33,13 +33,15 @@ class HubSpaces(models.Model):
         ("Reserved", "Reserved"),
     ]
 
-    space_name = models.CharField(max_length=30)  # Name of the space
-    space_type = models.CharField(max_length=20)  # Type of the space
-    number_of_seats = models.PositiveIntegerField()  # Number of seats
+    space_name = models.CharField(max_length=30)
+    space_type = models.CharField(max_length=20) 
+    number_of_seats = models.PositiveIntegerField()
     status = models.CharField(max_length=10, choices=SPACE_STATUS, default="Available")  # Status of the space
+    vacant = models.IntegerField(null=False) 
 
     def __str__(self):
         return f"{self.space_name} ({self.space_type}) - {self.status}"
+
 
 class AuditLog(models.Model):
     log_id = models.AutoField(primary_key=True)

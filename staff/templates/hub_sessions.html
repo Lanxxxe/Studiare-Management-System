@@ -1,0 +1,37 @@
+{% extends 'staff_base.html' %}
+{% load static %}
+
+{% block local_css %}
+  <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
+{% endblock %}
+
+{% block title %}Staff Spaces{% endblock %}
+
+{% block content %}
+<div class="gap-4 h-full p-4">
+  <h1 class="text-2xl font-bold"><a class="text-xl" href="{% url 'staff_spaces' %}"><i class="bi bi-arrow-left-circle"></i></a> Manage Sessions for <span class="text-fuchsia-900">{{ space.space_name }}</span></h1>
+
+  <div class="flex flex-col gap-6 px-24 mt-4">
+    {% for form in forms %}
+      <form class=" rounded border-2 border-gray-400 p-4" method="post">
+        {% csrf_token %}
+        <h3 class="text-xl font-bold">Seat {{ forloop.counter }}</h3>
+          <div class="flex flex-col p-4 bg-white rounded-lg shadow">
+            {{ form.as_p }}
+            <button type="submit"  name="submit" value="{{ forloop.counter }}"class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Save Sessions</button>
+          </div>
+      </form>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block local_js %} 
+<script>
+    document.querySelector('#spaces').classList.add("bg-white");
+    document.querySelector('#spaces').classList.add("text-[#4A003E]");
+</script>
+
+{% endblock %}

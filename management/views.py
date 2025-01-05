@@ -167,7 +167,14 @@ def add_new_space(request):
         if 'add_new_space' in request.POST:
             add_new_space_form = AddNewSpaceForm(request.POST)
             if add_new_space_form.is_valid():
-                add_new_space_form.save()
+                # Create a new HubSpaces instance but don't save it to the database yet
+                new_space = add_new_space_form.save(commit=False)
+                
+                # Set the 'vacant' field to the value of 'number_of_seats'
+                new_space.vacant = new_space.number_of_seats
+                
+                # Save the instance to the database
+                new_space.save()
                 sweetify.success(request, "New Space Added!", text="New space added successfully!", persistent="Okay")
                 return redirect('admin_settings')
             else:

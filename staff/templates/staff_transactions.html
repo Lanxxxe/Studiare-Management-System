@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
 {% endblock %}
 
-{% block title %}Staff Sales{% endblock %}
+{% block title %}Staff Transactions{% endblock %}
 
 {% block content %}
 <div class="grid grid-cols-2 gap-4 h-full">
@@ -40,8 +40,8 @@
 
 {% block local_js %} 
 <script>
-    document.querySelector('#sales').classList.add("bg-white");
-    document.querySelector('#sales').classList.add("text-[#4A003E]");
+    document.querySelector('#transactions').classList.add("bg-white");
+    document.querySelector('#transactions').classList.add("text-[#4A003E]");
 
     flatpickr("#calendar", {
         inline: true, // Makes the calendar always visible

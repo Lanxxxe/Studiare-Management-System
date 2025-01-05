@@ -1,8 +1,62 @@
 {% extends 'staff_base.html' %}
+{% load static %}
 
-{% block title %}Staff Dashboard{% endblock %}
 
+{% block local_css %}
+  <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
+{% endblock %}
+
+{% block title %}Spaces Sessions{% endblock %}
 
 {% block content %}
+<div class="grid grid-cols-2 gap-4 h-full">
+
+    <div class="col-span-2 p-4 w-full">
+        <table class="table-auto w-full border-collapse border border-purple-900">
+            <thead>
+              <tr class="bg-[#4A003E] text-white">
+                <th class="border border-gray-300 px-4 py-2 text-left">Space</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Total Seats</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Vacant</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if spaces %}
+                {% for space in spaces %}
+                  <tr class="hover:bg-gray-100">
+                    <td class="border border-gray-300 px-4 py-2">{{ space.space_name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ space.vacant }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <a href="{% url 'manage_sessions' space.id %}" class="text-blue-700 underline underline-offset-4">View</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% endif %}
+          </table>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block local_js %} 
+<script>
+    document.querySelector('#spaces').classList.add("bg-white");
+    document.querySelector('#spaces').classList.add("text-[#4A003E]");
+
+    flatpickr("#calendar", {
+        inline: true, // Makes the calendar always visible
+        enableTime: false, // Disable time selection
+        dateFormat: "d/m/Y", // Custom date format
+        minDate: 'today',
+        onChange: function(selectedDates, dateStr) {
+          alert("Selected date: " + dateStr);
+        },
+      });
+</script>
 
 {% endblock %}
