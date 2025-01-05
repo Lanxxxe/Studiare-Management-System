@@ -14,20 +14,21 @@
 </head>
 
 <body class="bg-[#1e1c1f] text-[#4a003e] overflow-x-hidden">
+    <!-- Navigation -->
     <nav class="bg-[#4a003e] px-4 py-6 sticky top-0 z-10">
-        <div class="flex justify-between items-center text-[#F7E7CE]">
-            <div class="flex items-center space-x-4">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center text-[#F7E7CE]">
+            <!-- Logo Section -->
+            <div class="flex items-center justify-between sm:w-auto w-full">
                 <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
             </div>
-            <div class="ml-auto flex space-x-10 text-lg"> <!-- Increased space between buttons -->
+            <!-- Navigation Links -->
+            <div class="flex sm:ml-auto sm:space-x-10 space-y-4 sm:space-y-0 sm:text-lg text-center">
                 <a href="{% url 'landing_page' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">Home</a>
-                <!-- Increased text size -->
-                <a href="{% url 'reservation_process' %}"
-                    class="text-lg hover:text-[#F7E7CE] transition-colors">Reservation</a> <!-- Increased text size -->
+                <a href="{% url 'reservation_process' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">Reservation</a>
                 <a href="{% url 'about_us' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">About Us</a>
-                <!-- Increased text size -->
             </div>
-            <div class="ml-auto">
+            <!-- Sign-Up/Login Button -->
+            <div class="sm:ml-auto mt-4 sm:mt-0">
                 <a href="{% url 'login' %}"
                     class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
                     Sign Up / Login
@@ -36,9 +37,11 @@
         </div>
     </nav>
 
+    <!-- Content Block -->
     {% block content %}
     {% endblock %}
 
+    <!-- Footer -->
     <footer class="bg-[#000000] text-[#F7E7CE] text-center py-4">
         <p>&copy; 2048 Studiare. All rights reserved.</p>
     </footer>
