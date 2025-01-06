@@ -18,7 +18,7 @@
         <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
             <div class="">
               <p class="text-[24px]">Reservations</p>
-              <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
+              <a class="text-[12px] underline underline-offset-4" href="{% url 'staff_spaces' %}">View</a>
             </div>
     
             <p class="text-[32px] font-bold">{{ reservations }}</p>
@@ -27,10 +27,10 @@
         <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
             <div class="">
               <p class="text-[24px]">Vacants</p>
-              <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
+              <a class="text-[12px] underline underline-offset-4" href="{% url 'staff_spaces' %}">View</a>
             </div>
     
-            <p class="text-[32px] font-bold">{{ reservations }}</p>
+            <p class="text-[32px] font-bold">{{ total_vacant_seats }}</p>
         </div>
     </div>
 
@@ -45,12 +45,18 @@
               </tr>
             </thead>
             <tbody>
-                  <tr class="hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                  </tr>
+              <tbody>
+                {% if spaces %}
+                  {% for space in spaces %}
+                    <tr class="hover:bg-gray-100">
+                      <td class="border border-gray-300 px-4 py-2">{{ space.space_name }}</td>
+                      <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
+                      <td class="border border-gray-300 px-4 py-2">{{ space.vacant }}</td>
+                      <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
+                    </tr>
+                  {% endfor %}
+                {% endif %}
+            </table>
             </tbody>
           </table>
     </div>

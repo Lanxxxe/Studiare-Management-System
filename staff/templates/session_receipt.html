@@ -1,0 +1,35 @@
+{% extends 'staff_base.html' %}
+{% load static %}
+
+{% block local_css %}
+  <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
+{% endblock %}
+
+{% block title %}Receipt{% endblock %}
+
+{% block content %}
+<div class="gap-4 h-full p-4">
+    <div class="w-2/5 mx-auto mt-4 p-8 rounded-md border-2 border-gray-400">
+        <img class="mx-auto w-2/4 rounded" src="{% static 'images/stud.png' %}" alt="">
+        <h2 class="text-2xl font-bold text-center mt-4">Session Receipt</h2>
+        <p class="mt-4">Guest Name: {{ guest_name }}</p>
+        <p>Check-in Time: {{ check_in_time }}</p>
+        <p>Check-out Time: {{ check_out_time }}</p>
+        <hr class="my-4 border-2 border-gray-500 rounded-2xl" >
+        <p class="text-xl "><strong>Total Payment:</strong> PHP {{ total_payment|floatformat:2 }}</p>
+    </div>
+    <div class="mt-6 text-center">
+        <a href="{% url 'staff_spaces' %}" class="px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Return</a>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block local_js %} 
+<script>
+    document.querySelector('#spaces').classList.add("bg-white");
+    document.querySelector('#spaces').classList.add("text-[#4A003E]");
+</script>
+
+{% endblock %}

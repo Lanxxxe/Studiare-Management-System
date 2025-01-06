@@ -17,19 +17,33 @@
               <tr class="bg-[#4A003E] text-white">
                 <th class="border border-gray-300 px-4 py-2 text-left">Guest</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Space</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Date</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Check In</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Check Out</th>
                 <th class="border border-gray-300 px-4 py-2 text-left">Total Bill</th>
               </tr>
             </thead>
             <tbody>
+                {% if transactions %}
+                  {% for transaction in transactions %}
                   <tr class="hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
+                    <td class="border border-gray-300 px-4 py-2">{{ transaction.guest_name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ transaction.space.space_name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ transaction.check_in_time|date:"M. j, Y" }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ transaction.check_out_time|time:"g:i a" }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ transaction.check_out_time|time:"g:i a" }}</td>
+                    <td class="border border-gray-300 px-4 py-2">Php {{ transaction.total_payment }}</td>
                   </tr>
+                  {% endfor %}
+                  <tr class="hover:bg-gray-100">
+                    <td class="text-end font-bold border border-gray-300 px-4 py-2" colspan="5">Total Sales:</td>
+                    <td class="border border-gray-300 px-4 py-2">Php {{ total_sale }}</td>
+                {% else %}
+                  <tr class="hover:bg-gray-100">
+                    <td class="border border-gray-300 px-4 py-2">You don't have any transactions.</td>
+                  </tr>
+                {% endif %}
+                  
             </tbody>
           </table>
     </div>

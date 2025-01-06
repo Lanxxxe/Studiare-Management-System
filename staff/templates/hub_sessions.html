@@ -12,17 +12,31 @@
   <h1 class="text-2xl font-bold"><a class="text-xl" href="{% url 'staff_spaces' %}"><i class="bi bi-arrow-left-circle"></i></a> Manage Sessions for <span class="text-fuchsia-900">{{ space.space_name }}</span></h1>
 
   <div class="flex flex-col gap-6 px-24 mt-4">
-    {% for form in forms %}
-      <form class=" rounded border-2 border-gray-400 p-4" method="post">
+    {% for form, remaining_time in forms_with_times %}
+      <form class="rounded border-2 border-gray-400 p-4" method="post">
         {% csrf_token %}
         <h3 class="text-xl font-bold">Seat {{ forloop.counter }}</h3>
-          <div class="flex flex-col p-4 bg-white rounded-lg shadow">
-            {{ form.as_p }}
-            <button type="submit"  name="submit" value="{{ forloop.counter }}"class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Save Sessions</button>
-          </div>
+        <div class="flex flex-col p-4 bg-white rounded-lg shadow">
+          {{ form.as_p }}
+          
+          {% if remaining_time %}
+            <p class="text-md">{{ remaining_time }}</p>
+          {% endif %}
+
+          {% if existing_sessions|length > forloop.counter0 %}
+            <!-- If session exists for this seat -->
+            <div class="flex justify-end gap-4 mt-6">
+              <button type="submit" name="submit" value="{{ forloop.counter }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Update Session</button>
+              <button type="submit" name="end_session" value="{{ forloop.counter }}" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">End Session</button>
+            </div>
+          {% else %}
+            <!-- If seat is empty -->
+            <button type="submit" name="submit" value="{{ forloop.counter }}" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Save Session</button>
+          {% endif %}
+        </div>
       </form>
     {% endfor %}
-  </div>
+</div>
 </div>
 
 {% endblock %}

@@ -8,4 +8,5 @@ urlpatterns = [
     path('staff_transactions/', staff_transactions, name='staff_transactions'),
     path('staff_reservations/', staff_reservations, name='staff_reservations'),
     path('staff_spaces/sessions/<int:space_id>', staff_manage_sessions, name='manage_sessions'),
+    path('staff_spaces/session_receipt/', session_receipt, name='session_receipt'),
 ]
