@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from management.utils import login_required_custom
+from management.utils import check_admin
 # Create your views here.
 
 # from sales_management
@@ -9,7 +8,7 @@ from reservation.models import Reservation
 
 import sweetify
 
-@login_required_custom
+@check_admin
 def index(request):
     spaces = HubSpaces.objects.all()
     reservations = Reservation.objects.all().count()
@@ -25,7 +24,7 @@ def index(request):
     }
     return render(request, 'admin_dashboard.html', context)
 
-@login_required_custom
+@check_admin
 def sales(request):
     reservations = Reservation.objects.all().count()
 
@@ -34,7 +33,7 @@ def sales(request):
     }
     return render(request, 'admin_sales.html', context)
 
-@login_required_custom
+@check_admin
 def spaces(request):
     spaces = HubSpaces.objects.all()
     context = {
@@ -43,7 +42,7 @@ def spaces(request):
 
     return render(request, 'admin_spaces.html', context)
 
-@login_required_custom
+@check_admin
 def staff(request):
     user_id = request.session.get('user_id')
     staffs = ManagementUser.objects.exclude(id=user_id)
@@ -55,7 +54,7 @@ def staff(request):
 
 
 
-@login_required_custom
+@check_admin
 def admin_reservations(request):
     reservations = Reservation.objects.all()
 
@@ -65,7 +64,7 @@ def admin_reservations(request):
     return render(request, 'admin_reservations.html', context)
 
 
-@login_required_custom
+@check_admin
 def update_reservation(request, action, reservation_id):
     
 

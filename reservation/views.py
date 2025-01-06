@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from management.models import HubSpaces
+from management.utils import custom_login_required
 from users.models import User
 from .models import Reservation
 
@@ -10,7 +11,7 @@ from datetime import datetime
 def reservation_index(request):
     return render(request, 'reservation.html')
 
-
+@custom_login_required
 def reservation_home(request):
     user_id = request.session.get("id")
     spaces = HubSpaces.objects.all()
@@ -23,6 +24,7 @@ def reservation_home(request):
     }
     return render(request, 'reserv_home.html', context)
 
+@custom_login_required
 def reservation_list(request):
     user_id = request.session.get("id")
     reservations = Reservation.objects.filter(user=user_id)
@@ -33,6 +35,7 @@ def reservation_list(request):
     }
     return render(request, 'reservation_list.html', context)
 
+@custom_login_required
 def reservation_transaction(request):
     user_id = request.session.get("id")
     reservations = Reservation.objects.filter(user=user_id)
@@ -44,6 +47,7 @@ def reservation_transaction(request):
 
     return render(request, 'reservation_transactions.html', context)
 
+@custom_login_required
 def reserve_space(request, space_id):        
     user_id = request.session.get("id")
     user = get_object_or_404(User, user_id=user_id)

@@ -36,6 +36,7 @@ def login(request):
                     request.session['id'] = user.user_id
                     request.session['name'] = f'{user.firstname} {user.lastname}' 
                     request.session['email'] = user.user_email
+                    request.session['user_type'] = "User"
 
                     sweetify.success(request, f"Welcome {user.firstname}!", persistent="Got it!")
                     return redirect("reservation_home")  # Replace with your home URL

@@ -1,0 +1,30 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Update Staff Information {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
+  <h1 class="text-2xl text-gray-900 font-bold mb-2"><i class="bi bi-border"></i> Update Space</h1>
+  
+  <div class="flex gap-2 ">
+    <form class="flex-1 rounded" method="POST">
+        {% csrf_token %}
+        <div class="flex flex-col p-4 bg-white rounded-lg shadow">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="w-full flex justify-end gap-4">
+                <button type="submit" name="update_info" class="px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Save</button>
+                <a href="{% url 'admin_settings' %}" class="px-4 py-2 bg-gray-600 hover:bg-gray-800 text-white rounded">Cancel</a>
+            </div>
+        </div>
+    </form>
+  </div>
+ 
+</div>
+
+<script>
+  document.querySelector('#staff').classList.add("bg-white");
+  document.querySelector('#staff').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}

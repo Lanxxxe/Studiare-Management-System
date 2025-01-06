@@ -88,8 +88,8 @@
               <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
               <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
               <td class="border border-gray-300 px-4 py-2">
-                <a class="text-blue-700 underline underline-offset-4" href="">Update</a>
-                <a class="text-red-700 underline underline-offset-4 ms-2" href="">Remove</a>
+                <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_space_information' space.id %}">Update</a>
+                <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'remove_space' space.id %}">Remove</a>
               </td>
             </tr>
             {% endfor %}

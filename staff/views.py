@@ -4,12 +4,15 @@ from django.db.models import Sum
 from datetime import timedelta
 
 from management.models import HubSpaces
+from management.utils import check_staff
 from .forms import HubSessionsForm
 
 from .models import HubSessions, Transactions
 from reservation.models import Reservation
 
 import sweetify
+
+@check_staff
 def staff_dashboard(request):
     spaces = HubSpaces.objects.all()
     reservation = Reservation.objects.all().count()
@@ -22,6 +25,7 @@ def staff_dashboard(request):
     }
     return render(request, 'staff_dashboard.html', context)
 
+@check_staff
 def staff_spaces(request):
     spaces = HubSpaces.objects.all()
 
@@ -32,6 +36,7 @@ def staff_spaces(request):
     return render(request, 'staff_spaces.html', context)
 
 
+@check_staff
 def staff_transactions(request):
     date_today = now().date()
     transactions = Transactions.objects.all()
@@ -48,13 +53,15 @@ def staff_transactions(request):
     return render(request, 'staff_transactions.html', context)
 
 
+@check_staff
 def staff_reservations(request):
     return render(request, 'staff_reservations.html')
 
+@check_staff
 def staff_sales(request):
     return render(request, 'staff_sales.html')
 
-
+@check_staff
 def staff_manage_sessions(request, space_id):
     # Get the space and the number of seats
     space = get_object_or_404(HubSpaces, id=space_id)
@@ -165,7 +172,6 @@ def staff_manage_sessions(request, space_id):
 
     return render(request, 'hub_sessions.html', context)
 
-
+@check_staff
 def session_receipt(request):
-
     return render(request, 'session_receipt.html')

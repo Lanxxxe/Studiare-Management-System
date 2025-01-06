@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password, make_password
-from management.utils import login_required_custom
+from management.utils import check_admin
 
 from .models import ManagementUser, HubSpaces
-from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm, UpdateStaffAccountForm
+from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm, UpdateStaffAccountForm, UpdateSpaceForm
 
 import sweetify
 
@@ -45,7 +45,7 @@ def management_index(request):
 
     return render(request, 'manage_login.html', {"form": form})
 
-@login_required_custom
+@check_admin
 def settings(request):
     # Retrieve the currently logged-in user from the session
     user_id = request.session.get('user_id')
@@ -95,7 +95,7 @@ def settings(request):
     return render(request, 'admin_settings.html', context)
 
 
-@login_required_custom
+@check_admin
 def account_registration(request):
     # Retrieve the currently logged-in user from the session
     user_id = request.session.get('user_id')
@@ -116,7 +116,7 @@ def account_registration(request):
     return render(request, 'acc_registration.html', {"forms": registration_form})
 
 
-@login_required_custom
+@check_admin
 def update_staff_account(request, staff_id):
     #Retrieve staff
     staff = ManagementUser.objects.get(id=staff_id)
@@ -139,23 +139,18 @@ def update_staff_account(request, staff_id):
     return render(request, 'update_staff.html', context)
 
 
-@login_required_custom
+@check_admin
 def remove_staff_account(request, staff_id):
-    
     staff = get_object_or_404(ManagementUser, id=staff_id)
-    
     try:
         staff.delete()
         sweetify.toast(request, f"Staff {staff.first_name} {staff.last_name} has been removed.", icon="success")
-    
     except:
         sweetify.error(request, "Failed to remove staff account. Please check the staff details.")
     
     return redirect('admin_staff') 
 
-
-
-@login_required_custom
+@check_admin
 def add_new_space(request):
     # Retrieve the currently logged-in user from the session
     user_id = request.session.get('user_id')
@@ -185,10 +180,39 @@ def add_new_space(request):
     return render(request, 'add_new_space.html', {"forms": add_new_space_form})
 
 
+@check_admin
+def update_space_information(request, space_id):
+    space = HubSpaces.objects.get(id=space_id)
+
+    if request.method == "POST":
+        form = UpdateSpaceForm(request.POST, instance=space)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, "Updated", text=f"Space updated successfully!", persistent="Okay")
+            return redirect('admin_settings')
+        else:
+            sweetify.error(request, "Failed to update space details. Please check the form.")
+    else:
+        form = UpdateSpaceForm(instance=space)
+
+    context = {
+        'form' : form
+    }
+    return render(request, 'update_space.html', context)
 
 
+@check_admin
+def remove_space(request, space_id):
+    space = HubSpaces.objects.get(id=space_id)
 
+    try:
+        space.delete()
+        sweetify.toast(request,f"Space removed successfully!", icon="success", timer=2500)
+    except Exception as e:
+        sweetify.error(request, "Failed to remove space. Please check the form.")
 
+    return redirect('admin_settings')
+    
 
 
 
