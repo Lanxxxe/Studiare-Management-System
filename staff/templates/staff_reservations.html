@@ -24,14 +24,32 @@
               </tr>
             </thead>
             <tbody>
+              {% if reservations %}
+                {% for reservation in reservations %}
                   <tr class="hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
+                    <td class="border border-gray-300 px-4 py-2">{{ reservation.user.firstname }} {{ reservation.user.lastname }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ reservation.space.id }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_start_time }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_end_time }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ reservation.status }}</td>
+                      <td class="border border-gray-300 px-4 py-2">
+                          {% if reservation.status == 'Pending' %}
+                              <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_reservation' 'CONFIRM' reservation.reservation_id %}">Accept</a>
+                              <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'update_reservation' 'DECLINED' reservation.reservation_id %}">Decline</a>
+                          {% elif reservation.status == 'Completed' %}
+                              <p>Paid</p>
+                          {% else %}
+                              <a class="text-gray-700 underline underline-offset-4" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}">Revert Action</a>
+                              <a class="text-gray-700 underline underline-offset-4" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}">Check In</a>
+                          {% endif %}
+                      </td>
                   </tr>
+                  {% endfor %}
+                {% else %}
+                  <tr>
+                    <td class="text-center" colspan="7">No reservations for now.</td>
+                  </tr>
+              {% endif %}
             </tbody>
           </table>
     </div>

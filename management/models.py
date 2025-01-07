@@ -40,15 +40,22 @@ class HubSpaces(models.Model):
     vacant = models.IntegerField(null=False) 
 
     def __str__(self):
-        return f"{self.space_name} ({self.space_type}) - {self.status}"
+        return f"{self.space_name} ({self.space_type})"
 
 
-class AuditLog(models.Model):
+class CustomLoginLog(models.Model):
+    EVENTS = [
+        ("Login", "Login"),
+        ("Logout", "Logout"),
+    ]
+    
     log_id = models.AutoField(primary_key=True)
-    action = models.CharField(max_length=255)
+    username = models.CharField(max_length=100)
+    user = models.CharField(max_length=100)
+    action = models.CharField(max_length=10, choices=EVENTS, default="")
+    ip_address = models.CharField(max_length=100, default="")
     action_date = models.DateTimeField(auto_now_add=True)
-    details = models.TextField()
 
     def __str__(self):
-        return f"Log {self.log_id} by {self.user_id.username}"
+        return f"{self.user}"
 

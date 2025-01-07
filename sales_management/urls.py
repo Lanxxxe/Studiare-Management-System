@@ -9,5 +9,4 @@ urlpatterns = [
     path('spaces/', spaces, name='admin_spaces'),
     path('reservations/', admin_reservations, name='admin_reservations'),
     path('reservations/<str:action>/<int:reservation_id>', update_reservation, name='update_reservation'),
-    
 ]

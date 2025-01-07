@@ -12,6 +12,9 @@ from django.db.models import Q
 from .forms import RegistrationForm, LoginForm
 from .models import User, UserEmail
 
+from management.models import CustomLoginLog
+from management.utils import get_client_ip
+
 import sweetify
 
 
@@ -34,9 +37,17 @@ def login(request):
                 if user.is_active and password == user.password:
                     # Add session or token logic here as needed
                     request.session['id'] = user.user_id
+                    request.session['username'] = user.username
                     request.session['name'] = f'{user.firstname} {user.lastname}' 
                     request.session['email'] = user.user_email
                     request.session['user_type'] = "User"
+
+                    CustomLoginLog.objects.create(
+                        username=user.username,
+                        user="User",
+                        action="Login",
+                        ip_address=get_client_ip(request)
+                    )
 
                     sweetify.success(request, f"Welcome {user.firstname}!", persistent="Got it!")
                     return redirect("reservation_home")  # Replace with your home URL
@@ -94,6 +105,13 @@ def activate_account(request, uid):
 
 def logout(request):
     try:
+        CustomLoginLog.objects.create(
+            username=request.session.get("username"),
+            user=request.session.get("user_type"),
+            action="Logout",
+            ip_address=get_client_ip(request)
+        )
+        
         request.session.flush()
         sweetify.success(request, "Logout Successfully.", persistent="Okay")
     except:

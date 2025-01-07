@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import check_password, make_password
-from management.utils import check_admin
+from easyaudit.models import CRUDEvent, RequestEvent
+from management.utils import check_admin, get_client_ip
 
-from .models import ManagementUser, HubSpaces
+from .models import ManagementUser, HubSpaces, CustomLoginLog
 from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm, UpdateStaffAccountForm, UpdateSpaceForm
+
 
 import sweetify
 
@@ -22,15 +24,25 @@ def management_index(request):
                     if user.position in ["Staff", "Admin"]:
                         # Save user information in session
                         request.session['user_id'] = user.id
+                        request.session['username'] = user.username
                         request.session['name'] = f'{user.first_name} {user.last_name}'
-                        request.session['position'] = user.position
+                        request.session['user_type'] = user.position
                         request.session['email'] = user.email
-
                         sweetify.success(request, "Welcome back!",  text=f"Hello, {user.first_name}!", button=True)
+                        
+                        CustomLoginLog.objects.create(
+                            username=user.username,
+                            user=user.position,
+                            action="Login",
+                            ip_address=get_client_ip(request)
+                        )
 
                         # Redirect based on user position
-                        if user.position == "Admin" or user.position == "Staff":
+                        if user.position == "Admin":
                             return redirect("admin_dashboard")
+                        
+                        elif user.position == "Staff":
+                            return redirect("staff_dashboard")
                     else:
                         sweetify.error(
                             request, 
@@ -214,5 +226,18 @@ def remove_space(request, space_id):
     return redirect('admin_settings')
     
 
-
+@check_admin
+def audit_trail(request):
+    # Querying recent audit events
+    login_events = CustomLoginLog.objects.all()  # Last 10 login/logout events
+    crud_events = CRUDEvent.objects.order_by('-datetime')[:10]    # Last 10 CRUD events
+    request_events = RequestEvent.objects.order_by('-datetime')[:10]  # Last 10 URL requests
+    
+    # Passing the data to the template
+    context = {
+        'login_events': login_events,
+        'crud_events': crud_events,
+        'request_events': request_events,
+    }
+    return render(request, 'audit_trail.html', context)
 

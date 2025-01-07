@@ -39,13 +39,14 @@ def staff_spaces(request):
 @check_staff
 def staff_transactions(request):
     date_today = now().date()
-    transactions = Transactions.objects.all()
+    transactions = Transactions.objects.filter(check_out_time__date=date_today)
     # Filter transactions for today and calculate the total
     total_bills_today = Transactions.objects.filter(
         check_out_time__date=date_today
     ).aggregate(total_bills=Sum('total_payment'))['total_bills'] or 0
     
     total_bills_today = f"{total_bills_today:.2f}"
+    print(transactions, date_today)
     context = {
         'transactions' : transactions,
         'total_sale' : total_bills_today
@@ -55,7 +56,13 @@ def staff_transactions(request):
 
 @check_staff
 def staff_reservations(request):
-    return render(request, 'staff_reservations.html')
+    reservation = Reservation.objects.all()
+
+    context = {
+        'reservations' : reservation,
+    }
+    return render(request, 'staff_reservations.html', context)
+
 
 @check_staff
 def staff_sales(request):

@@ -1,0 +1,116 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Staff {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-col gap-4">
+    <h1 class="text-center text-2xl font-bold">Audit Trail</h1>
+
+    <div class="border-2 border-gray-400 p-6">
+        <!-- CRUD Events -->
+        <h2 class="text-lg font-bold">CRUD Events</h2>
+        <table class="table-auto w-full border-collapse border border-purple-900 mt-4">
+            <thead>
+                <tr class="bg-[#4A003E] text-white">
+                    <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Model</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in crud_events %}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.user.username }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.object_repr }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.get_event_type_display }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.datetime }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 text-center" colspan="4">No CRUD events found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="border-2 border-gray-400 p-6">
+        <!-- Login/Logout Events -->
+        <h2 class="text-lg font-bold">Login/Logout Events</h2>
+        <table class="table-auto w-full border-collapse border border-purple-900 mt-4">
+            <thead>
+                <tr class="bg-[#4A003E] text-white">
+                    <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Role</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Event</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">IP Address</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in login_events %}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.username }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.user }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.action }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.ip_address }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.action_date }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 text-center" colspan="4">No login/logout events found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <div class="border-2 border-gray-500">
+        <h2>URL Request Events</h2>
+        <table class="table-auto w-full border-collapse border border-purple-900">
+            <thead>
+                <tr class="bg-[#4A003E] text-white">
+                    <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">URL</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Method</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in request_events %}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.user.username }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.url }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.http_method }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.datetime }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No request events found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> -->
+    <!-- <table class="table-auto w-full border-collapse border border-purple-900">
+        <thead>
+        <tr class="bg-[#4A003E] text-white">
+            <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table> -->
+</div>
+
+<script>
+  document.querySelector('#audit').classList.add("bg-white");
+  document.querySelector('#audit').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}
