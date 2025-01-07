@@ -1,7 +1,6 @@
 {% extends 'staff_base.html' %}
 {% load static %}
 
-
 {% block local_css %}
   <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
 {% endblock %}
@@ -34,13 +33,13 @@
                     <td class="border border-gray-300 px-4 py-2">{{ reservation.status }}</td>
                       <td class="border border-gray-300 px-4 py-2">
                           {% if reservation.status == 'Pending' %}
-                              <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_reservation' 'CONFIRM' reservation.reservation_id %}">Accept</a>
-                              <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'update_reservation' 'DECLINED' reservation.reservation_id %}">Decline</a>
+                              <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_reservation' 'CONFIRM' reservation.reservation_id %}"><i class="bi bi-check2"></i> Accept</a>
+                              <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'update_reservation' 'DECLINED' reservation.reservation_id %}"><i class="bi bi-x"></i> Decline</a>
                           {% elif reservation.status == 'Completed' %}
                               <p>Paid</p>
                           {% else %}
-                              <a class="text-gray-700 underline underline-offset-4" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}">Revert Action</a>
-                              <a class="text-gray-700 underline underline-offset-4" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}">Check In</a>
+                              <a class="text-gray-700 underline underline-offset-4" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}"><i class="bi bi-arrow-counterclockwise"></i> Revert Action</a>
+                              <a class="text-green-700 underline underline-offset-4 ms-2" href="{% url 'update_reservation' 'UNDO' reservation.reservation_id %}"><i class="bi bi-clock"></i> Check In</a>
                           {% endif %}
                       </td>
                   </tr>

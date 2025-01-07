@@ -57,6 +57,7 @@ def management_index(request):
 
     return render(request, 'manage_login.html', {"form": form})
 
+
 @check_admin
 def settings(request):
     # Retrieve the currently logged-in user from the session

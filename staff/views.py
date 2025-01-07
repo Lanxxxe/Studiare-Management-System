@@ -25,6 +25,7 @@ def staff_dashboard(request):
     }
     return render(request, 'staff_dashboard.html', context)
 
+
 @check_staff
 def staff_spaces(request):
     spaces = HubSpaces.objects.all()
@@ -67,6 +68,7 @@ def staff_reservations(request):
 @check_staff
 def staff_sales(request):
     return render(request, 'staff_sales.html')
+
 
 @check_staff
 def staff_manage_sessions(request, space_id):
@@ -178,6 +180,7 @@ def staff_manage_sessions(request, space_id):
     }
 
     return render(request, 'hub_sessions.html', context)
+
 
 @check_staff
 def session_receipt(request):
