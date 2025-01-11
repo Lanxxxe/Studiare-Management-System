@@ -16,8 +16,7 @@
     <title> {% block title %} {% endblock %}</title>
 </head>
 
-<body class="overflow-x-hidden">
-
+<body class="flex flex-col min-h-screen">
     <nav class="my-8 mx-12 border-2 border-white rounded-2xl bg-[#4a003e] px-4 py-6 top-0 z-10">
         <div class="flex justify-between items-center text-black px-8">
             <div class="flex items-center space-x-4">
@@ -26,7 +25,11 @@
                 <span class="text-[#F7E7CE] text-2xl">{{ user_name }}</span>
             </div>
 
-            <div>
+            <div class="flex space-x-4">
+                <a href="{% url 'user_feedback' %}"
+                    class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
+                    Provide Feedback
+                </a>
                 <a href="{% url 'logout' %}"
                     class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
                     Log Out
@@ -35,15 +38,19 @@
         </div>
     </nav>
 
-    {% block content %}
-    {% endblock %}
+    <!-- Main content -->
+    <div class="flex-1">
+        {% block content %}
+        {% endblock %}
+    </div>
 
     {% block local_script %} {% endblock %}
 
     {% load sweetify %}
     {% sweetify %}
 
-    <footer class="text-[#F7E7CE] bg-[#4a003e] text-center py-4 mt-12">
+    <!-- Footer -->
+    <footer class="text-[#F7E7CE] bg-[#4a003e] text-center py-4">
         <p class="text-[#ffffff]">&copy; 2048 Studiare. All rights reserved.</p>
     </footer>
 </body>

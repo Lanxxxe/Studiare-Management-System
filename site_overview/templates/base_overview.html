@@ -24,17 +24,24 @@
             <!-- Navigation Links -->
             <div class="flex sm:ml-auto sm:space-x-10 space-y-4 sm:space-y-0 sm:text-lg text-center">
                 <a href="{% url 'landing_page' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">Home</a>
-                <a href="{% url 'reservation_process' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">Reservation</a>
+                <a href="{% url 'reservation_process' %}"
+                    class="text-lg hover:text-[#F7E7CE] transition-colors">Reservation</a>
                 <a href="{% url 'about_us' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">About Us</a>
             </div>
             <!-- Sign-Up/Login Button -->
             <div class="sm:ml-auto mt-4 sm:mt-0">
-                <a href="{% url 'login' %}"
-                    class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
-                    Sign Up / Login
-                </a>
+                <div
+                    class="inline-flex items-center justify-center bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 rounded-full divide-x divide-[#4a003e]">
+                    <a href="{% url 'registration' %}"
+                        class="px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-l-full">
+                        Sign Up
+                    </a>
+                    <a href="{% url 'login' %}"
+                        class="px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-r-full">
+                        Login
+                    </a>
+                </div>
             </div>
-        </div>
     </nav>
 
     <!-- Content Block -->

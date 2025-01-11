@@ -5,11 +5,31 @@ from management.utils import custom_login_required
 from users.models import User
 from .models import Reservation
 
+from django.contrib import messages
+from users.models import Feedback
+
 import sweetify
 from datetime import datetime
 
 def reservation_index(request):
     return render(request, 'reservation.html')
+
+def user_feedback(request):
+    if request.method == 'POST':
+        feedback_message = request.POST.get('message')  # Get feedback input
+        
+        if feedback_message.strip():  # Ensure input is not empty
+            Feedback.objects.create(
+                
+                user_id=request.session.get("id"),  # Link feedback to the logged-in user
+                message=feedback_message.strip(),
+            )
+            sweetify.success(request, "Thank you for your feedback!")
+            return redirect('reservation_home')  # Redirect to home or any other page
+        else:
+            messages.error(request, "Feedback cannot be empty.")
+
+    return render(request, 'feedback.html')
 
 @custom_login_required
 def reservation_home(request):
