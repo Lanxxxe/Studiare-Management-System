@@ -1,17 +1,13 @@
-{% extends 'staff_base.html' %}
+{% extends "admin_base.html" %} 
 {% load static %}
 
-{% block local_css %}
-  <link rel="stylesheet" href="{% static 'css/staff_dashboard.css' %}">
-{% endblock %}
-
-{% block title %}Staff Transactions{% endblock %}
+{% block title %} Transactions {% endblock %}
 
 {% block content %}
 <div class="grid grid-cols-2 gap-4 h-full">
 
     <!-- Date filter form -->
-    <!-- <form method="get" action="" class="col-span-2 flex items-center space-x-4">
+    <form method="get" action="" class="col-span-2 flex items-center space-x-4">
         <label for="filter_date" class="text-gray-700 font-semibold">Filter by Date:</label>
         <input
             type="date"
@@ -26,7 +22,7 @@
         >
             Apply Filter
         </button>
-    </form> -->
+    </form>
 
     <div class="col-span-2 p-4 w-full">
         <table class="table-auto w-full border-collapse border border-purple-900">
@@ -69,13 +65,11 @@
           </table>
     </div>
 </div>
-{% endblock %}
 
-
-{% block local_js %} 
 <script>
-    document.querySelector('#transactions').classList.add("bg-white");
-    document.querySelector('#transactions').classList.add("text-[#4A003E]");
+  document.querySelector('#transactions').classList.add("bg-white");
+  document.querySelector('#transactions').classList.add("text-[#4A003E]");
 </script>
-
 {% endblock %}
+
+

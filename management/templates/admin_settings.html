@@ -38,8 +38,7 @@
           <th class="border border-gray-300 px-4 py-2 text-left">Full Name</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Position</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Contact</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -47,11 +46,19 @@
           {% for staff in staffs %}
             <!-- Example row -->
             <tr class="hover:bg-gray-100">
-              <td class="border border-gray-300 px-4 py-2">{{ staff.first_name }} {{ staff.last_name }}</td>
-              <td class="border border-gray-300 px-4 py-2">{{ staff.position }}</td>
+              <td class="border border-gray-300 px-4 py-2">{{ staff.first_name }} {{ staff.last_name }} {{ staff.id }}</td>
+              <td class="border border-gray-300 px-4 py-2">
+                {% if staff.is_superuser %}
+                  Admin
+                {% else %}
+                  Staff
+                {% endif %}
+              </td>
               <td class="border border-gray-300 px-4 py-2">{{ staff.email }}</td>
-              <td class="border border-gray-300 px-4 py-2">{{ staff.contact_number }}</td>
-              <td class="border border-gray-300 px-4 py-2">{{ staff.status }}</td>
+              <td class="border border-gray-300 px-4 py-2">
+                <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_staff_account' staff.id %}">Update</a>
+                <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'remove_staff' staff.id %}">Remove</a>
+              </td>
           </tr>
           {% endfor %}
         {% else %}
@@ -76,6 +83,7 @@
           <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Vacants</th> -->
           <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
         </tr>
       </thead>
@@ -87,6 +95,7 @@
               <td class="border border-gray-300 px-4 py-2">{{ space.space_type }}</td>
               <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
               <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
+              <!-- <td class="border border-gray-300 px-4 py-2">{{ space.vacant }}</td> -->
               <td class="border border-gray-300 px-4 py-2">
                 <a class="text-blue-700 underline underline-offset-4" href="{% url 'update_space_information' space.id %}">Update</a>
                 <a class="text-red-700 underline underline-offset-4 ms-2" href="{% url 'remove_space' space.id %}">Remove</a>

@@ -25,7 +25,12 @@
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center rounded-md ">
           <i class="bi bi-person-lock px-2 py-1 rounded-md"></i>
-          <h1 class="text-[15px]  ml-3 text-xl text-gray-200 font-bold">Admin Panel</h1>
+          <div class="ms-3 w-full flex flex-col items-start">
+            <p class="text-2xl text-gray-200 font-bold text-start">{{ name }}</p>
+            <p class="text-sm font-light">
+              Admin Panel
+            </p>
+          </div>
           <i class="bi bi-x ml-20 cursor-pointer lg:hidden" onclick="Openbar()"></i>
         </div>
         <hr class="my-2 text-gray-600">
@@ -49,12 +54,18 @@
             <i class="bi bi-coin"></i>
             Sales
           </a>
-          <a href="{% url 'admin_staff' %}" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer gap-3 hover:bg-white hover:text-[#4A003E] text-[16px]"
+          <a href="{% url 'admin_transaction' %}" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer gap-3 hover:bg-white hover:text-[#4A003E] text-[16px]"
+          id="transactions"
+          >
+            <i class="bi bi-arrow-left-right"></i>
+            Transactions
+          </a>
+          <!-- <a href="{% url 'admin_staff' %}" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer gap-3 hover:bg-white hover:text-[#4A003E] text-[16px]"
           id="staff"
           >
             <i class="bi bi-people"></i>
             Staff
-          </a>
+          </a> -->
           <a href="{% url 'admin_spaces' %}" class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer gap-3 hover:bg-white hover:text-[#4A003E] text-[16px]"
           id="spaces"
           >
@@ -90,14 +101,6 @@
     {% block local_javascript %} {% endblock %}
 
     <script>
-
-
-        function dropDown() {
-            document.querySelector('#submenu').classList.toggle('hidden')
-            document.querySelector('#arrow').classList.toggle('rotate-0')
-          }
-          dropDown()
-      
           function Openbar() {
             document.querySelector('.sidebar').classList.toggle('left-[-300px]')
           }

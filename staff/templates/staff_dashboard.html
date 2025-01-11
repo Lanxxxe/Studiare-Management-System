@@ -10,28 +10,36 @@
 
 {% block content %}
 <div class="grid grid-cols-2 gap-4 h-full">
-    <div class="p-4 flex items-center justify-center">
+    <div class="p-4 flex flex-col items-start gap-2">
+      <p class="text-start text-2xl text-[#4A003E] font-bold">Today's Date</p>
         <div class="" id="calendar"></div>
     </div>
 
-    <div class="flex flex-wrap items-center justify-start gap-2">
-        <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+    <div class="flex flex-col gap-4 py-16">
+        <div class="w-3/4 h-[50px] flex flex-1 justify-between items-center py-4 px-6 bg-[#4A003E] text-white rounded">
+            <div class="">
+              <p class="text-[24px]">Sales Today</p>
+            </div>
+    
+            <p class="text-[32px] font-bold">&#x20B1; {{ today_sales }}</p>
+        </div>
+
+        <div class="w-3/4 h-[50px] flex flex-1 justify-between items-center py-4 px-6 bg-[#4A003E] text-white rounded">
+            <div class="">
+              <p class="text-[24px]">Reservations</p>
+              <a class="text-[12px] underline underline-offset-4" href="{% url 'staff_reservations' %}">View</a>
+            </div>
+    
+            <p class="text-[32px] font-bold">{{ reservations }}</p>
+        </div>
+        <!-- <div class="w-3/4 h-[50px] flex flex-1 justify-between items-center py-4 px-6 bg-[#4A003E] text-white rounded">
             <div class="">
               <p class="text-[24px]">Reservations</p>
               <a class="text-[12px] underline underline-offset-4" href="{% url 'staff_spaces' %}">View</a>
             </div>
     
             <p class="text-[32px] font-bold">{{ reservations }}</p>
-        </div>
-
-        <div class="min-w-[300px] max-w-[330px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-            <div class="">
-              <p class="text-[24px]">Vacants</p>
-              <a class="text-[12px] underline underline-offset-4" href="{% url 'staff_spaces' %}">View</a>
-            </div>
-    
-            <p class="text-[32px] font-bold">{{ total_vacant_seats }}</p>
-        </div>
+        </div> -->
     </div>
 
     <div class="col-span-2 p-4 w-full">
@@ -60,10 +68,10 @@
             </tbody>
           </table>
     </div>
+
 </div>
 
 {% endblock %}
-
 
 {% block local_js %} 
 <script>
@@ -75,10 +83,8 @@
         enableTime: false, // Disable time selection
         dateFormat: "d/m/Y", // Custom date format
         minDate: 'today',
-        onChange: function(selectedDates, dateStr) {
-          alert("Selected date: " + dateStr);
-        },
       });
+
 </script>
 
 {% endblock %}

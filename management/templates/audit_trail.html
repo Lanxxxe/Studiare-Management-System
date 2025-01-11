@@ -14,26 +14,73 @@
             <thead>
                 <tr class="bg-[#4A003E] text-white">
                     <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Position</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Model</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Event</th>
                     <th class="border border-gray-300 px-4 py-2 text-left">Timestamp</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for event in crud_events %}
                 <tr>
-                    <td class="border border-gray-300 px-4 py-2">{{ event.user.username }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ event.object_repr }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ event.get_event_type_display }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ event.datetime }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.user }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        {% if event.user.is_superuser and event.user.is_staff %}
+                            Admin
+                        {% elif event.user.is_staff %}
+                            Staff
+                        {% else %}
+                            Regular User
+                        {% endif %}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.table_name }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.action }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ event.formatted_timestamp }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <a href="{% url 'audit_detail' event.audit_id %}" class="text-blue-700 underline underline-offset-4">View</a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td class="border border-gray-300 px-4 py-2 text-center" colspan="4">No CRUD events found.</td>
+                    <td class="border border-gray-300 px-4 py-2 text-center" colspan="6">No CRUD events found.</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        {% if crud_events_page.paginator.num_pages > 1 %}
+        <div class="flex justify-center mt-4">
+            <div class="flex items-center p-2 overflow-x-auto max-w-full gap-2">
+                {% if crud_events_page.has_previous %}
+                <!-- <a href="?crud_page={{ crud_events_page.previous_page_number }}&login_page={{ login_events_page.number }}" 
+                   class="px-4 py-2 bg-[#4A003E] text-white rounded hover:bg-[#3A002E]">
+                    Previous
+                </a> -->
+                {% endif %}
+
+                {% for num in crud_events_page.paginator.page_range %}
+                    {% if num == crud_events_page.number %}
+                    <span class="px-4 py-2 bg-[#4A003E] text-white rounded">
+                        {{ num }}
+                    </span>
+                    {% else %}
+                    <a href="?crud_page={{ num }}&login_page={{ login_events_page.number }}" 
+                       class="px-4 py-2 border border-[#4A003E] text-[#4A003E] rounded hover:bg-gray-100">
+                        {{ num }}
+                    </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if crud_events_page.has_next %}
+                <!-- <a href="?crud_page={{ crud_events_page.next_page_number }}&login_page={{ login_events_page.number }}" 
+                   class="px-4 py-2 bg-[#4A003E] text-white rounded hover:bg-[#3A002E]">
+                    Next
+                </a> -->
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 
     <div class="border-2 border-gray-400 p-6">
@@ -60,11 +107,44 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td class="border border-gray-300 px-4 py-2 text-center" colspan="4">No login/logout events found.</td>
+                    <td class="border border-gray-300 px-4 py-2 text-center" colspan="5">No login/logout events found.</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        {% if login_events_page.paginator.num_pages > 1 %}
+        <div class="flex justify-center mt-4">
+            <div class="flex items-center p-2 overflow-x-auto max-w-full gap-2 ">
+                {% if login_events_page.has_previous %}
+                <!-- <a href="?login_page={{ login_events_page.previous_page_number }}&crud_page={{ crud_events_page.number }}" 
+                   class="px-4 py-2 bg-[#4A003E] text-white rounded hover:bg-[#3A002E]">
+                    Previous
+                </a> -->
+                {% endif %}
+
+                {% for num in login_events_page.paginator.page_range %}
+                    {% if num == login_events_page.number %}
+                    <span class="px-4 py-2 bg-[#4A003E] text-white rounded">
+                        {{ num }}
+                    </span>
+                    {% else %}
+                    <a href="?login_page={{ num }}&crud_page={{ crud_events_page.number }}" 
+                       class="px-4 py-2 border border-[#4A003E] text-[#4A003E] rounded hover:bg-gray-100">
+                        {{ num }}
+                    </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if login_events_page.has_next %}
+                <!-- <a href="?login_page={{ login_events_page.next_page_number }}&crud_page={{ crud_events_page.number }}" 
+                   class="px-4 py-2 bg-[#4A003E] text-white rounded hover:bg-[#3A002E]">
+                    Next
+                </a> -->
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 
     <!-- <div class="border-2 border-gray-500">

@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 from management.models import HubSpaces
-from management.models import ManagementUser
+from sales_management.models import DailySales
 
 class HubSessions(models.Model):
     LOYALTY_STATUS = [
@@ -37,8 +38,12 @@ class HubSessions(models.Model):
         return f"{self.guest_name} - {self.space}"
 
 class Transactions(models.Model):
-    guest_name = models.CharField(max_length=100)
-    #process_by = models.ForeignKey(ManagementUser, on_delete=models.CASCADE)
+    guest_name = models.CharField(max_length=100, blank=True, null=True)
+    process_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="processed_transactions"
+    )
     space = models.ForeignKey(HubSpaces, on_delete=models.CASCADE)
     check_in_time = models.DateTimeField()
     check_out_time = models.DateTimeField()

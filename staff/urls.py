@@ -7,6 +7,7 @@ urlpatterns = [
     path('staff_sales/', staff_sales, name='staff_sales'),
     path('staff_transactions/', staff_transactions, name='staff_transactions'),
     path('staff_reservations/', staff_reservations, name='staff_reservations'),
+    path('staff_spaces/reservation/session/<int:space_id>/<int:reservation_id>/<str:action>', staff_manage_reservation, name='manage_reservation'),
     path('staff_spaces/sessions/<int:space_id>', staff_manage_sessions, name='manage_sessions'),
     path('staff_spaces/session_receipt/', session_receipt, name='session_receipt'),
 ]

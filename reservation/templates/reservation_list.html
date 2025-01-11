@@ -4,23 +4,37 @@
 
 {% block content %} 
 
-<section id="menu" class="min-h-dvh flex text-center text-[#FFFFFF] fade-in">
+<section id="menu" class="min-h-dvh flex flex-col text-[#FFFFFF] fade-in">
+    <div>
+        <h1 class="text-black text-2xl font-bold ms-14"><a href="{% url 'reservation_home' %}" class="text-black"><i class="bi bi-arrow-left-circle"></i></a> Your Reservations</h1>
+    </div>
     <div class="section-content flex flex-wrap mx-20 p-4 mt-8 w-full gap-6">
         <!-- Dynamically Generated Rectangles -->
         {% if reservations %}
             {% for reservation in reservations %}
-                <div class="w-[400px] h-[150px] bg-[#4a003e] flex justify-between items-center px-8 rounded-md">
+                <div class="w-[420px] h-[150px] bg-[#4a003e] flex justify-between items-center px-8 rounded-md">
                     <div class="w-full flex flex-col justify-start items-start">
                         <p class="text-2xl font-bold">{{ reservation.space.space_name }}</p>
                         <p class="mt-2">{{ reservation.reservation_date }}</p>
                         <p class="mt-4 italic text-xs font-thin">
+                            [{{ reservation.reservation_id }}]
                             {{ reservation.reservation_start_time }} -
                             {{ reservation.reservation_end_time }}
                         </p>
                     </div>
-                    <h1 class="text-3xl italic font-bold">
-                        {{ reservation.status }}
-                    </h1>
+                    <div class="w-full">
+                        <h1 class="text-3xl italic font-bold">
+                            {{ reservation.status }}
+                        </h1>
+
+                        <div class="mt-4">
+                            {% if reservation.status != 'Confirmed' and reservation.status != 'Cancelled' and reservation.status != 'Completed' %}
+                            <a href="{% url 'update_reserve_space' reservation.space.id reservation.reservation_id %}" class="text-cyan-500 underline underline-offset-4 me-2">Update</a>
+                            <a href="{% url 'remove_reservation' reservation.reservation_id %}" class="text-red-300 underline underline-offset-4">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
                 </div>
             {% endfor %}
         {% else %}
@@ -28,10 +42,6 @@
                 <p>You don't have any reservation. Book a reservation <a href="">here</a></p>
             </div>
         {% endif %}
-
-        <div class="w-full flex">
-            <a href="{% url 'reservation_home' %}" class="mt-auto bg-gray-600 hover:bg-slate-800 text-white py-2 px-8 rounded ms-auto">Back</a>
-        </div>
     </div>
 </section>
 

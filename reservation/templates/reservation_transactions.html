@@ -6,40 +6,51 @@
 
 <section id="menu" class="min-h-96 flex flex-col items-start justify-start text-[#FFFFFF] fade-in">
     <!-- Orange Transactions Text at the Top Left -->
-    <div class="text-orange-500 px-12 text-4xl font-bold">
-        <h1>
-            Transactions
+    <div>
+        <h1 class="text-black text-2xl font-bold ms-14">
+            <a href="{% url 'reservation_home' %}" class="text-black"><i class="bi bi-arrow-left-circle"></i></a> Transactions
         </h1>
     </div>
 
     <!-- Purple Table in the Center -->
-    <div class="min-h-96 flex justify-center items-start w-full mt-6 px-12 py-8">
+    <div class="min-h-96 flex justify-center items-start w-full px-12 py-8">
         <table class="w-full text-white text-sm table-auto">
             <thead>
                 <tr class="bg-[#4A003E] text-white">
-                    <th class="border border-gray-300 px-4 py-2 text-start">Spacee</th>
+                    <th class="border border-gray-300 px-4 py-2 text-start">Space</th>
+                    <th class="border border-gray-300 px-4 py-2 text-start">Status</th>
                     <th class="border border-gray-300 px-4 py-2 text-start">Date</th>
                     <th class="border border-gray-300 px-4 py-2 text-start">Time In</th>
                     <th class="border border-gray-300 px-4 py-2 text-start">Time Out</th>
                     <th class="border border-gray-300 px-4 py-2 text-start">Total Time</th>
-                    <th class="border border-gray-300 px-4 py-2 text-start">Total Bill</th>
                 </tr>
             </thead>
             <tbody>
+                {% if transactions %}
+                    {% for transaction in transactions %}
+                        <tr class="text-black hover:bg-gray-100">
+                            <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.space }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.status }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.reservation_date }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.reservation_start_time }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.reservation_end_time }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-start">
+                                {% if item.total_time %}
+                                    {{ item.total_time|time:"%H:%M:%S" }}
+                                {% else %}
+                                    Not Available
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
                 <tr class="text-black hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2 text-start">Space</td>
-                    <td class="border border-gray-300 px-4 py-2 text-start">Date</td>
-                    <td class="border border-gray-300 px-4 py-2 text-start">Time In</td>
-                    <td class="border border-gray-300 px-4 py-2 text-start">Time Out</td>
-                    <td class="border border-gray-300 px-4 py-2 text-start">Total Time</td>
-                    <td class="border border-gray-300 px-4 py-2 text-start">Total Bill</td>
+                    <td class="border border-gray-300 px-4 py-2 text-start">You don't have any transactions. Book a reservation now.</td>
                 </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
-
-    <a href="{% url 'reservation_home' %}" class="self-end bg-gray-600 hover:bg-slate-800 text-white text-center mt-4 mx-12 py-2 px-8 rounded">Back</a>
-
 </section>
 
 {% endblock %}

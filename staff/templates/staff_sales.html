@@ -9,27 +9,67 @@
 {% block title %}Staff Sales{% endblock %}
 
 {% block content %}
-<div class="grid grid-cols-2 gap-4 h-full">
-
+<div class="grid grid-cols-3 gap-4 h-full">
     <div class="col-span-2 p-4 w-full">
-        <table class="table-auto w-full border-collapse border border-purple-900">
+      <div class="h-[125px] flex flex-1 justify-between items-center px-10 py-8 bg-[#4A003E] text-white rounded">
+          <p class="text-3xl"><i class="bi bi-cash-coin me-2"></i> Total Sales</p>
+          <p class="text-3xl font-bold">&#x20B1; {{ sales }}</p>
+      </div>
+
+      <h1 class="mt-8 text-xl mb-2"><i class="bi bi-clock-history"></i> Sales History</h1>
+
+      <div class="py-4 px-2 grid max-h-[100dvh] overflow-y-auto gap-4">
+        {% if transaction_history %}
+          {% for sales in transaction_history %}
+          <div class="h-[135px] flex flex-1 justify-between items-center px-10 bg-gray-300 text-black rounded mt-2">
+            <div>
+              <!-- <p class="">Total Sales</p> -->
+              <p class="text-5xl text-[#4A003E] tracking-wide">&#x20B1; {{ sales.total_sales }}</p>
+            </div>
+            <p class="text-3xl tracking-wide">{{ sales.sales_date }}</p>
+            <!-- <a href="" class="text-sky-700 underline underline-offset-4">View</a> -->
+          </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-lg">No sales history available.</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-span-1 w-full max-h-dvh overflow-x-auto">
+      <div class="flex justify-between items-center pe-4">
+        <p class="text-2xl font-bold">Transactions</p>
+        <a href="{% url 'staff_transactions' %}" class="text-blue-700 underline underline-offset-4">View</a>
+      </div>
+        <table class="table-auto w-full border-collapse border border-purple-900 mt-2">
             <thead>
               <tr class="bg-[#4A003E] text-white">
-                <th class="border border-gray-300 px-4 py-2 text-left">Guest</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Space</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Check In</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Check Out</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Total Bill</th>
+                <th class="border border-gray-300 px-2 py-2 text-left">id</th>
+                <!-- <th class="border border-gray-300 px-2 py-2 text-left">Processed by</th> -->
+                <!-- <th class="border border-gray-300 px-2 py-2 text-left">Space</th> -->
+                <th class="border border-gray-300 px-2 py-2 text-left">Guest</th>
+                <!-- <th class="border border-gray-300 px-2 py-2 text-left">Time In</th> -->
+                <!-- <th class="border border-gray-300 px-2 py-2 text-left">Check Out</th> -->
+                <th class="border border-gray-300 px-2 py-2 text-left">Total Bill</th>
               </tr>
             </thead>
             <tbody>
+              {% if transactions %}
+                {% for transaction in transactions %}
+                    <tr class="hover:bg-gray-100">
+                      <td class="border border-gray-300 px-2 py-2">{{ transaction.id }}</td>
+                      <!-- <td class="border border-gray-300 px-2 py-2">{{ transaction.process_by }}</td> -->
+                      <!-- <td class="border border-gray-300 px-2 py-2">{{ transaction.space }}</td> -->
+                      <td class="border border-gray-300 px-2 py-2">{{ transaction.guest_name }}</td>
+                      <!-- <td class="border border-gray-300 px-2 py-2">{{ transaction.check_in_time }}</td> -->
+                      <!-- <td class="border border-gray-300 px-2 py-2">{{ transaction.check_out_time }}</td> -->
+                      <td class="border border-gray-300 px-2 py-2">&#x20B1; {{ transaction.total_payment }}</td>
+                    </tr>
+                {% endfor %}
+                {% else %}
                   <tr class="hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
-                    <td class="border border-gray-300 px-4 py-2"></td>
+                    <td class="border border-gray-300 px-2 py-2 text-center" colspan="3">No transactions found</td>
                   </tr>
+              {% endif %}
             </tbody>
           </table>
     </div>
