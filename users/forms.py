@@ -1,6 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .models import User
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(
@@ -24,15 +24,15 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['firstname', 'lastname', 'username', 'user_email', 'password']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password']
         widgets = {
-            "firstname": forms.TextInput(
+            "first_name": forms.TextInput(
                 attrs={
                     "class": "w-full px-4 my-2 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
                     "placeholder": "Enter your first name",
                 }
             ),
-            "lastname": forms.TextInput(
+            "last_name": forms.TextInput(
                 attrs={
                     "class": "w-full px-4 my-2 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
                     "placeholder": "Enter your last name",
@@ -44,7 +44,7 @@ class RegistrationForm(forms.ModelForm):
                     "placeholder": "Enter your username",
                 }
             ),
-            "user_email": forms.EmailInput(
+            "email": forms.EmailInput(
                 attrs={
                     "class": "w-full px-4 my-2 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
                     "placeholder": "Enter your email",
@@ -58,7 +58,8 @@ class RegistrationForm(forms.ModelForm):
         confirm_password = cleaned_data.get("confirm_password")
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
-        cleaned_data["password"] = make_password(password)  # Hash the password
+        # Automatically hash the password
+        cleaned_data["password"] = make_password(password)
         return cleaned_data
 
 
@@ -80,6 +81,3 @@ class LoginForm(forms.Form):
             }
         ),
     )
-
-
-

@@ -13,6 +13,15 @@
   flex-wrap: wrap;
 }
 
+.flatpickr-day.today {
+  background-color: transparent;
+  background-color: #4a003e;
+  color: white;
+}
+.flatpickr-day.flatpickr-disabled {
+  color: transparent;
+  color: rgb(115, 115, 115);
+}
 .dayContainer {
   all: unset;
   width: inherit;

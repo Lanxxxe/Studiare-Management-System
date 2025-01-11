@@ -1,9 +1,7 @@
 from django.db import models
-from users.models import User 
+from django.contrib.auth.models import User
 from management.models import HubSpaces
 
-
-# Create your models here.
 class Reservation(models.Model):
     RESERVATION_STATUS = [
         ('Pending', 'Pending'),
@@ -24,13 +22,7 @@ class Reservation(models.Model):
     reservation_start_time = models.TimeField(null=True)
     reservation_end_time = models.TimeField(null=True)
     status = models.CharField(max_length=20, choices=RESERVATION_STATUS, default="Pending")
-    payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS, null=True, default="Pending")
-    amount_paid = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    cancellation_reason = models.TextField(null=True, blank=True)
-    time_updated = models.DateTimeField(auto_now=True, null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Reservation {self.reservation_id} by {self.user}"
-
-
-
+        return f"Reservation by {self.user}"

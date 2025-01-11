@@ -1,7 +1,11 @@
 from django import forms
-from .models import ManagementUser, HubSpaces
+from .models import HubSpaces
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-class RegistrationForm(forms.ModelForm):
+
+
+class RegistrationForm(UserCreationForm):
     POSITION_CHOICES = [
         ("", "Select Position"),
         ("Admin", "Admin"),
@@ -15,74 +19,96 @@ class RegistrationForm(forms.ModelForm):
                 'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400',
             }
         ),
+        required=True
     )
 
-    password = forms.CharField(
-        widget=forms.PasswordInput(
+    contact_number = forms.CharField(
+        widget=forms.TextInput(
             attrs={
-                'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
-                'placeholder': 'Enter the password',
-            },
-        ), 
-        min_length=8, 
+                "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400",
+                "placeholder": "Enter your contact number",
+            }
+        ),
+        required=True
     )
-    confirm_password = forms.CharField(
+
+    password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
                 'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
-                'placeholder': 'Enter the password',
-            },
+                'placeholder': 'Enter your password',
+            }
         ), 
-        min_length=8, 
+        min_length=8,
+        label="Password"
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300',
+                'placeholder': 'Confirm your password',
+            }
+        ),
+        min_length=8,
+        label="Confirm Password"
     )
 
     class Meta:
-        model = ManagementUser
-        fields = ["first_name", "last_name", "contact_number", "email", "username", "position", "password"]
+        model = User
+        fields = ["first_name", "last_name", "username", "email", "contact_number", "position", "password1", "password2"]
         widgets = {
             "first_name": forms.TextInput(
                 attrs={
                     "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
-                    "placeholder": "Enter the first name",
+                    "placeholder": "Enter your first name",
                 }
             ),
             "last_name": forms.TextInput(
                 attrs={
                     "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
-                    "placeholder": "Enter the last name",
-                }
-            ),
-            "contact_number": forms.TextInput(
-                attrs={
-                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
-                    "placeholder": "Enter the last name",
-                }
-            ),
-            "email": forms.EmailInput(
-                attrs={
-                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
-                    "placeholder": "Enter the email",
+                    "placeholder": "Enter your last name",
                 }
             ),
             "username": forms.TextInput(
                 attrs={
                     "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
-                    "placeholder": "Enter the username",
+                    "placeholder": "Enter your username",
+                }
+            ),
+            "email": forms.EmailInput(
+                attrs={
+                    "class": "my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
+                    "placeholder": "Enter your email",
                 }
             ),
         }
 
+    def clean_position(self):
+        position = self.cleaned_data.get("position")
+        if not position:
+            raise forms.ValidationError("Position is required.")
+        return position
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-        if password != confirm_password:
-            raise forms.ValidationError("Passwords do not match.")
-        return cleaned_data
+    def save(self, commit=True):
+        # Call the base class's save to get the user instance
+        user = super().save(commit=False)
+        position = self.cleaned_data.get('position')
 
+        # Set staff/admin attributes based on the position
+        if position == "Admin":
+            user.is_staff = True
+            user.is_superuser = True
+        elif position == "Staff":
+            user.is_staff = True
+        else:
+            user.is_staff = False
+            user.is_superuser = False
 
-class LoginForm(forms.Form):
+        if commit:
+            user.save()
+        return user
+
+class LoginForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -90,7 +116,8 @@ class LoginForm(forms.Form):
                 "placeholder": "Username",
             }
         ),
-        required=True
+        required=True,
+        label="Username"
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
@@ -98,16 +125,15 @@ class LoginForm(forms.Form):
                 "class": "my-3 block w-full mb-4 px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-white rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400 placeholder-gray-300",
                 "placeholder": "Password",
             }
-        ), 
-        label="Password", 
-        required=True
+        ),
+        required=True,
+        label="Password"
     )
-
 
 class UpdateUserForm(forms.ModelForm):
     class Meta:
-        model = ManagementUser
-        fields = ['first_name', 'last_name', "username", 'contact_number', 'email',  "position"]
+        model = User
+        fields = ['first_name', 'last_name', "username", 'email']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -167,22 +193,64 @@ class AddNewSpaceForm(forms.ModelForm):
 
 
 class UpdateStaffAccountForm(forms.ModelForm):
+    POSITION_CHOICES = [
+        ("", "Select Position"),
+        ("Admin", "Admin"),
+        ("Staff", "Staff"),
+    ]
+
+    position = forms.ChoiceField(
+        choices=POSITION_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-pink-400',
+            }
+        ),
+        required=True
+    )
 
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
-        label="Password"
+        label="Password",
+        required=False
     )
 
     class Meta:
-        model = ManagementUser
-        fields = ['first_name', 'last_name', 'contact_number', 'email', 'username', 'position']
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username']
 
     def __init__(self, *args, **kwargs):
+        user_instance = kwargs.get('instance')
         super().__init__(*args, **kwargs)
+        # Pre-fill position based on `is_staff` and `is_superuser` attributes
+        if user_instance:
+            if user_instance.is_superuser:
+                self.fields['position'].initial = "Admin"
+            elif user_instance.is_staff:
+                self.fields['position'].initial = "Staff"
+            else:
+                self.fields['position'].initial = ""
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'})
 
+    def save(self, commit=True):
+        # Call the base class's save to get the user instance
+        user = super().save(commit=False)
+        position = self.cleaned_data.get('position')
 
+        # Set staff/admin attributes based on the position
+        if position == "Admin":
+            user.is_staff = True
+            user.is_superuser = True
+        elif position == "Staff":
+            user.is_staff = True
+        else:
+            user.is_staff = False
+            user.is_superuser = False
+
+        if commit:
+            user.save()
+        return user
 
 class UpdateSpaceForm(forms.ModelForm):
     class Meta:

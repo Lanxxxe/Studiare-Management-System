@@ -19,7 +19,7 @@
         <p class="text-xl "><strong>Total Payment:</strong> PHP {{ total_payment|floatformat:2 }}</p>
     </div>
     <div class="mt-6 text-center">
-        <a href="{% url 'staff_spaces' %}" class="px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Return</a>
+        <a href="{% url 'manage_sessions' space_id %}" class="px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Return</a>
     </div>
 </div>
 

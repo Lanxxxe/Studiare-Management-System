@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import ManagementUser, HubSpaces, CustomLoginLog
+from .models import HubSpaces, CustomLoginLog, AuditLog
 
 # Register your models here.
-admin.site.register(ManagementUser)
-admin.site.register(HubSpaces)
+# admin.site.register(HubSpaces)
 admin.site.register(CustomLoginLog)
+admin.site.register(AuditLog)

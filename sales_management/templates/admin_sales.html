@@ -14,28 +14,26 @@
       <div class="" id="calendar"></div>
     </div>
 
-    <div id="spaces" class="flex flex-wrap items-center justify-start gap-2">
-      <div class="min-w-[280px] max-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
+    <div id="spaces" class="flex flex-col gap-2">
+      <div class="w-3/4 h-[125px] flex flex-1 justify-between items-center py-4 px-6 bg-[#4A003E] text-white rounded">
+        <div class="">
+          <p class="text-[24px]">Avg. Daily Sales</p>
+        </div>
+
+        <p class="text-[32px] font-bold">&#x20B1; {{ average_sales }}</p>
+      </div>
+
+      <div class="w-3/4 h-[125px] flex flex-1 justify-between items-center py-4 px-6 bg-[#4A003E] text-white rounded">
+        <div class="">
+          <p class="text-[24px]">Current Month Sales</p>
+        </div>
+
+        <p class="text-[32px] font-bold">&#x20B1; {{ current_month_sales }}</p>
+      </div>
+
+      <div class="w-3/4 h-[125px] flex flex-1 justify-between items-center py-4 px-6 bg-[#4A003E] text-white rounded">
         <div class="">
           <p class="text-[24px]">Reservations</p>
-          <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
-        </div>
-
-        <p class="text-[32px] font-bold">{{ reservations }}</p>
-      </div>
-
-      <div class="min-w-[280px] max-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-        <div class="">
-          <p class="text-[24px]">Occupied Spaces</p>
-          <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
-        </div>
-
-        <p class="text-[32px] font-bold">10</p>
-      </div>
-
-      <div class="min-w-[280px] max-w-[280px] h-[125px] flex flex-1 justify-between items-center p-4 bg-[#4A003E] text-white rounded">
-        <div class="">
-          <p class="text-[24px]">Sales</p>
           <a class="text-[12px] underline underline-offset-4" href="{% url 'admin_spaces' %}">View</a>
         </div>
 
@@ -47,7 +45,7 @@
 
     <div id="statistics" class="col-span-2 flex p-4 mt-6">
       <div class="chart-container w-full">
-        <h2>Bar Chart Example</h2>
+        <h2 class="text-2xl ms-6 text-bold text-[#4A003E] font-semibold">Daily Sales Chart</h2>
         <canvas id="myChart" ></canvas>
       </div>
     </div>
@@ -60,49 +58,72 @@
   document.querySelector('#sales').classList.add("bg-white");
   document.querySelector('#sales').classList.add("text-[#4A003E]");
   
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar', // Specify the chart type
+  flatpickr("#calendar", {
+    inline: true, 
+    enableTime: false, 
+    dateFormat: "d/m/Y",
+    minDate: 'today',
+  });
+
+  const salesDates = `{{ sales_dates|safe }}`;
+  const totalSales = JSON.parse(`{{ total_sales|safe }}`);
+  const datesList = JSON.parse(salesDates.replace(/'/g, '"'));
+
+  console.log(typeof datesList, typeof totalSales);
+  console.log(datesList,totalSales);
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const dailySalesChart = new Chart(ctx, {
+      type: 'line',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May'], // X-axis labels
-        datasets: [{
-          label: 'Monthly Sales', // Label for the dataset
-          data: [12, 19, 3, 5, 8], // Y-axis data points
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)'
-          ],
-          borderWidth: 1 // Width of the border
-        }]
+          labels: datesList,
+          datasets: [{
+              label: 'Total Sales (Php)',
+              data: totalSales,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 2,
+              tension: 0.3 // Smooth line
+          }]
       },
       options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true // Ensure the y-axis starts at zero
+          responsive: true,
+          scales: {
+              x: {
+                  title: {
+                      display: true,
+                      text: 'Date',
+                      color: '#333',
+                      font: {
+                          size: 14
+                      }
+                  }
+              },
+              y: {
+                  title: {
+                      display: true,
+                      text: 'Sales (Php)',
+                      color: '#333',
+                      font: {
+                          size: 14
+                      }
+                  },
+                  beginAtZero: true
+              }
+          },
+          plugins: {
+              legend: {
+                  display: true,
+                  position: 'top'
+              },
+              tooltip: {
+                  callbacks: {
+                      label: function(context) {
+                          return 'Php ' + context.raw.toLocaleString();
+                      }
+                  }
+              }
           }
-        }
       }
-    });
-
-    // Initialize Flatpickr as a permanently visible calendar
-    flatpickr("#calendar", {
-      inline: true, // Makes the calendar always visible
-      enableTime: false, // Disable time selection
-      dateFormat: "d/m/Y", // Custom date format
-      onChange: function(selectedDates, dateStr) {
-        alert("Selected date: " + dateStr);
-      },
-    });
+  });
   </script>
 {% endblock %}

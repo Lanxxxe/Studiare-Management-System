@@ -10,7 +10,32 @@
 
 {% block content %}
 <div class="grid grid-cols-2 gap-4 h-full">
+  <div class="col-span-2 p-4">
+    <h1 class="text-2xl font-bold text-[#4A003E]">Your Reservations</h1>
 
+    <div>
+      {% if reservations %}
+        <div class="max-h-[250px] content-start overflow-y-auto grid grid-cols-4 gap-2 p-4 mt-4">
+          {% for reservation in reservations %}
+            <div class="col-span-1 flex flex-1 justify-between items-center py-4 px-6 border-2 border-gray-200 text-black rounded shadow-md">
+              <div class="">
+                <p class="text-xl font-bold">{{ reservation.user.first_name }} {{ reservation.user.last_name }}</p>
+                <p class="text-sm">{{ reservation.space }}</p>
+                <p class="text-sm">{{ reservation.reservation_start_time }} - {{ reservation.reservation_end_time }}</p>
+              </div>
+      
+              <a href="{% url 'manage_reservation' reservation.space_id reservation.reservation_id 'CHECKIN' %}" class="text-md text-sky-500 underline underline-offset-4"><i class="bi bi-clock"></i> Clock In</a>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-center">No current reservations today.</p>
+      {% endif %}
+    </div>
+  </div>
+
+    <hr class="col-span-2 mx-4 border-2 border-gray-300 rounded-md">
+    
     <div class="col-span-2 p-4 w-full">
         <table class="table-auto w-full border-collapse border border-purple-900">
             <thead>
@@ -31,7 +56,11 @@
                     <td class="border border-gray-300 px-4 py-2">{{ space.vacant }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
                     <td class="border border-gray-300 px-4 py-2">
+                      {% if space.status == 'Reserved' %}
+                        <a class="text-green-700 underline underline-offset-4 ms-2" href=""><i class="bi bi-clock"></i> Check In</a>
+                      {% else %}
                         <a href="{% url 'manage_sessions' space.id %}" class="text-blue-700 underline underline-offset-4">View</a>
+                      {% endif %}
                     </td>
                   </tr>
                 {% endfor %}
@@ -53,9 +82,6 @@
         enableTime: false, // Disable time selection
         dateFormat: "d/m/Y", // Custom date format
         minDate: 'today',
-        onChange: function(selectedDates, dateStr) {
-          alert("Selected date: " + dateStr);
-        },
       });
 </script>
 

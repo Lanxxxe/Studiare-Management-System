@@ -3,7 +3,8 @@ from .views import *
 
 urlpatterns = [
     path("", management_index, name="management_index"),
-    path("audit/    ", audit_trail, name="audit_trail"),
+    path("audit/", audit_trail, name="audit_trail"),
+    path("audit/detail/<int:event_id>/", audit_trail, name="audit_detail"),
     path('settings/', settings, name='admin_settings'),
     path('settings/account_registration/', account_registration, name='account_registration'),
     path('settings/add_new_space/', add_new_space, name='add_new_space'),

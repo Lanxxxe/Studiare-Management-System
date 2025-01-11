@@ -9,7 +9,13 @@
     {% for staff in staffs %}
     <div class="w-[380px] h-[125px] flex justify-between items-center p-4 bg-[#4A003E] text-white rounded">
       <div>
-        <p class="text-[14px]">{{ staff.position }} {{ staff.id }}</p>
+        <p class="text-[14px]">
+            {% if staff.is_superuser %}
+              Admin
+            {% else %}
+              Staff
+            {% endif %}
+        </p>
         <p class="text-[24px] font-bold">{{ staff.first_name }} {{ staff.last_name }}</p>
         <p class="text-[12px]">{{ staff.status }}</p>
       </div>

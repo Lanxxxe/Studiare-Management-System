@@ -21,8 +21,8 @@
     {% if reservations %}
       {% for reservation in reservations %}
         <tr class="hover:bg-gray-100">
-            <td class="border border-gray-300 px-4 py-2">{{ reservation.user.firstname }} {{ reservation.user.lastname }}</td>
-            <td class="border border-gray-300 px-4 py-2">{{ reservation.user.user_email }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.user.first_name }} {{ reservation.user.lastname }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ reservation.user.email }}</td>
             <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_date }}</td>
             <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_start_time }}</td>
             <td class="border border-gray-300 px-4 py-2">{{ reservation.reservation_end_time }}</td>

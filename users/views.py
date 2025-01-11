@@ -3,17 +3,16 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import User, Permission
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.conf import settings
-from django.db.models import Q
 
 from .forms import RegistrationForm, LoginForm
-from .models import User, UserEmail
 
 from management.models import CustomLoginLog
-from management.utils import get_client_ip
+from management.utils import get_client_ip, set_current_user, remove_current_user
 
 import sweetify
 
@@ -30,31 +29,32 @@ def login(request):
         if form.is_valid():
             identifier = form.cleaned_data["identifier"]
             password = form.cleaned_data["password"]
-            print(identifier, password)
+            user = authenticate(request, username=identifier, password=password)
+
             try:
-                user = User.objects.get(Q(username=identifier) | Q(user_email=identifier))
-                # if user.is_active and check_password(password, user.password):
-                if user.is_active and password == user.password:
-                    # Add session or token logic here as needed
-                    request.session['id'] = user.user_id
-                    request.session['username'] = user.username
-                    request.session['name'] = f'{user.firstname} {user.lastname}' 
-                    request.session['email'] = user.user_email
-                    request.session['user_type'] = "User"
+                if user:
+                    if user.is_active:
+                        auth_login(request, user)  # Login the user
+                        request.session['id'] = user.id
+                        request.session['username'] = user.username
+                        request.session['name'] = f"{user.first_name} {user.last_name}"
+                        request.session['email'] = user.email
+                        request.session['user_type'] = "User"
+                        set_current_user(user.id)
+                        # Log the login event
+                        CustomLoginLog.objects.create(
+                            username=user.username,
+                            user="User",
+                            action="Login",
+                            ip_address=get_client_ip(request),
+                        )
 
-                    CustomLoginLog.objects.create(
-                        username=user.username,
-                        user="User",
-                        action="Login",
-                        ip_address=get_client_ip(request)
-                    )
-
-                    sweetify.success(request, f"Welcome {user.firstname}!", persistent="Got it!")
-                    return redirect("reservation_home")  # Replace with your home URL
-                elif not user.is_active:
-                    sweetify.error(request, "Account is not active. Please confirm your email.", persistent="Okay")
+                        sweetify.success(request, f"Welcome {user.first_name}!", persistent="Got it!")
+                        return redirect("reservation_home")  # Replace with your home URL
+                    else:
+                        sweetify.error(request, "Account is not active. Please confirm your email.", persistent="Okay")
                 else:
-                    sweetify.error(request, "Invalid credentials.", persistent="Okay")
+                    sweetify.error(request, "Invalid username/email or password.", persistent="Okay")
             except User.DoesNotExist:
                 sweetify.error(request, "User not found.", persistent="Okay")
     else:
@@ -69,12 +69,9 @@ def account_registration(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-
-            # Create the corresponding UserEmail entry
-            UserEmail.objects.create(user_id=user, user_email=user.user_email)
             
             # Send email confirmation
-            uid = urlsafe_base64_encode(force_bytes(user.user_id))
+            uid = urlsafe_base64_encode(force_bytes(user.id))
             activation_link = request.build_absolute_uri(
                 reverse("account_activation", kwargs={"uid": uid})
             )
@@ -82,7 +79,7 @@ def account_registration(request):
                 subject="Account Activation",
                 message=f"Click the link to activate your account: {activation_link}",
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.user_email],
+                recipient_list=[user.email],
             )
             sweetify.success(request, "Account created. Please check your email to confirm.", persistent="Okay")
             return redirect("login")
@@ -94,9 +91,12 @@ def account_registration(request):
 def activate_account(request, uid):
     try:
         user_id = force_str(urlsafe_base64_decode(uid))
-        user = User.objects.get(user_id=user_id)
+        user = User.objects.get(id=user_id)
         user.is_active = True
         user.save()
+        # Assign "add_reservation" permission
+        permission = Permission.objects.get(codename='add_reservation')  # codename for the "add" permission
+        user.user_permissions.add(permission)
         sweetify.success(request, "Account activated. You can now log in.", persistent="Okay")
         return redirect("login")
     except User.DoesNotExist:
@@ -111,6 +111,12 @@ def logout(request):
             action="Logout",
             ip_address=get_client_ip(request)
         )
+        remove_current_user()
+        if request.session.get("user_type") in ["Staff", "Admin"]:
+
+            request.session.flush()
+            sweetify.success(request, "Logout Successfully.", persistent="Okay")
+            return redirect("management_index")
         
         request.session.flush()
         sweetify.success(request, "Logout Successfully.", persistent="Okay")

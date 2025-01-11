@@ -11,7 +11,7 @@
     <form class="flex-1 rounded border-2 border-gray-400" method="POST">
       {% csrf_token %}
       <div class="flex flex-col p-4 bg-white rounded-lg shadow">
-        {{ forms.as_p }}
+        {{ form.as_p }}
         <div class="flex justify-end gap-4">
           <button type="submit" name="register_new_account" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Add Account</button>
           <a href="{% url 'admin_settings' %}" class="self-end bg-gray-600 hover:bg-slate-800 text-white text-center mt-4 py-2 px-4 rounded">Cancel</a>

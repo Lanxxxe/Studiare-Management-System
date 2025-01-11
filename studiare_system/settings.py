@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "reservation",
     "management",
     "sweetify",
-    "easyaudit",
 ]
 
 MIDDLEWARE = [
@@ -57,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'easyaudit.middleware.easyaudit.EasyAuditMiddleware',
 ]
 
 ROOT_URLCONF = 'studiare_system.urls'
@@ -85,11 +83,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'studiare_system.wsgi.application'
 SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
-DJANGO_EASY_AUDIT_UNREGISTERED_CLASSES_EXTRA = [
-    'management.CustomLoginLog',  # Replace with the app and model you want to exclude
-]
 
+# DJANGO_EASY_AUDIT_REGISTERED_CLASSES = [
+#     'management.HubSpaces',
+#     'reservation.Reservation',
+#     'staff.HubSessions',
+#     'staff.Transactions',
 
+# ]
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 

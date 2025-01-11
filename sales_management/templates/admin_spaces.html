@@ -11,6 +11,7 @@
         <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
         <th class="border border-gray-300 px-4 py-2 text-left">Type</th>
         <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Vacants</th>
         <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
       </tr>
     </thead>
@@ -21,6 +22,7 @@
           <td class="border border-gray-300 px-4 py-2">{{ space.space_name }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ space.space_type }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ space.number_of_seats }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ space.vacant }}</td>
           <td class="border border-gray-300 px-4 py-2">{{ space.status }}</td>
         </tr>
         {% endfor %}

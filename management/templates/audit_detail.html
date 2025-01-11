@@ -1,0 +1,93 @@
+{% extends "admin_base.html" %} 
+{% load static %}
+
+{% block title %} Audit Details {% endblock %}
+
+{% block content %}
+<div class="p-4 flex flex-col gap-4">
+    <div class="flex items-center w-100 ">
+        <a href="{% url 'audit_trail' %}" class=""><i class="bi bi-arrow-left-circle text-3xl"></i></a>
+        <h1 class="mx-auto text-3xl font-bold">{{ detail.action }} on {{ detail.table_name }}</h1>
+    </div>
+
+    <!-- Audit Summary -->
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <!-- <h2 class="text-xl font-semibold mb-4">Audit Summary</h2> -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div>
+                <span class="font-semibold">Audit ID:</span>
+                <span>{{ detail.audit_id }}</span>
+            </div>
+            <div>
+                <span class="font-semibold">User:</span>
+                <span>
+                    {% if detail.user == 'None' %}
+                        System
+                    {% else %}
+                        {{ detail.user }}
+                    {% endif %}
+                </span>
+            </div>
+            <div>
+                <span class="font-semibold">Action:</span>
+                <span class="text-blue-600 font-bold">{{ detail.action }}</span>
+            </div>
+            <div>
+                <span class="font-semibold">Table Name:</span>
+                <span>{{ detail.table_name }}</span>
+            </div>
+            <div class="col-span-2">
+                <span class="font-semibold">Timestamp:</span>
+                <span>{{ detail.timestamp }}</span>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-md rounded-lg mb-6">
+            <h2 class="text-xl font-semibold mb-2">Data Before</h2>
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead class="bg-[#4A003E] text-white">
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left w-[50%]">Field</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left w-[50%]">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in data_before.items %}
+                    <tr>
+                        <td class="border px-4 py-2 break-words text-left">{{ key }}</td>
+                        <td class="border px-4 py-2 break-words text-left">{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Data After -->
+        <div class="bg-white shadow-md rounded-lg">
+            <h2 class="text-xl font-semibold mb-2">Data After</h2>
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead class="bg-gray-100">
+                    <tr class="bg-[#4A003E] text-white">
+                        <th class="border border-gray-300 px-4 py-2 text-left w-[50%]">Field</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left w-[50%]">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in data_after.items %}
+                    <tr>
+                        <td class="border px-4 py-2 break-words text-left">{{ key }}</td>
+                        <td class="border px-4 py-2 break-words text-left">{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+  document.querySelector('#audit').classList.add("bg-white");
+  document.querySelector('#audit').classList.add("text-[#4A003E]");
+</script>
+{% endblock %}
