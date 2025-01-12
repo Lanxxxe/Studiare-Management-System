@@ -26,7 +26,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'charles05.pythonanywhere.com',
+]
 
 
 # Application definition
@@ -136,14 +138,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'users/static/'
-
+STATIC_URL = '/static/'
+print(BASE_DIR)
 STATICFILES_DIRS = [
     BASE_DIR / 'users/static',
     BASE_DIR / 'management/static',
-    BASE_DIR / 'site_overview/static',  # Ensure the path to your static folder is correct
-    BASE_DIR / 'sales_management/static',  # Ensure the path to your static folder is correct
-    BASE_DIR / 'reservation/static',  # Ensure the path to your static folder is correct
+    BASE_DIR / 'site_overview/static', 
+    BASE_DIR / 'sales_management/static',  
+    BASE_DIR / 'reservation/static', 
     BASE_DIR / 'staff/static',
 ]
 
@@ -154,7 +156,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Email Configuration
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587
