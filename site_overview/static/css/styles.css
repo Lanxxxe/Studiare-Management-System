@@ -1,14 +1,14 @@
-.fade-in,
+/* .fade-in,
 .fade-out {
     transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
 }
 
 .fade-in {
     opacity: 1;
-    background-color: #fcfcfc; /* Default soft white */
+    background-color: #fcfcfc; 
 }
 
 .fade-out {
     opacity: 0;
-    background-color: #f2f2f2; /* Soft gray when fading out */
-}
+    background-color: #f2f2f2; 
+} */

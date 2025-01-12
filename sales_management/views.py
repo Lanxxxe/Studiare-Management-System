@@ -15,6 +15,7 @@ from users.models import Feedback
 
 import sweetify
 
+
 @check_admin
 def index(request):
     user_id = request.session.get("user_id")
@@ -120,7 +121,6 @@ def staff(request):
     user_id = request.session.get('user_id')
     staffs = User.objects.exclude(id=user_id)
 
-    print(staffs)
     context = {
         "name" : request.session.get("name"),
         'staffs' : staffs

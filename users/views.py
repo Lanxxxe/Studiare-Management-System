@@ -161,7 +161,6 @@ def forgot_password(request):
 
         except User.DoesNotExist:
             sweetify.error(request, 'Error', text='No account found with the provided username and email.', persistent="Okay")
-    print(password_reset_tokens)
     return render(request, 'forgot_password.html')
 
 
@@ -190,7 +189,6 @@ def reset_password(request, user_id, token):
                 sweetify.error(request, 'Error', text='User not found.', persistent="Okay")
         else:
             sweetify.error(request, 'Error', text='Passwords do not match.',  persistent="Okay")
-    print(password_reset_tokens)
     return render(request, 'reset_password.html')
 
 

@@ -15,6 +15,7 @@ from sales_management.models import DailySales
 
 import sweetify
 
+
 @check_staff
 def staff_dashboard(request):
     spaces = HubSpaces.objects.all()
