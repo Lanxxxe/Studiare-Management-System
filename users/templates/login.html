@@ -20,6 +20,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        <a href="{% url 'forgot_password' %}">Forgot password?</a>
         <button class="w-full py-2 mt-8 bg-[#e09247] text-[#582711] text-lg rounded-md hover:bg-[#d68338] transition-colors" type="submit">Login</button>
         <a href="{% url 'landing_page' %}" class="w-full block text-center py-2 mt-4 bg-zinc-500 text-slate-200 text-lg rounded-md hover:bg-zinc-600 transition-colors">Back to Home</a>
     </form>

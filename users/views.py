@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
+from django.utils.crypto import get_random_string
 from django.contrib import messages
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User, Permission
 from django.core.mail import send_mail
@@ -13,9 +14,10 @@ from .forms import RegistrationForm, LoginForm
 
 from management.models import CustomLoginLog
 from management.utils import get_client_ip, set_current_user, remove_current_user
-
 import sweetify
 
+# Temporary storage for password reset tokens (in production, use a database or cache)
+password_reset_tokens = {}
 
 def index(request):
     display_message = messages.get_messages(request)
@@ -85,6 +87,7 @@ def account_registration(request):
             return redirect("login")
     else:
         form = RegistrationForm()
+
     return render(request, "registration.html", {"form": form})
 
 
@@ -102,6 +105,7 @@ def activate_account(request, uid):
     except User.DoesNotExist:
         sweetify.error(request, "Invalid activation link.", persistent="Okay")
         return redirect("registration")
+
 
 def logout(request):
     try:
@@ -123,5 +127,72 @@ def logout(request):
     except:
         pass
     return redirect("landing_page")
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        username = request.POST.get('username').strip()
+        email = request.POST.get('email').strip()
+
+        try:
+            # Check if user exists
+            user = User.objects.get(username=username, email=email)
+
+            # Generate a unique token
+            token = get_random_string(50)
+
+            password_reset_tokens[user.id] = token
+
+            # Construct reset URL
+            reset_url = request.build_absolute_uri(
+                reverse("reset_password", kwargs={"user_id": user.id, "token" : token})                
+                )
+
+            # Send email with the reset link
+            send_mail(
+                subject='Password Reset Request',
+                message=f'Click the link below to reset your password:\n\n{reset_url}',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+            )
+
+            sweetify.success(request, 'Sent successfully!', text='A password reset link has been sent to your email.', persistent="Got it!")
+            return redirect('login')
+
+        except User.DoesNotExist:
+            sweetify.error(request, 'Error', text='No account found with the provided username and email.', persistent="Okay")
+    print(password_reset_tokens)
+    return render(request, 'forgot_password.html')
+
+
+
+def reset_password(request, user_id, token):
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if new_password == confirm_password:
+            try:
+                # Verify the token
+                if password_reset_tokens.get(int(user_id)) == token:
+                    user = User.objects.get(id=user_id)
+                    user.password = make_password(new_password)
+                    user.save()
+
+                    # Remove the token after use
+                    del password_reset_tokens[int(user_id)]
+
+                    sweetify.success(request,  'Password successfully reset!', text='Password successfully reset. You can now log in.', persistent="Got it!")
+                    return redirect('login')
+                else:
+                    sweetify.error(request, 'Error', text='Invalid or expired reset token.', persistent="Okay")
+            except User.DoesNotExist:
+                sweetify.error(request, 'Error', text='User not found.', persistent="Okay")
+        else:
+            sweetify.error(request, 'Error', text='Passwords do not match.',  persistent="Okay")
+    print(password_reset_tokens)
+    return render(request, 'reset_password.html')
+
+
 
 
