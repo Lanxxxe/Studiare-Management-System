@@ -10,6 +10,35 @@
       </div>
     <form method="post" class="max-w-lg mx-auto bg-[#F7E7CE] p-6 rounded-lg shadow mt-6">
         {% csrf_token %}
+        
+        <!-- Star Rating Section -->
+        <div class="text-center mb-4">
+            <label for="rating" class="block text-[#4a003e] text-lg font-semibold mb-2">Rate Us:</label>
+            <div class="flex justify-center space-x-2 text-[#4a003e]">
+                {% for i in "12345" %}
+                <svg 
+                    class="w-8 h-8 cursor-pointer hover:fill-current" 
+                    data-rating="{{ i }}" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="2" 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                {% endfor %}
+            </div>
+            <input 
+                type="hidden" 
+                id="rating" 
+                name="rating" 
+                value="0" 
+                required />
+        </div>
+        
+        <!-- Feedback Message Input -->
         <textarea 
             id="message" 
             name="message" 
@@ -17,6 +46,8 @@
             class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-[#4a003e] text-[#4a003e] bg-[#ffffff]"
             placeholder="Write your feedback here..." 
             required></textarea>
+        
+        <!-- Submit Button -->
         <button 
             type="submit" 
             class="mt-4 w-full bg-[#4a003e] text-[#F7E7CE] py-2 rounded hover:bg-[#310029] hover:text-[#F7E7CE] transition-colors">
@@ -24,4 +55,26 @@
         </button>
     </form>
 </div>
+
+<script>
+    // JavaScript for star rating interaction
+    const stars = document.querySelectorAll('svg[data-rating]');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const rating = star.getAttribute('data-rating');
+            ratingInput.value = rating;
+
+            // Highlight stars up to the selected one
+            stars.forEach(s => {
+                if (s.getAttribute('data-rating') <= rating) {
+                    s.classList.add('fill-current', 'text-[#FFD700]'); // Filled star
+                } else {
+                    s.classList.remove('fill-current', 'text-[#FFD700]'); // Unfilled star
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
