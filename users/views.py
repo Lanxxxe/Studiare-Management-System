@@ -95,7 +95,7 @@ def activate_account(request, uid):
         user.is_active = True
         user.save()
         # Assign "add_reservation" permission
-        permission = Permission.objects.get(codename='add_reservation')  # codename for the "add" permission
+        permission = Permission.objects.get(codename='add_reservation')
         user.user_permissions.add(permission)
         sweetify.success(request, "Account activated. You can now log in.", persistent="Okay")
         return redirect("login")

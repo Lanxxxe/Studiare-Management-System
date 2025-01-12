@@ -9,7 +9,6 @@ from management.utils import check_admin, get_client_ip, set_current_user
 from .models import HubSpaces, CustomLoginLog, AuditLog
 from .forms import LoginForm, RegistrationForm, UpdatePasswordForm, UpdateUserForm, AddNewSpaceForm, UpdateStaffAccountForm, UpdateSpaceForm
 
-
 import sweetify, json, pytz
 
 def management_index(request):
@@ -59,6 +58,7 @@ def management_index(request):
                 sweetify.error(request, "Invalid credentials", text="Please check your username or password", persistent="Back")
 
     return render(request, 'manage_login.html', {"form": form})
+
 
 @check_admin
 def settings(request):

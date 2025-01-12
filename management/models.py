@@ -18,6 +18,7 @@ class HubSpaces(models.Model):
     def __str__(self):
         return f"{self.space_name} ({self.space_type})"
 
+
 class CustomLoginLog(models.Model):
     EVENTS = [
         ("Login", "Login"),
@@ -33,7 +34,6 @@ class CustomLoginLog(models.Model):
 
     def __str__(self):
         return f"{self.user}"
-
 
 
 class AuditLog(models.Model):

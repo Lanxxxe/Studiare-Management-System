@@ -26,7 +26,12 @@
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center rounded-md ">
           <i class="bi bi-person px-2 py-1 rounded-md"></i>
-          <h1 class="text-[15px]  ml-3 text-xl text-gray-200 font-bold">Staff Panel</h1>
+          <div class="ms-3 w-full flex flex-col items-start">
+            <p class="text-2xl text-gray-200 font-bold text-start">{{ name }}</p>
+            <p class="text-sm font-light">
+              Staff Panel
+            </p>
+          </div>
           <i class="bi bi-x ml-20 cursor-pointer lg:hidden" onclick="Openbar()"></i>
         </div>
         <hr class="my-2 text-gray-600">

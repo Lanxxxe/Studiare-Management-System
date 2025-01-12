@@ -11,6 +11,7 @@ from management.models import HubSpaces
 from reservation.models import Reservation
 from sales_management.models import DailySales
 from staff.models import Transactions
+from users.models import Feedback
 
 import sweetify
 
@@ -168,3 +169,26 @@ def update_reservation(request, action, reservation_id):
         sweetify.toast(request, "Invalid Action", icon="error", timer=3000)
 
     return redirect('admin_reservations')
+
+
+@check_admin
+def feedbacks(request):
+    feedbacks = Feedback.objects.all()
+
+    context = {
+        'feedbacks' : feedbacks
+    }
+
+    return render(request, 'admin_feedbacks.html', context)
+
+
+
+
+
+
+
+
+
+
+
+

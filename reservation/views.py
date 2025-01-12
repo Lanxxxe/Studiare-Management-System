@@ -21,7 +21,6 @@ def user_feedback(request):
         
         if feedback_message.strip():  # Ensure input is not empty
             Feedback.objects.create(
-                
                 user_id=request.session.get("id"),  # Link feedback to the logged-in user
                 message=feedback_message.strip(),
             )
@@ -70,6 +69,7 @@ def reservation_transaction(request):
         default=Value(4)  # For other statuses like 'Completed' or 'Cancelled'
         )
     ).order_by('custom_order')
+    
     # Compute total time for each reservation
     reservations_with_time = []
     for reservation in reservations:

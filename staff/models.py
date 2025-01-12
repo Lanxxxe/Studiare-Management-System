@@ -38,11 +38,12 @@ class HubSessions(models.Model):
         return f"{self.guest_name} - {self.space}"
 
 class Transactions(models.Model):
-    guest_name = models.CharField(max_length=100, blank=True, null=True)
+    guest_name = models.CharField(max_length=100, blank=True, null=False)
     process_by = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
-        related_name="processed_transactions"
+        on_delete=models.SET_NULL,
+        related_name="processed_transactions",
+        null=True
     )
     space = models.ForeignKey(HubSpaces, on_delete=models.CASCADE)
     check_in_time = models.DateTimeField()

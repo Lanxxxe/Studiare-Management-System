@@ -8,6 +8,7 @@ urlpatterns = [
     path('staff/', staff, name='admin_staff'),
     path('spaces/', spaces, name='admin_spaces'),
     path('transactions/', transactions, name='admin_transaction'),
+    path('feedback/', feedbacks, name='admin_feedbacks'),
     path('reservations/', admin_reservations, name='admin_reservations'),
     path('reservations/<str:action>/<int:reservation_id>', update_reservation, name='update_reservation'),
 ]

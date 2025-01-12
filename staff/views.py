@@ -50,6 +50,7 @@ def staff_dashboard(request):
 
 
     context = {
+        "name" : request.session.get("name"),
         'spaces' : spaces,
         'reservations' : reservation,
         'total_vacant_seats' : total_vacant_seats,
@@ -69,6 +70,7 @@ def staff_spaces(request):
     spaces = HubSpaces.objects.all().order_by('status')
 
     context = {
+        "name" : request.session.get("name"),
         'spaces': spaces,
         'reservations': reservations,
     }
@@ -103,6 +105,7 @@ def staff_transactions(request):
 
     # Render the template with context
     context = {
+        "name" : request.session.get("name"),
         'transactions': transactions,
         'total_sale': total_sales,
         'selected_date': selected_date,
@@ -141,6 +144,7 @@ def staff_reservations(request):
             return JsonResponse(data, safe=False)
 
     context = {
+        "name" : request.session.get("name"),
         'reservations' : reservation,
     }
     return render(request, 'staff_reservations.html', context)
@@ -167,6 +171,7 @@ def staff_sales(request):
 
     # Pass context to the template
     context = {
+        "name" : request.session.get("name"),
         'transactions': transactions,
         'transaction_history': transaction_history,
         'sales': total_sales,
@@ -298,6 +303,7 @@ def staff_manage_sessions(request, space_id):
             })
 
     context = {
+        "name" : request.session.get("name"),
         'space': space,
         'forms_with_times': forms_with_times,
         'existing_sessions': existing_sessions,
@@ -446,6 +452,7 @@ def staff_manage_reservation(request, space_id, reservation_id, action):
 
                 # Redirect to receipt page
                 return render(request, 'session_receipt.html', {
+                    "name" : request.session.get("name"),
                     'guest_name': session.guest_name,
                     'check_in_time': session.check_in_time,
                     'check_out_time': session.check_out_time,
@@ -453,12 +460,14 @@ def staff_manage_reservation(request, space_id, reservation_id, action):
                 })
 
         context = {
+            "name" : request.session.get("name"),
             'space': space,
             'forms_with_times': forms_with_times,
             'existing_sessions': existing_sessions,
         }
 
         return render(request, 'hub_sessions.html', context)
+
 
 @check_staff
 def session_receipt(request):
