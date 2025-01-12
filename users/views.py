@@ -35,7 +35,7 @@ def login(request):
                 if user:
                     if user.is_active:
                         auth_login(request, user)  # Login the user
-                        request.session['id'] = user.id
+                        request.session['user_id'] = user.id
                         request.session['username'] = user.username
                         request.session['name'] = f"{user.first_name} {user.last_name}"
                         request.session['email'] = user.email

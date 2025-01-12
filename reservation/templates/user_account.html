@@ -1,0 +1,38 @@
+{% extends 'reservation_base.html' %}
+{% load static %}
+
+{% block local_css %}
+  <link rel="stylesheet" href="{% static 'css/reservation_base.css' %}">
+{% endblock %}
+
+
+{% block title %} Home {% endblock %}
+
+{% block content %} 
+
+<section id="menu" class=" flex flex-col justify-center items-center fade-in p-4 mb-12">
+  <div class="flex items-center w-full">
+    <a href="{% url 'reservation_home' %}" class="text-start text-2xl"><i class="bi bi-arrow-left-circle"></i></a>
+    <h1 class="text-2xl text-gray-900 font-bold mb-2 mx-auto"><i class="bi bi-person"></i> Personal Information</h1>
+
+  </div>
+
+    <div class="section-content mx-auto p-8 mt-4 gap-6 flex w-full border-2 border-gray-400">
+      <form class="flex-1 rounded border-2 border-gray-400" method="POST">
+          {% csrf_token %}
+          <div class="flex flex-col p-4 bg-white rounded-lg shadow">
+            {{ user_form.as_p }}
+            <button type="submit" name="update_info" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Update Information</button>
+          </div>
+        </form>
+        <form class="flex-1 rounded border-2 border-gray-400" method="POST">
+          {% csrf_token %}
+          <div class="flex flex-col p-4 bg-white rounded-lg shadow">
+            <h3 class="text-lg font-bold mb-2">Update Password</h3>
+            {{ password_form.as_p }}
+            <button type="submit" name="update_password" class="self-end mt-6 px-4 py-2 bg-fuchsia-800 hover:bg-fuchsia-900 text-white rounded">Update Password</button>
+          </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

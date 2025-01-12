@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Case, When, Value
+from django.contrib.auth.hashers import check_password, make_password
 from management.models import HubSpaces
 from management.utils import custom_login_required
 from django.contrib.auth.models import User, AnonymousUser
@@ -8,12 +9,14 @@ from staff.models import Transactions
 
 from django.contrib import messages
 from users.models import Feedback
+from management.forms import UpdateUserForm, UpdatePasswordForm
 
 import sweetify
 from datetime import datetime, date, timedelta
 
 def reservation_index(request):
     return render(request, 'reservation.html')
+
 
 def user_feedback(request):
     if request.method == 'POST':
@@ -29,7 +32,55 @@ def user_feedback(request):
         else:
             messages.error(request, "Feedback cannot be empty.")
 
-    return render(request, 'feedback.html')
+    context = {
+        "user_name" : request.session.get("name"),
+    }
+    return render(request, 'feedback.html', context)
+
+
+def user_profile(request):
+    user_id = request.session.get('user_id')
+    user = get_object_or_404(User, id=user_id)
+
+    # Forms for updating user information and password
+    user_form = UpdateUserForm(instance=user)
+    password_form = UpdatePasswordForm()
+
+    if request.method == 'POST':
+        if 'update_info' in request.POST:
+            user_form = UpdateUserForm(request.POST, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+                sweetify.success(request, "Updated!", text="Information updated successfully!", persistent="Okay")
+                return redirect('user_profile')
+
+        elif 'update_password' in request.POST:
+            password_form = UpdatePasswordForm(request.POST)
+            if password_form.is_valid():
+                current_password = password_form.cleaned_data['current_password']
+                new_password = password_form.cleaned_data['new_password']
+
+                # Check current password
+                if check_password(current_password, user.password):
+                    # Set the new password (hashed)
+                    user.password = make_password(new_password)
+                    user.save()
+                    sweetify.success(request, "Updated!", text="Password updated successfully!", persistent="Okay")
+                    return redirect('user_profile')
+                else:
+                    sweetify.error(request, "Error", text="Incorrect current password.", persistent="Return")
+            else:
+                sweetify.error(request, "Error", text="Password form is invalid. Please try again.", persistent="Return")
+
+    context = {
+        "user_name" : request.session.get("name"),
+        'user_form': user_form,
+        'password_form': password_form,
+    }
+
+    return render(request, 'user_account.html', context)
+
+
 
 
 @custom_login_required

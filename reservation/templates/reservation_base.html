@@ -24,7 +24,8 @@
             <div class="flex items-center space-x-4">
                 <!-- Gray Placeholder -->
                 <img class="h-16 w-16 rounded-md" src="{% static 'images/user_profile.png' %}" alt="">
-                <span class="text-[#F7E7CE] text-2xl">{{ user_name }} {{ type }}</span>
+                <span class="text-[#F7E7CE] text-2xl">{{ user_name }}</span>
+                <a href="{% url 'user_profile' %}" class="text-white text-2xl"><i class="bi bi-gear"></i></a>
             </div>
 
             <div class="flex space-x-4">
@@ -32,6 +33,10 @@
                     class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
                     Provide Feedback
                 </a>
+                <!-- <a href="{% url 'user_feedback' %}"
+                    class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
+                    Provide Feedback
+                </a> -->
                 <a href="{% url 'logout' %}"
                     class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
                     Log Out

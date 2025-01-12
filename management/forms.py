@@ -130,6 +130,8 @@ class LoginForm(AuthenticationForm):
         label="Password"
     )
 
+
+
 class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User

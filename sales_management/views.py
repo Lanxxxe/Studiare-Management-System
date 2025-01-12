@@ -176,6 +176,7 @@ def feedbacks(request):
     feedbacks = Feedback.objects.all()
 
     context = {
+        "name" : request.session.get("name"),
         'feedbacks' : feedbacks
     }
 
