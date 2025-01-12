@@ -8,13 +8,13 @@
         <a href="{% url 'reservation_home' %}" class="text-start text-2xl"><i class="bi bi-arrow-left-circle"></i></a>
         <h1 class="text-4xl font-bold text-center mx-auto text-[#4a003e]">We Value Your Feedback</h1>
       </div>
-    <form method="post" class="max-w-lg mx-auto bg-[#F7E7CE] p-6 rounded-lg shadow mt-6">
+      <form method="post" class="max-w-lg mx-auto bg-[#F7E7CE] p-6 rounded-lg shadow mt-6">
         {% csrf_token %}
         
         <!-- Star Rating Section -->
         <div class="text-center mb-4">
             <label for="rating" class="block text-[#4a003e] text-lg font-semibold mb-2">Rate Us:</label>
-            <div class="flex justify-center space-x-2 text-[#4a003e]">
+            <div id="star-container" class="flex justify-center space-x-2 text-[#4a003e]">
                 {% for i in "12345" %}
                 <svg 
                     class="w-8 h-8 cursor-pointer hover:fill-current" 
@@ -57,21 +57,19 @@
 </div>
 
 <script>
-    // JavaScript for star rating interaction
-    const stars = document.querySelectorAll('svg[data-rating]');
+    const stars = document.querySelectorAll('#star-container svg');
     const ratingInput = document.getElementById('rating');
-
+    
     stars.forEach(star => {
         star.addEventListener('click', () => {
             const rating = star.getAttribute('data-rating');
             ratingInput.value = rating;
 
-            // Highlight stars up to the selected one
+            // Update star colors
+            stars.forEach(s => s.classList.remove('fill-current'));
             stars.forEach(s => {
                 if (s.getAttribute('data-rating') <= rating) {
-                    s.classList.add('fill-current', 'text-[#FFD700]'); // Filled star
-                } else {
-                    s.classList.remove('fill-current', 'text-[#FFD700]'); // Unfilled star
+                    s.classList.add('fill-current');
                 }
             });
         });

@@ -174,6 +174,8 @@ def update_reservation(request, action, reservation_id):
 @check_admin
 def feedbacks(request):
     feedbacks = Feedback.objects.all()
+    for feedback in feedbacks:
+        feedback.rating = range(feedback.rating)
 
     context = {
         "name" : request.session.get("name"),

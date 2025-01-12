@@ -247,6 +247,7 @@ def update_space_information(request, space_id):
     }
     return render(request, 'update_space.html', context)
 
+
 @check_admin
 def remove_space(request, space_id):
     space = HubSpaces.objects.get(id=space_id)
@@ -266,6 +267,7 @@ def remove_space(request, space_id):
         sweetify.error(request, f"An error occurred while removing the space: {str(e)}")
 
     return redirect('admin_settings')
+
 
 @check_admin
 def audit_trail(request, event_id=None):

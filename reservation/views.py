@@ -19,24 +19,26 @@ def reservation_index(request):
 
 
 def user_feedback(request):
+    user_id = request.session.get('user_id')
     if request.method == 'POST':
-        feedback_message = request.POST.get('message')  # Get feedback input
-        
-        if feedback_message.strip():  # Ensure input is not empty
+        feedback_message = request.POST.get('message', '').strip()
+        feedback_rating = request.POST.get('rating', '0')
+        user = User.objects.get(id=user_id)
+        if feedback_message and feedback_rating.isdigit() and 1 <= int(feedback_rating) <= 5:
             Feedback.objects.create(
-                user_id=request.session.get("id"),  # Link feedback to the logged-in user
-                message=feedback_message.strip(),
+                user=user,
+                message=feedback_message,
+                rating=int(feedback_rating),
             )
             sweetify.success(request, "Thank you for your feedback!")
-            return redirect('reservation_home')  # Redirect to home or any other page
+            return redirect('reservation_home')
         else:
-            messages.error(request, "Feedback cannot be empty.")
+            messages.error(request, "Please provide a valid message and select a rating.")
 
     context = {
-        "user_name" : request.session.get("name"),
+        "user_name": request.session.get("name"),
     }
     return render(request, 'feedback.html', context)
-
 
 def user_profile(request):
     user_id = request.session.get('user_id')
