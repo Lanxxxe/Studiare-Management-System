@@ -17,7 +17,7 @@
     <title> {% block title %} {% endblock %}</title>
 </head>
 
-<body class="overflow-x-hidden min-h-dvh">
+<body class="flex flex-col min-h-screen overflow-x-hidden">
 
     <nav class="my-8 mx-12 rounded-2xl bg-[#4a003e] px-4 py-6 top-0 z-10">
         <div class="flex justify-between items-center text-black px-8">
@@ -51,7 +51,7 @@
     {% load sweetify %}
     {% sweetify %}
 
-    <footer class="text-[#F7E7CE] bg-[#4a003e] text-center py-4">
+    <footer class="text-[#F7E7CE] bg-[#4a003e] text-center py-4 mt-auto">
         <p class="text-[#ffffff]">&copy; 2048 Studiare. All rights reserved.</p>
     </footer>
 </body>

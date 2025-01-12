@@ -38,7 +38,7 @@ class HubSessions(models.Model):
         return f"{self.guest_name} - {self.space}"
 
 class Transactions(models.Model):
-    guest_name = models.CharField(max_length=100, blank=True, null=False)
+    guest_name = models.CharField(max_length=100, blank=True, null=True)
     process_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
