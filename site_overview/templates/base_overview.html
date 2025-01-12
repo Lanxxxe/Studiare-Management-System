@@ -14,35 +14,38 @@
 </head>
 
 <body class="bg-[#1e1c1f] text-[#4a003e] overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="bg-[#4a003e] px-4 py-6 sticky top-0 z-10">
-        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center text-[#F7E7CE]">
-            <!-- Logo Section -->
-            <div class="flex items-center justify-between sm:w-auto w-full">
-                <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-16">
+<!-- Navigation -->
+<nav class="bg-[#4a003e] px-4 py-4 sm:py-6 sticky top-0 z-10">
+    <div class="flex flex-wrap items-center justify-between text-[#F7E7CE]">
+        <!-- Logo Section -->
+        <div class="flex items-center w-full sm:w-auto mb-4 sm:mb-0">
+            <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-12 sm:h-16">
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="flex flex-col sm:flex-row sm:space-x-10 text-center text-sm sm:text-lg w-full sm:w-auto sm:justify-end">
+            <a href="{% url 'landing_page' %}" class="py-2 hover:text-[#F7E7CE] transition-colors">Home</a>
+            <a href="{% url 'reservation_process' %}" class="py-2 hover:text-[#F7E7CE] transition-colors">Reservation</a>
+            <a href="{% url 'about_us' %}" class="py-2 hover:text-[#F7E7CE] transition-colors">About Us</a>
+        </div>
+
+        <!-- Sign-Up/Login Button -->
+        <div class="flex justify-end w-full sm:w-auto mt-4 sm:mt-0">
+            <div
+                class="inline-flex items-center bg-[#310029] text-[#FFFFFF] px-4 py-2 sm:px-6 sm:py-3 rounded-full divide-x divide-[#4a003e]">
+                <a href="{% url 'registration' %}"
+                    class="px-2 sm:px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-l-full">
+                    Sign Up
+                </a>
+                <a href="{% url 'login' %}"
+                    class="px-2 sm:px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-r-full">
+                    Login
+                </a>
             </div>
-            <!-- Navigation Links -->
-            <div class="flex sm:ml-auto sm:space-x-10 space-y-4 sm:space-y-0 sm:text-lg text-center">
-                <a href="{% url 'landing_page' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">Home</a>
-                <a href="{% url 'reservation_process' %}"
-                    class="text-lg hover:text-[#F7E7CE] transition-colors">Reservation</a>
-                <a href="{% url 'about_us' %}" class="text-lg hover:text-[#F7E7CE] transition-colors">About Us</a>
-            </div>
-            <!-- Sign-Up/Login Button -->
-            <div class="sm:ml-auto mt-4 sm:mt-0">
-                <div
-                    class="inline-flex items-center justify-center bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 rounded-full divide-x divide-[#4a003e]">
-                    <a href="{% url 'registration' %}"
-                        class="px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-l-full">
-                        Sign Up
-                    </a>
-                    <a href="{% url 'login' %}"
-                        class="px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-r-full">
-                        Login
-                    </a>
-                </div>
-            </div>
-    </nav>
+        </div>
+    </div>
+</nav>
+
 
     <!-- Content Block -->
     {% block content %}

@@ -7,47 +7,51 @@ Reservation Process
 
 {% block content %}
 <section id="reservation-header"
-    class="h-[93vh] flex flex-col justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-out px-4">
+    class="min-h-screen flex flex-col justify-center items-center text-center bg-[#fcfcfc] text-[#333333] px-4">
     <!-- Title and Smaller Text Inside One Div -->
     <div class="mb-8">
         <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             How to Book a Reservation
         </div>
-        <div class="text-lg sm:text-xl md:text-xl">
+        <div class="text-lg sm:text-xl">
             Click on the images
         </div>
     </div>
 
     <!-- All Images Inside a Single Div -->
-    <div class="flex flex-wrap gap-4 sm:gap-6 md:gap-8 justify-center">
+    <div class="flex flex-wrap gap-4 justify-center">
         <img src="{% static 'images/res1.png' %}" alt="Reservation Image 1"
-            class="w-full sm:w-[480px] md:w-[500px] lg:w-[540px] h-auto object-cover rounded-md cursor-pointer border-[3px] border-black"
+            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
             onclick="openModal('{% static 'images/res1.png' %}', 'Once you login, your UI should look like this. On the right side of the screen you can see a table, click the reserve button of a table type to your liking.')" />
         <img src="{% static 'images/res2.png' %}" alt="Reservation Image 2"
-            class="w-full sm:w-[480px] md:w-[500px] lg:w-[540px] h-auto object-cover rounded-md cursor-pointer border-[3px] border-black"
+            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
             onclick="openModal('{% static 'images/res2.png' %}', 'You will then be redirected to a page where you can input your date and time of your check-in and check-out.')" />
         <img src="{% static 'images/res3.png' %}" alt="Reservation Image 3"
-            class="w-full sm:w-[480px] md:w-[500px] lg:w-[540px] h-auto object-cover rounded-md cursor-pointer border-[3px] border-black"
+            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
             onclick="openModal('{% static 'images/res3.png' %}', 'Once you are done, you can now press the [Reserve] button.')" />
         <img src="{% static 'images/res4.png' %}" alt="Reservation Image 4"
-            class="w-full sm:w-[480px] md:w-[500px] lg:w-[540px] h-auto object-cover rounded-md cursor-pointer border-[3px] border-black"
-            onclick="openModal('{% static 'images/res4.png' %}', 'You will then be redirected to your dashboard, you have successfully reserved a spaec at Studiare, congratulations!')" />
+            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
+            onclick="openModal('{% static 'images/res4.png' %}', 'You will then be redirected to your dashboard, you have successfully reserved a space at Studiare, congratulations!')" />
         <img src="{% static 'images/res5.png' %}" alt="Reservation Image 5"
-            class="w-full sm:w-[480px] md:w-[500px] lg:w-[540px] h-auto object-cover rounded-md cursor-pointer border-[3px] border-black"
+            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
             onclick="openModal('{% static 'images/res5.png' %}', 'As you can notice, your reservations went up by one, click [view] to see your reservations.')" />
         <img src="{% static 'images/res6.png' %}" alt="Reservation Image 6"
-            class="w-full sm:w-[480px] md:w-[500px] lg:w-[540px] h-auto object-cover rounded-md cursor-pointer border-[3px] border-black"
+            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
             onclick="openModal('{% static 'images/res6.png' %}', 'You can see all your reservations here.')" />
     </div>
 
     <!-- Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-[#f9f9f9] bg-opacity-90 flex justify-center items-center hidden">
+    <div id="imageModal"
+        class="fixed inset-0 bg-[#f9f9f9] bg-opacity-90 flex justify-center items-center overflow-y-auto hidden z-50">
         <div
             class="relative bg-[#ffffff] text-[#333333] p-4 rounded-md max-w-[90vw] max-h-[90vh] flex flex-col justify-center items-center shadow-lg">
-            <span id="closeModal" class="absolute top-0 right-0 text-[#333333] text-4xl cursor-pointer">&times;</span>
-            <img id="modalImage" src="" alt="Modal Image" class="max-w-[60vw] max-h-[60vh] object-contain mb-4 rounded-md" />
-            <!-- Placeholder for unique text per image -->
-            <div id="modalText" class="text-lg text-center">
+            <button id="closeModal"
+                class="absolute top-4 right-4 bg-[#333333] text-white rounded-full w-8 h-8 flex items-center justify-center text-xl cursor-pointer">
+                &times;
+            </button>
+            <img id="modalImage" src="" alt="Modal Image"
+                class="max-w-[80vw] max-h-[70vh] object-contain mb-4 rounded-md" />
+            <div id="modalText" class="text-lg text-center px-4 text-black font-semibold"> <!-- Darker text color here -->
                 <!-- Dynamic text will be inserted here -->
             </div>
         </div>
@@ -66,12 +70,12 @@ Reservation Process
     }
 
     // Function to close the modal
-    document.getElementById("closeModal")?.addEventListener("click", function () {
+    document.getElementById("closeModal").addEventListener("click", function () {
         document.getElementById("imageModal").classList.add("hidden");
     });
 
     // Close the modal if the background is clicked
-    document.getElementById("imageModal")?.addEventListener("click", function (e) {
+    document.getElementById("imageModal").addEventListener("click", function (e) {
         if (e.target === this) {
             this.classList.add("hidden");
         }
