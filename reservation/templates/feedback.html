@@ -7,8 +7,8 @@
     <div class="flex items-center w-full py-4 px-8">
         <a href="{% url 'reservation_home' %}" class="text-start text-2xl"><i class="bi bi-arrow-left-circle"></i></a>
         <h1 class="text-4xl font-bold text-center mx-auto text-[#4a003e]">We Value Your Feedback</h1>
-      </div>
-      <form method="post" class="max-w-lg mx-auto bg-[#F7E7CE] p-6 rounded-lg shadow mt-6">
+    </div>
+    <form method="post" class="max-w-lg mx-auto bg-[#F7E7CE] p-6 rounded-lg shadow mt-6">
         {% csrf_token %}
         
         <!-- Star Rating Section -->
@@ -17,7 +17,7 @@
             <div id="star-container" class="flex justify-center space-x-2 text-[#4a003e]">
                 {% for i in "12345" %}
                 <svg 
-                    class="w-8 h-8 cursor-pointer hover:fill-current" 
+                    class="w-8 h-8 cursor-pointer" 
                     data-rating="{{ i }}" 
                     fill="none" 
                     stroke="currentColor" 
