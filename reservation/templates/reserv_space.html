@@ -14,7 +14,7 @@
             {% endif %}
         
         </h1>
-        <form class="flex-1 rounded" action="{% if reservation %}{% url 'update_reserve_space' space.id reservation.reservation_id %}{% else %}{% url 'reserve_space' space.id %}{% endif %}"" method="POST">
+        <form class="flex-1 rounded" action="{% if reservation %}{% url 'update_reserve_space' space.id reservation.reservation_id %}{% else %}{% url 'reserve_space' space.id %}{% endif %}" method="POST">
             {% csrf_token %}
             <div class="flex flex-col p-4 bg-white rounded-lg shadow">
                 <div>

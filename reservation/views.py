@@ -87,7 +87,7 @@ def user_profile(request):
 
 @custom_login_required
 def reservation_home(request):
-    user_id = request.session.get("id")
+    user_id = request.session.get("user_id")
     spaces = HubSpaces.objects.all().order_by('status').values()
     reservations = Reservation.objects.filter(user=user_id).count()
     transactions = Reservation.objects.filter(user=user_id, status='Completed').count()
@@ -102,7 +102,7 @@ def reservation_home(request):
 
 @custom_login_required
 def reservation_list(request):
-    user_id = request.session.get("id")
+    user_id = request.session.get("user_id")
     reservations = Reservation.objects.filter(user=user_id)
     
     context = {
@@ -113,7 +113,7 @@ def reservation_list(request):
 
 @custom_login_required
 def reservation_transaction(request):
-    user_id = request.session.get("id")
+    user_id = request.session.get("user_id")
     reservations = Reservation.objects.filter(user=user_id).annotate(
     custom_order=Case(
         When(status="Pending", then=Value(1)),
@@ -150,7 +150,7 @@ def reservation_transaction(request):
 
 @custom_login_required
 def reserve_space(request, space_id, reservation_id=None):        
-    user_id = request.session.get("id")
+    user_id = request.session.get("user_id")
     user = get_object_or_404(User, id=user_id)
     space = get_object_or_404(HubSpaces, id=space_id)
     current_reservation = None
@@ -159,11 +159,6 @@ def reserve_space(request, space_id, reservation_id=None):
         current_reservation = get_object_or_404(Reservation, reservation_id=reservation_id)
 
     if request.method == "POST":
-        # Get form data
-        if isinstance(request.user, AnonymousUser):
-            print("Anonymous User - not linked to CRUD events")
-        else:
-            print(f"Authenticated User: {request.user}")
         checkin_date = request.POST.get("checkin_date")
         start_time = request.POST.get("start_time")
         end_time = request.POST.get("end_time")
@@ -241,6 +236,7 @@ def reserve_space(request, space_id, reservation_id=None):
         "reservation" : current_reservation,
         "date_today" : (date.today() + timedelta(days=1)).strftime('%Y-%m-%d')
     }
+
     return render(request, 'reserv_space.html', context)
 
 
@@ -248,7 +244,7 @@ def reserve_space(request, space_id, reservation_id=None):
 def remove_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, reservation_id=reservation_id)
 
-    if reservation.user.id != request.session.get("id"):
+    if reservation.user.id != request.session.get("user_id"):
         sweetify.error(request, "You do not have permission to delete this reservation.", button="Okay")
         return redirect("landing_page") 
 

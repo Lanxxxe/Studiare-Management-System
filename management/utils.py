@@ -88,7 +88,7 @@ def remove_current_user():
     try:
         with connection.cursor() as cursor:
             # Ensure the table exists
-            cursor.execute("DELETE FROM current_user_id;")  # Clear existing value
+            cursor.execute("DELETE FROM current_user_id;") 
     except Exception as e:
         print(f"Error setting current user ID: {e}")
 
