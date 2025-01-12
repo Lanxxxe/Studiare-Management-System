@@ -7,7 +7,7 @@ Landing Page
 
 {% block content %}
 <!-- Welcome Section -->
-<section id="welcome" class="h-[90vh] flex justify-center items-center text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
+<section id="welcome" class="h-[90vh] flex justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4">
         <h1 class="text-4xl sm:text-6xl font-bold mb-4">Welcome to Studiare</h1>
         <p class="text-lg sm:text-xl mb-8">Where learning meets comfort.</p>
@@ -15,7 +15,7 @@ Landing Page
 </section>
 
 <!-- About Section -->
-<section id="about" class="h-[80vh] flex flex-col justify-between items-center text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
+<section id="about" class="h-[80vh] flex flex-col justify-between items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4 mt-24 sm:mt-48">
         <h2 class="text-3xl sm:text-4xl font-bold mb-6">About Studiare</h2>
         <p class="text-base sm:text-lg mb-8">
@@ -24,21 +24,21 @@ Landing Page
     </div>
 
     <div class="flex flex-wrap justify-center space-x-8 mb-40 mt-4 fade-in">
-        <!-- Image Circles -->
-        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0">
+        <!-- Image Circles with Borders -->
+        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0 border-[3px] border-black">
             <img src="{% static 'images/landpage1.jpg' %}" alt="Landing Page 1" class="h-full w-full object-cover">
         </div>
-        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0">
+        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0 border-[3px] border-black">
             <img src="{% static 'images/landpage2.jpg' %}" alt="Landing Page 2" class="h-full w-full object-cover">
         </div>
-        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden">
+        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-[3px] border-black">
             <img src="{% static 'images/landpage3.jpg' %}" alt="Landing Page 3" class="h-full w-full object-cover">
         </div>
     </div>
 </section>
 
 <!-- Services Section -->
-<section id="menu" class="h-[80vh] flex flex-col sm:flex-row justify-center items-center text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
+<section id="menu" class="h-[80vh] flex flex-col sm:flex-row justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4 flex items-center sm:space-x-8">
         <div class="w-full sm:w-1/2 text-left sm:pr-8">
             <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Services</h2>
@@ -50,14 +50,14 @@ Landing Page
             </p>
         </div>
         
-        <div class="w-full sm:w-[70%] h-[400px] sm:h-[600px] bg-[#4a003e] overflow-hidden relative mb-8 sm:mb-0">
+        <div class="w-full sm:w-[70%] h-[400px] sm:h-[600px] bg-[#f2f2f2] overflow-hidden relative mb-8 sm:mb-0 border-[3px] border-black">
             <img src="{% static 'images/aboutstud.jpg' %}" alt="About Studiare" class="absolute top-0 left-0 w-full h-full object-cover">
         </div>
     </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="h-[80vh] flex flex-col sm:flex-row justify-center items-center text-center bg-[#1e1c1f] text-[#FFFFFF] fade-in">
+<section id="contact" class="h-[80vh] flex flex-col sm:flex-row justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4 flex flex-col sm:flex-row justify-between items-center w-full">
         <div class="w-full sm:w-1/2 text-left sm:pr-8 mb-8 sm:mb-0">
             <h2 class="text-3xl sm:text-4xl font-bold mb-4">Contact Us</h2>
@@ -68,24 +68,24 @@ Landing Page
 
         <div class="w-full sm:w-1/2 flex justify-center space-x-8 sm:space-x-10">
             <div class="flex flex-col items-center fade-in mb-4 sm:mb-0">
-                <div class="w-24 h-24 bg-[#4a003e] rounded-full flex justify-center items-center mb-2">
-                    <span class="text-[#FFFFFF] text-3xl">F</span>
+                <div class="w-24 h-24 bg-[#f2f2f2] rounded-full flex justify-center items-center mb-2 border-[3px] border-black">
+                    <span class="text-[#555555] text-3xl">F</span>
                 </div>
-                <p class="text-sm text-[#FFFFFF]">Facebook</p>
+                <p class="text-sm text-[#555555]">Facebook</p>
             </div>
 
             <div class="flex flex-col items-center fade-in mb-4 sm:mb-0">
-                <div class="w-24 h-24 bg-[#4a003e] rounded-full flex justify-center items-center mb-2">
-                    <span class="text-[#FFFFFF] text-3xl">P</span>
+                <div class="w-24 h-24 bg-[#f2f2f2] rounded-full flex justify-center items-center mb-2 border-[3px] border-black">
+                    <span class="text-[#555555] text-3xl">P</span>
                 </div>
-                <p class="text-sm text-[#FFFFFF]">Phone</p>
+                <p class="text-sm text-[#555555]">Phone</p>
             </div>
 
             <div class="flex flex-col items-center fade-in">
-                <div class="w-24 h-24 bg-[#4a003e] rounded-full flex justify-center items-center mb-2">
-                    <span class="text-[#FFFFFF] text-3xl">G</span>
+                <div class="w-24 h-24 bg-[#f2f2f2] rounded-full flex justify-center items-center mb-2 border-[3px] border-black">
+                    <span class="text-[#555555] text-3xl">G</span>
                 </div>
-                <p class="text-sm text-[#FFFFFF]">Gmail</p>
+                <p class="text-sm text-[#555555]">Gmail</p>
             </div>
         </div>
     </div>
