@@ -2,38 +2,33 @@
 {% load static %}
 
 {% block title %}
-About Us
+Studiare - About Us
 {% endblock %}
 
 {% block content %}
-<section id="about-us" class="min-h-screen flex items-center justify-center bg-[#fcfcfc] text-[#333333] px-4">
-    <div class="section-content max-w-[1300px] mx-auto p-4 flex flex-col lg:flex-row items-center">
-        <!-- Left text content -->
-        <div class="w-full lg:w-1/2 text-left lg:pr-8 mb-8 lg:mb-0">
-            <h2 class="text-4xl font-bold mb-4">About Us</h2>
-            <p class="text-lg mb-4">
-                Welcome to <strong>Studiare</strong>, your go-to hub for productive and focused study sessions. 
-                At Studiare, we understand the importance of having a conducive environment for learning, 
-                whether you're preparing for exams, working on a project, or simply seeking a quiet space to focus. 
-            </p>
-            <p class="text-lg mb-4">
-                Our innovative platform allows you to book study spaces or slots on an hourly basis, giving you 
-                flexibility and affordability. Designed with comfort and functionality in mind, our spaces 
-                are equipped with everything you need to achieve your goals, including high-speed internet, 
-                ergonomic seating, and distraction-free zones.
-            </p>
-            <p class="text-lg">
-                Join us at Studiare and experience a new way to study, collaborate, and grow. Whether you're a student, 
-                professional, or lifelong learner, we're here to help you make the most of your time. 
-                Let's create success—one focused hour at a time!
-            </p>
-        </div>
-        <!-- Right circle with image -->
-        <div class="w-full lg:w-1/2 flex justify-center">
-            <div class="h-[500px] w-[500px] rounded-full overflow-hidden bg-gray-300 border-[3px] border-black mb-8 lg:mb-0">
-                <img src="{% static 'images/about_us.jpg' %}" alt="About Us" class="h-full w-full object-cover">
-            </div>
-        </div>
+<section 
+    id="about-us" 
+    class="min-h-screen flex items-center justify-center bg-cover bg-center text-[#333333] px-4"
+    style="background-image: url('{% static 'images/about_us.jpg' %}');">
+    <div class="section-content max-w-[1300px] mx-auto p-4 text-center bg-white bg-opacity-80 rounded-lg">
+        <!-- Text content -->
+        <h2 class="text-4xl font-bold mb-4">About Us</h2>
+        <p class="text-lg mb-4">
+            Welcome to <strong>Studiare</strong>, your go-to hub for productive and focused study sessions. 
+            At Studiare, we understand the importance of having a conducive environment for learning, 
+            whether you're preparing for exams, working on a project, or simply seeking a quiet space to focus. 
+        </p>
+        <p class="text-lg mb-4">
+            Our innovative platform allows you to book study spaces or slots on an hourly basis, giving you 
+            flexibility and affordability. Designed with comfort and functionality in mind, our spaces 
+            are equipped with everything you need to achieve your goals, including high-speed internet, 
+            ergonomic seating, and distraction-free zones.
+        </p>
+        <p class="text-lg">
+            Join us at Studiare and experience a new way to study, collaborate, and grow. Whether you're a student, 
+            professional, or lifelong learner, we're here to help you make the most of your time. 
+            Let's create success—one focused hour at a time!
+        </p>
     </div>
 </section>
 {% endblock %}
