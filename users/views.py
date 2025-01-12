@@ -97,6 +97,7 @@ def activate_account(request, uid):
         user = User.objects.get(id=user_id)
         user.is_active = True
         user.save()
+        
         # Assign "add_reservation" permission
         permission = Permission.objects.get(codename='add_reservation')
         user.user_permissions.add(permission)

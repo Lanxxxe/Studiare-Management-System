@@ -6,15 +6,17 @@ Landing Page
 {% endblock %}
 
 {% block content %}
+
 <!-- Welcome Section -->
-<section id="welcome" class="border-2 border-red-500 h-dvh flex justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in" 
-   style="background-image: url('{% static 'images/about_us.jpg' %}');">
-    <div class="section-content max-w-full mx-auto p-4 text-white">
+<section id="welcome" class="min-h-screen flex justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in"
+    style="background-image: url({% static 'images/about_us.jpg' %});"
+>
+    <div class="section-content max-w-full mx-auto mt-[-150px] text-white">
         <h1 class="text-4xl sm:text-6xl font-bold mb-4">Welcome to Studiare</h1>
         <p class="text-lg sm:text-xl mb-8">Where learning meets comfort.</p>
 
-        <a class="border-2 border-black py-2 px-6" href="">Sign Up</a>
-        <a class="border-2 border-black" href="">Book Now</a>
+        <a class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 me-4 rounded-md" href="">Sign Up</a>
+        <a class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-8 rounded-md" href="">Book Now</a>
     </div>
 </section>
 
@@ -94,4 +96,5 @@ Landing Page
         </div>
     </div>
 </section>
+
 {% endblock %}
