@@ -22,7 +22,7 @@
                     <th class="border border-gray-300 px-4 py-2 text-start">Date</th>
                     <th class="border border-gray-300 px-4 py-2 text-start">Time In</th>
                     <th class="border border-gray-300 px-4 py-2 text-start">Time Out</th>
-                    <th class="border border-gray-300 px-4 py-2 text-start">Total Time</th>
+                    <!-- <th class="border border-gray-300 px-4 py-2 text-start">Total Time</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -34,18 +34,18 @@
                             <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.reservation_date }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.reservation_start_time }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-start">{{ transaction.reservation.reservation_end_time }}</td>
-                            <td class="border border-gray-300 px-4 py-2 text-start">
+                            <!-- <td class="border border-gray-300 px-4 py-2 text-start">
                                 {% if item.total_time %}
                                     {{ item.total_time|time:"%H:%M:%S" }}
                                 {% else %}
                                     Not Available
                                 {% endif %}
-                            </td>
+                            </td> -->
                         </tr>
                     {% endfor %}
                 {% else %}
                 <tr class="text-black hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2 text-start">You don't have any transactions. Book a reservation now.</td>
+                    <td class="border border-gray-300 px-4 py-2 text-start", colspan="5">You don't have any transactions. Book a reservation now.</td>
                 </tr>
                 {% endif %}
             </tbody>

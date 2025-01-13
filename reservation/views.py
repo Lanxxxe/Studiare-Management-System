@@ -114,7 +114,7 @@ def reservation_list(request):
 @custom_login_required
 def reservation_transaction(request):
     user_id = request.session.get("user_id")
-    reservations = Reservation.objects.filter(user=user_id).annotate(
+    reservations = Reservation.objects.filter(user=user_id, status='Completed').annotate(
     custom_order=Case(
         When(status="Pending", then=Value(1)),
         When(status="Declined", then=Value(2)),

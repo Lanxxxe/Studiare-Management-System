@@ -45,7 +45,7 @@ class Transactions(models.Model):
         related_name="processed_transactions",
         null=True
     )
-    space = models.ForeignKey(HubSpaces, on_delete=models.CASCADE)
+    space = models.ForeignKey(HubSpaces, on_delete=models.SET_NULL, null=True)
     check_in_time = models.DateTimeField()
     check_out_time = models.DateTimeField()
     total_payment = models.DecimalField(max_digits=10, decimal_places=2)
