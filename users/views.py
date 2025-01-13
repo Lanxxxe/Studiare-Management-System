@@ -56,7 +56,7 @@ def login(request):
                     else:
                         sweetify.error(request, "Account is not active. Please confirm your email.", persistent="Okay")
                 else:
-                    sweetify.error(request, "Invalid username/email or password.", persistent="Okay")
+                    sweetify.error(request, "Invalid username or password or your account is not active.", persistent="Okay")
             except User.DoesNotExist:
                 sweetify.error(request, "User not found.", persistent="Okay")
     else:

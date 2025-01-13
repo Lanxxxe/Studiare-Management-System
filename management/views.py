@@ -70,7 +70,7 @@ def settings(request):
 
     # Fetch the user object
     user = get_object_or_404(User, id=user_id)
-    users = User.objects.exclude(is_staff=False, is_superuser=False).order_by('first_name')
+    users = User.objects.filter(is_staff=False, is_superuser=False).order_by('first_name')
     staffs = User.objects.filter(is_staff=True).exclude(id=user_id)
     spaces = HubSpaces.objects.all().order_by('-status').values()
     

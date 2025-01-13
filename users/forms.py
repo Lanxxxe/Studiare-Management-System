@@ -65,7 +65,7 @@ class RegistrationForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     identifier = forms.CharField(
-        label="Username or Email",
+        label="Username",
         widget=forms.TextInput(
             attrs={
                 "class": "w-full px-4 my-2 py-2 border border-[#f6d5b4] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#e09247]",
