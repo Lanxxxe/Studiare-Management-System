@@ -115,7 +115,7 @@
 </div>
 
 
-<div class="p-4 mt-8 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
+<!-- <div class="p-4 mt-8 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
   <h1 class="text-2xl text-gray-900 font-bold mb-2"><i class="bi bi-person-check"></i> Users</h1>
 
   <div>
@@ -124,10 +124,10 @@
         <tr class="bg-[#4A003E] text-white">
           <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
-          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Seats</th> -->
+          <th class="border border-gray-300 px-4 py-2 text-left">Seats</th>
           <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
-          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Vacants</th> -->
-          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Action</th> -->
+          <th class="border border-gray-300 px-4 py-2 text-left">Vacants</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -143,9 +143,9 @@
                 <span class="text-red-600">Inactive</span>
                 {% endif %}
               </td>
-              <!-- <td class="border border-gray-300 px-4 py-2">
+              <td class="border border-gray-300 px-4 py-2">
                 <a class="text-red-700 underline underline-offset-4 ms-2" href="">Remove</a>
-              </td> -->
+              </td>
             </tr>
             {% endfor %}
           {% else %}
@@ -157,8 +157,8 @@
     </table>
   </div>
 
-  <!-- <a href="{% url 'add_new_space' %}" class="self-end bg-fuchsia-800 hover:bg-fuchsia-900 text-white text-center w-40 mt-4 py-2 rounded">Add Space</a> -->
-</div>
+  <a href="{% url 'add_new_space' %}" class="self-end bg-fuchsia-800 hover:bg-fuchsia-900 text-white text-center w-40 mt-4 py-2 rounded">Add Space</a>
+</div> -->
 
 <script>
   document.querySelector('#settings').classList.add("bg-white");
