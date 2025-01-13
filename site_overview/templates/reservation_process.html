@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block title %}
-Reservation Process
+Studiare - Reservation Process
 {% endblock %}
 
 {% block content %}
 <section id="reservation-header"
-    class="min-h-screen flex flex-col justify-center items-center text-center bg-[#fcfcfc] text-[#333333] px-4">
+    class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center text-white px-4"
+    style="background-image: url('{% static 'images/about_us.jpg' %}');">
     <!-- Title and Smaller Text Inside One Div -->
     <div class="mb-8">
         <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
@@ -18,32 +19,49 @@ Reservation Process
         </div>
     </div>
 
-    <!-- All Images Inside a Single Div -->
     <div class="flex flex-wrap gap-4 justify-center">
-        <img src="{% static 'images/res1.png' %}" alt="Reservation Image 1"
-            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
-            onclick="openModal('{% static 'images/res1.png' %}', 'Once you login, your UI should look like this. On the right side of the screen you can see a table, click the reserve button of a table type to your liking.')" />
-        <img src="{% static 'images/res2.png' %}" alt="Reservation Image 2"
-            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
-            onclick="openModal('{% static 'images/res2.png' %}', 'You will then be redirected to a page where you can input your date and time of your check-in and check-out.')" />
-        <img src="{% static 'images/res3.png' %}" alt="Reservation Image 3"
-            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
-            onclick="openModal('{% static 'images/res3.png' %}', 'Once you are done, you can now press the <em>Reserve</em> button.')" />
-        <img src="{% static 'images/res4.png' %}" alt="Reservation Image 4"
-            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
-            onclick="openModal('{% static 'images/res4.png' %}', 'You will then be redirected to your dashboard, you have successfully reserved a space at Studiare, congratulations!')" />
-        <img src="{% static 'images/res5.png' %}" alt="Reservation Image 5"
-            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
-            onclick="openModal('{% static 'images/res5.png' %}', 'As you can notice, your reservations went up by one, click <em>view</em> to see your reservations.')" />
-        <img src="{% static 'images/res6.png' %}" alt="Reservation Image 6"
-            class="w-full sm:w-[48%] lg:w-[30%] h-auto object-cover rounded-md cursor-pointer border-2 border-black transition-transform hover:scale-105"
-            onclick="openModal('{% static 'images/res6.png' %}', 'You can see all your reservations here.')" />
+        <div class="w-full sm:w-[48%] lg:w-[30%] relative">
+            <img src="{% static 'images/res1.png' %}" alt="Reservation Image 1"
+                class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
+                onclick="openModal('{% static 'images/res1.png' %}', 'Once you login, your UI should look like this. On the right side of the screen you can see a table, click the reserve button of a table type to your liking.')" />
+            <span class="absolute bottom-4 right-4 bg-white text-black text-lg font-bold px-2 py-1 rounded-full">1</span>
+        </div>
+        <div class="w-full sm:w-[48%] lg:w-[30%] relative">
+            <img src="{% static 'images/res2.png' %}" alt="Reservation Image 2"
+                class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
+                onclick="openModal('{% static 'images/res2.png' %}', 'You will then be redirected to a page where you can input your date and time of your check-in and check-out.')" />
+            <span class="absolute bottom-4 right-4 bg-white text-black text-lg font-bold px-2 py-1 rounded-full">2</span>
+        </div>
+        <div class="w-full sm:w-[48%] lg:w-[30%] relative">
+            <img src="{% static 'images/res3.png' %}" alt="Reservation Image 3"
+                class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
+                onclick="openModal('{% static 'images/res3.png' %}', 'Once you are done, you can now press the <em>Reserve</em> button.')" />
+            <span class="absolute bottom-4 right-4 bg-white text-black text-lg font-bold px-2 py-1 rounded-full">3</span>
+        </div>
+        <div class="w-full sm:w-[48%] lg:w-[30%] relative">
+            <img src="{% static 'images/res4.png' %}" alt="Reservation Image 4"
+                class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
+                onclick="openModal('{% static 'images/res4.png' %}', 'You will then be redirected to your dashboard, you have successfully reserved a space at Studiare, congratulations!')" />
+            <span class="absolute bottom-4 right-4 bg-white text-black text-lg font-bold px-2 py-1 rounded-full">4</span>
+        </div>
+        <div class="w-full sm:w-[48%] lg:w-[30%] relative">
+            <img src="{% static 'images/res5.png' %}" alt="Reservation Image 5"
+                class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
+                onclick="openModal('{% static 'images/res5.png' %}', 'As you can notice, your reservations went up by one, click <em>view</em> to see your reservations.')" />
+            <span class="absolute bottom-4 right-4 bg-white text-black text-lg font-bold px-2 py-1 rounded-full">5</span>
+        </div>
+        <div class="w-full sm:w-[48%] lg:w-[30%] relative">
+            <img src="{% static 'images/res6.png' %}" alt="Reservation Image 6"
+                class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
+                onclick="openModal('{% static 'images/res6.png' %}', 'You can see all your reservations here.')" />
+            <span class="absolute bottom-4 right-4 bg-white text-black text-lg font-bold px-2 py-1 rounded-full">6</span>
+        </div>
     </div>
-
+    
 
     <!-- Modal -->
     <div id="imageModal"
-        class="fixed inset-0 bg-[#f9f9f9] bg-opacity-90 flex justify-center items-center overflow-y-auto hidden z-50">
+        class="fixed inset-0 bg-[#000000] bg-opacity-80 flex justify-center items-center overflow-y-auto hidden z-50">
         <div
             class="relative bg-[#ffffff] text-[#333333] p-4 rounded-md max-w-[90vw] max-h-[90vh] flex flex-col justify-center items-center shadow-lg">
             <button id="closeModal"
@@ -53,7 +71,6 @@ Reservation Process
             <img id="modalImage" src="" alt="Modal Image"
                 class="max-w-[80vw] max-h-[70vh] object-contain mb-4 rounded-md" />
             <div id="modalText" class="text-lg text-center px-4 text-black font-semibold">
-                <!-- Darker text color here -->
                 <!-- Dynamic text will be inserted here -->
             </div>
         </div>
@@ -70,7 +87,6 @@ Reservation Process
         // Display the modal
         document.getElementById("imageModal").classList.remove("hidden");
     }
-
 
     // Function to close the modal
     document.getElementById("closeModal").addEventListener("click", function () {
