@@ -114,6 +114,52 @@
   <a href="{% url 'add_new_space' %}" class="self-end bg-fuchsia-800 hover:bg-fuchsia-900 text-white text-center w-40 mt-4 py-2 rounded">Add Space</a>
 </div>
 
+
+<div class="p-4 mt-8 flex flex-col flex-wrap gap-4 rounded border-2 border-gray-400">
+  <h1 class="text-2xl text-gray-900 font-bold mb-2"><i class="bi bi-person-check"></i> Users</h1>
+
+  <div>
+    <table class="table-auto w-full border-collapse border border-purple-900">
+      <thead>
+        <tr class="bg-[#4A003E] text-white">
+          <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+          <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Seats</th> -->
+          <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Vacants</th> -->
+          <!-- <th class="border border-gray-300 px-4 py-2 text-left">Action</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        {% if user %}
+          {% for user in users %}
+            <tr class="hover:bg-gray-100">
+              <td class="border border-gray-300 px-4 py-2">{{ user.first_name }} {{ user.last_name }}</td>
+              <td class="border border-gray-300 px-4 py-2">{{ user.email }}</td>
+              <td class="border border-gray-300 px-4 py-2">
+                {% if user.is_active %}
+                <span class="text-green-800">Active</span>
+                {% else %}
+                <span class="text-red-600">Inactive</span>
+                {% endif %}
+              </td>
+              <!-- <td class="border border-gray-300 px-4 py-2">
+                <a class="text-red-700 underline underline-offset-4 ms-2" href="">Remove</a>
+              </td> -->
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td class="text-center" colspan="6">You don't have any spaces. Add <a href="{% url 'add_new_space' %}">here</a></td>
+            </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <a href="{% url 'add_new_space' %}" class="self-end bg-fuchsia-800 hover:bg-fuchsia-900 text-white text-center w-40 mt-4 py-2 rounded">Add Space</a> -->
+</div>
+
 <script>
   document.querySelector('#settings').classList.add("bg-white");
   document.querySelector('#settings').classList.add("text-[#4A003E]");

@@ -70,8 +70,9 @@ def settings(request):
 
     # Fetch the user object
     user = get_object_or_404(User, id=user_id)
+    users = User.objects.exclude(is_staff=False, is_superuser=False).order_by('first_name')
     staffs = User.objects.filter(is_staff=True).exclude(id=user_id)
-    spaces = HubSpaces.objects.all().order_by('space_name').values()
+    spaces = HubSpaces.objects.all().order_by('-status').values()
     
     # Forms for updating user information and password
     user_form = UpdateUserForm(instance=user)
@@ -109,6 +110,7 @@ def settings(request):
         'password_form': password_form,
         'staffs': staffs,
         'spaces': spaces,
+        'users' : users
     }
     return render(request, 'admin_settings.html', context)
 
