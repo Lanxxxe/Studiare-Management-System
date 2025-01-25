@@ -112,6 +112,7 @@ def settings(request):
         'spaces': spaces,
         'users' : users
     }
+    
     return render(request, 'admin_settings.html', context)
 
 

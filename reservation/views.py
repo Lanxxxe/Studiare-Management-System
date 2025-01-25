@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Case, When, Value
+from django.db import transaction
 from django.contrib.auth.hashers import check_password, make_password
 from management.models import HubSpaces
 from management.utils import custom_login_required
@@ -207,25 +208,33 @@ def reserve_space(request, space_id, reservation_id=None):
                 return redirect("reserve_space", space_id=space_id)
 
         # Create or update the reservation
-        if current_reservation:
-            # Update existing reservation
-            current_reservation.reservation_date = checkin_date
-            current_reservation.reservation_start_time = checkin_datetime.time()
-            current_reservation.reservation_end_time = checkout_datetime.time()
-            current_reservation.save()
-            sweetify.success(request, "Reservation successfully updated!")
-        else:
-            # Create new reservation
-            Reservation.objects.create(
-                user=user,
-                space=space,
-                reservation_date=checkin_date,
-                reservation_start_time=checkin_datetime.time(),
-                reservation_end_time=checkout_datetime.time(),
-            )
+        try:
+            with transaction.atomic():
+                if current_reservation:
+                    # Update existing reservation
+                    current_reservation.reservation_date = checkin_date
+                    current_reservation.reservation_start_time = checkin_datetime.time()
+                    current_reservation.reservation_end_time = checkout_datetime.time()
+                    current_reservation.save()
+                    sweetify.success(request, "Reservation successfully updated!")
+                else:
+                    # Create new reservation
+                    Reservation.objects.create(
+                        user=user,
+                        space=space,
+                        reservation_date=checkin_date,
+                        reservation_start_time=checkin_datetime.time(),
+                        reservation_end_time=checkout_datetime.time(),
+                    )
+                    sweetify.success(request, "Reservation successfully created!", button="Great!")
 
-            sweetify.success(request, "Reservation successfully created!", button="Great!")
-
+        except Exception as e:
+            # Rollback transaction if an error occurs
+            sweetify.error(request, f"An error occurred while processing your request: {e}")
+            if reservation_id:
+                return redirect("update_reserve_space", space_id=space_id, reservation_id=reservation_id)
+            else:
+                return redirect("reserve_space", space_id=space_id)
 
         return redirect("reservation_home")  # Redirect to the reservation home page
 

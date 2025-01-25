@@ -2,7 +2,7 @@ from django import forms
 from .models import HubSpaces
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from django.core.validators import RegexValidator
 
 
 class RegistrationForm(UserCreationForm):
@@ -40,6 +40,12 @@ class RegistrationForm(UserCreationForm):
             }
         ), 
         min_length=8,
+        validators=[
+            RegexValidator(
+                regex=r'^(?=.*\d).+$',
+                message="Password must contain at least one number.",
+            )
+        ],
         label="Password"
     )
     password2 = forms.CharField(
@@ -127,6 +133,7 @@ class LoginForm(AuthenticationForm):
             }
         ),
         required=True,
+        min_length=8,
         label="Password"
     )
 
@@ -145,12 +152,25 @@ class UpdateUserForm(forms.ModelForm):
 
 class UpdatePasswordForm(forms.Form):
     current_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
-        label="Current Password"
+        widget=forms.PasswordInput(
+            attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}
+            ),
+        label="Current Password",
+        min_length=8
     )
     new_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
-        label="New Password"
+        widget=forms.PasswordInput(
+            attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}
+        
+        ),
+        label="New Password",
+        min_length=8,
+        validators=[
+            RegexValidator(
+                regex=r'^(?=.*\d).+$',
+                message="Password must contain at least one number.",
+            )
+        ],
     )
 
     confirm_password = forms.CharField(
@@ -214,7 +234,14 @@ class UpdateStaffAccountForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'my-3 block w-full px-3 py-2 bg-transparent border-2 border-[#BEBEBE] text-black rounded-md focus:border-transparent focus:outline-none focus:ring focus:ring-fuchsia-400 placeholder-gray-300'}),
         label="Password",
-        required=False
+        required=False,
+        min_length=8,
+        validators=[
+            RegexValidator(
+                regex=r'^(?=.*\d).+$',
+                message="Password must contain at least one number.",
+            )
+        ],
     )
 
     class Meta:

@@ -1,6 +1,8 @@
 from django import forms
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(
@@ -11,6 +13,12 @@ class RegistrationForm(forms.ModelForm):
             }
         ),
         min_length=8,
+        validators=[
+            RegexValidator(
+                regex=r'^(?=.*\d).+$',
+                message="Password must contain at least one number.",
+            )
+        ],
     )
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(
