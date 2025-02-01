@@ -10,15 +10,15 @@
 
 {% block content %} 
 
-<section id="menu" class="flex justify-center items-center text-center text-[#FFFFFF] fade-in">
-    <div class="section-content mx-auto p-4 flex w-full">
+<section id="menu" class="justify-center b items-center text-center text-[#FFFFFF] fade-in">
+    <div class="grid grid-cols-1 md:grid-cols-2 mx-auto p-4 flex flex-wrap w-full">
         <!-- Left Section with Separate Containers -->
-        <div class="flex-1 p-8">
+        <div class="col-span-1 p-0 md:p-8">
             <!-- Container for Gray Rectangle -->
-            <div class="gray-rectangle-container flex items-center justify-center mb-2">
+            <div class="gray-rectangle-container flex items-center justify-start mb-2">
                 <div class="" id="calendar"></div>
             </div>
-            <div class="purple-rectangle-container flex gap-8 mt-12">
+            <div class="purple-rectangle-container flex flex-wrap gap-8 mt-12">
                 <div class="small-rectangle w-[350px] h-[142px] bg-[#4a003e] flex flex-1 justify-between items-center py-4 px-6 rounded-md">
                     <div class="">
                         <p class="text-[24px]">Your Reservations</p>
@@ -41,9 +41,9 @@
             </div>
         </div>
         
-        <div class="flex-1">
-            <div class="min-h-[700px] overflow-y-auto p-4 w-full border-2 border-slate-300 relative rounded-md">
-                <h1 class="text-black text-2xl text-start font-bold mb-4">Hub Spaces Information</h1>
+        <div class="col-span-1 mt-12 md:mt-0">
+            <div class="min-h-[700px] overflow-y-scroll p-4 w-full border-2 border-slate-300 relative rounded-md">
+                <h1 class="text-black text-lg md:text-2xl text-start font-bold mb-4">Hub Spaces Information</h1>
                 <table class="w-full text-white text-sm table-auto">
                     <thead>
                         <tr class="bg-[#4A003E] text-white max-h-96 overflow-y-scroll">

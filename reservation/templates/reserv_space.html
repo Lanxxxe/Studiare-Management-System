@@ -4,8 +4,8 @@
 
 {% block content %} 
 
-<section id="" class="min-h-dvh flex flex-col justify-center items-center fade-in mx-12">
-    <div class="flex flex-col gap-2 border-2 border-gray-400 rounded-md p-8 w-2/4">
+<section id="" class="min-h-dvh flex justify-center items-start lg:items-center  fade-in">
+    <div class="w-full md:3/4 lg:w-2/4 flex flex-col gap-2 border-2 border-gray-400 rounded-md p-8">
         <h1 class="text-2xl text-gray-900 font-bold mb-2"><i class="bi bi-person"></i> 
             {% if reservation %}
                 Updated Reservation
@@ -41,21 +41,28 @@
                     </div>
                 {% endif %}
                 
-                <div class="grid grid-cols-3 gap-x-4">
-                    <label for="date">Date:</label>
-                    <label for="time">Check In Time:</label>
-                    <label for="time">Checkout Time:</label>
-                    <input type="date" id="checkin_date" name="checkin_date" 
-                        class="my-3 block w-full px-3 py-2 bg-gray-200 text-black rounded-md" 
-                        min="{{ date_today }}" value="{{ reservation.reservation_date }}" required>        
-                    <input type="time" id="start_time" name="start_time" 
-                        class="my-3 block w-full px-3 py-2 bg-gray-200 text-black rounded-md" 
-                        value="{{ reservation.reservation_start_time }}" 
-                        min="08:00" max="20:00" required>
-                    <input type="time" id="end_time" name="end_time" 
-                        class="my-3 block w-full px-3 py-2 bg-gray-200 text-black rounded-md" 
-                        value="{{ reservation.reservation_end_time }}"
-                        min="09:00" max="22:00">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4">
+                    <div>
+                        <label for="date">Date:</label>
+                        <input type="date" id="checkin_date" name="checkin_date" 
+                            class="my-3 block w-full px-3 py-2 bg-gray-200 text-black rounded-md" 
+                            min="{{ date_today }}" value="{{ reservation.reservation_date }}" required>        
+                    </div>
+                    <div>
+                        <label for="time">Check In Time:</label>
+                        <input type="time" id="start_time" name="start_time" 
+                            class="my-3 block w-full px-3 py-2 bg-gray-200 text-black rounded-md" 
+                            value="{{ reservation.reservation_start_time }}" 
+                            min="08:00" max="20:00" required>
+                    </div>
+
+                    <div>
+                        <label for="time">Checkout Time:</label>
+                        <input type="time" id="end_time" name="end_time" 
+                            class="my-3 block w-full px-3 py-2 bg-gray-200 text-black rounded-md" 
+                            value="{{ reservation.reservation_end_time }}"
+                            min="09:00" max="22:00">
+                    </div>
                 </div>
                 
                 <div class="flex gap-2 justify-end">

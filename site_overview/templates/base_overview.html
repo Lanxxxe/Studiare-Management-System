@@ -9,53 +9,119 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>{% block title %}Studiare{% endblock %}</title>
 </head>
 
 <body class="bg-[#1e1c1f] text-[#4a003e] overflow-x-hidden">
-<!-- Navigation -->
-<nav class="bg-[#4a003e] px-4 py-4 sm:py-6 sticky top-0 z-10">
-    <div class="flex flex-wrap items-center justify-between text-[#F7E7CE]">
-        <!-- Logo Section -->
-        <div class="flex items-center w-full sm:w-auto mb-4 sm:mb-0">
-            <img src="{% static 'images/stud.png' %}" alt="Studiare Logo" class="h-12 sm:h-16">
+
+<nav class="bg-[#4a003e] sticky top-0 z-10 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+            <a href="{% url 'landing_page' %}" class="text-xl font-bold text-slate-200 ">
+            Studiare
+            </a>
         </div>
 
-        <!-- Navigation Links -->
-        <div class="flex flex-col sm:flex-row sm:space-x-10 text-center text-sm sm:text-lg w-full sm:w-auto sm:justify-end">
-            <a href="{% url 'landing_page' %}" class="py-2 hover:text-[#F7E7CE] transition-colors">Home</a>
-            <a href="{% url 'reservation_process' %}" class="py-2 hover:text-[#F7E7CE] transition-colors">Reservation</a>
-            <a href="{% url 'about_us' %}" class="py-2 hover:text-[#F7E7CE] transition-colors">About Us</a>
+        <!-- Links (Desktop) -->
+        <div class="hidden md:flex md:items-center md:space-x-6">
+            <a href="{% url 'landing_page' %}" class="text-slate-200 hover:text-[#F7E7CE] transition-colors">
+            Home
+            </a>
+            <a href="{% url 'reservation_process' %}" class="text-slate-200 hover:text-[#F7E7CE] transition-colors">
+            Reservation
+            </a>
+            <a href="{% url 'about_us' %}" class="text-slate-200 hover:text-[#F7E7CE] transition-colors">
+            About Us
+            </a>
         </div>
 
-        <!-- Sign-Up/Login Button -->
-        <div class="flex justify-end w-full sm:w-auto mt-4 sm:mt-0">
-            <div
-                class="inline-flex items-center bg-[#310029] text-[#FFFFFF] px-4 py-2 sm:px-6 sm:py-3 rounded-full divide-x divide-[#4a003e]">
-                <a href="{% url 'registration' %}"
-                    class="px-2 sm:px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-l-full">
-                    Sign Up
-                </a>
-                <a href="{% url 'login' %}"
-                    class="px-2 sm:px-4 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-r-full">
-                    Login
-                </a>
-            </div>
+        <!-- Login Button (Desktop) -->
+        <div class="hidden md:flex md:items-center">
+            <a
+            href="{% url 'login' %}"
+            class="ml-6 px-7 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+            Login
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="flex items-center md:hidden px-4">
+            <button
+            id="mobile-menu-button"
+            class="text-slate-200 hover:text-[#F7E7CE] transition-colors focus:outline-none"
+            >
+            <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+            </svg>
+            </button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (Dropdown) -->
+    <div id="mobile-menu" class="md:hidden hidden">
+        <div class="px-4 pt-2 pb-3 space-y-4 sm:px-3">
+        <a
+            href="{% url 'landing_page' %}"
+            class="block text-slate-200 hover:text-[#F7E7CE] transition-colors"
+        >
+            Home
+        </a>
+        <a
+            href="{% url 'reservation_process' %}"
+            class="block text-slate-200 hover:text-[#F7E7CE] transition-colors"
+        >
+            Reservation
+        </a>
+        <a
+            href="{% url 'about_us' %}"
+            class="block text-slate-200 hover:text-[#F7E7CE] transition-colors"
+        >
+            About Us
+        </a>
+        <a
+            href="{% url 'login' %}"
+            class="block px-3 py-2 text-center mt-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        >
+            Login
+        </a>
         </div>
     </div>
 </nav>
-
 
     <!-- Content Block -->
     {% block content %}
     {% endblock %}
 
     <!-- Footer -->
-    <footer class="bg-[#000000] text-[#F7E7CE] text-center py-4">
-        <p>&copy; 2048 Studiare. All rights reserved.</p>
+    <footer class="bg-[#4a003e] text-[#F7E7CE] text-center py-4">
+        <p>&copy; 2025 Studiare</p>
     </footer>
 
+    <script>
+        document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobile-menu");
+          mobileMenu.classList.toggle("hidden");
+        });
+    </script>
     <!-- <script src="{% static 'js/scripts.js' %}"></script> -->
 
     {% load sweetify %}

@@ -7,14 +7,14 @@
 <section id="menu" class="min-h-96 flex flex-col items-start justify-start text-[#FFFFFF] fade-in">
     <!-- Orange Transactions Text at the Top Left -->
     <div>
-        <h1 class="text-black text-2xl font-bold ms-14">
+        <h1 class="text-black text-2xl font-bold ms-4 md:ms-14">
             <a href="{% url 'reservation_home' %}" class="text-black"><i class="bi bi-arrow-left-circle"></i></a> Transactions
         </h1>
     </div>
 
     <!-- Purple Table in the Center -->
-    <div class="min-h-96 flex justify-center items-start w-full px-12 py-8">
-        <table class="w-full text-white text-sm table-auto">
+    <div class="min-h-96 min-w-2xl md:w-full border-2 flex justify-center items-start overflow-x-auto px-2 md:px-12 py-8">
+        <table class="min-w-2xl md:w-full text-white text-sm table-auto mx-4overflow-x-auto">
             <thead>
                 <tr class="bg-[#4A003E] text-white">
                     <th class="border border-gray-300 px-4 py-2 text-start">Space</th>

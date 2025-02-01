@@ -12,41 +12,41 @@ Landing Page
     style="background-image: url({% static 'images/about_us.jpg' %});"
 >
     <div class="section-content max-w-full mx-auto mt-[-150px] text-white">
-        <h1 class="text-4xl sm:text-6xl font-bold mb-4">Welcome to Studiare</h1>
-        <p class="text-lg sm:text-xl mb-8">Where learning meets comfort.</p>
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Studiare</h1>
+        <p class="text-md md:text-xl mb-8">Where learning meets comfort.</p>
 
-        <a class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 me-4 rounded-md" href="{% url 'registration' %}">Sign Up</a>
-        <a class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 px-8 rounded-md" href="{% url 'reservation_process' %}">Book Now</a>
+        <a class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded me-2 md:py-3 md:px-8 md:me-4 md:rounded-md" href="{% url 'registration' %}">Sign Up</a>
+        <a class="bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2 px-4 rounded md:py-3 md:px-8 md:rounded-md" href="{% url 'reservation_process' %}">Book Now</a>
     </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="min-h-screen py-20 flex flex-col justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
+<section id="about" class="min-h-screen py-0 md:py-20 flex flex-col justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-6">About Studiare</h2>
-        <p class="text-base sm:text-lg mb-8">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-[#4a003e]">About Studiare</h2>
+        <p class="text-base md:text-lg mb-8 max-w-4xl">
             Welcome to STUDIARE — your ultimate study hub, where modern design meets functionality to create the perfect environment for focus and collaboration. Our thoughtfully crafted spaces are designed to inspire creativity, enhance productivity, and foster a sense of community for learners and professionals alike.
         </p>
     </div>
 
-    <div class="flex flex-wrap justify-center space-x-8 mt-8 fade-in">
-        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0 border-[3px] border-black">
+    <div class="hidden md:flex flex-wrap justify-center space-x-8 md:mt-8 fade-in">
+        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0">
             <img src="{% static 'images/landpage1.jpg' %}" alt="Landing Page 1" class="h-full w-full object-cover">
         </div>
-        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0 border-[3px] border-black">
+        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden mb-4 sm:mb-0">
             <img src="{% static 'images/landpage2.jpg' %}" alt="Landing Page 2" class="h-full w-full object-cover">
         </div>
-        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-[3px] border-black">
+        <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden">
             <img src="{% static 'images/landpage3.jpg' %}" alt="Landing Page 3" class="h-full w-full object-cover">
         </div>
     </div>
 </section>
 
 <!-- Services Section -->
-<section id="menu" class="min-h-screen py-20 flex flex-col sm:flex-row justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
+<section id="menu" class="min-h-screen py-0 md:py-16 flex flex-col sm:flex-row justify-center items-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4 flex flex-col sm:flex-row items-center sm:space-x-8">
-        <div class="w-full sm:w-1/2 text-left sm:pr-8">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Services</h2>
+        <div class="w-full sm:w-1/2 text-left sm:pr-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#4a003e]">Our Services</h2>
             <p class="text-base sm:text-lg mb-8">
                 At Studiare, we provide the ideal environment for learners, professionals, and creative minds. Whether you need a quiet space to focus, a collaborative zone to brainstorm with your team, or a comfortable spot to unwind while staying productive, our services are tailored to meet your needs.
             </p>
@@ -56,40 +56,40 @@ Landing Page
         </div>
 
         <!-- Updated Image Section -->
-        <div class="w-full sm:w-[70%] bg-[#f2f2f2] flex justify-center items-center relative mb-8 sm:mb-0 border-[3px] border-black">
-            <img src="{% static 'images/aboutstud.jpg' %}" alt="About Studiare" class="max-w-full max-h-full object-contain">
+        <div class="w-full sm:w-[70%] bg-[#f2f2f2] flex justify-center items-center relative mb-8 sm:mb-0">
+            <img src="{% static 'images/aboutstud.jpg' %}" alt="About Studiare" class="max-w-full max-h-full object-contain rounded">
         </div>
     </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="min-h-screen py-20 flex flex-col sm:flex-row justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
+<section id="contact" class="min-h-screen py-0 md:py-16 flex flex-col sm:flex-row justify-center items-center text-center bg-[#fcfcfc] text-[#333333] fade-in">
     <div class="section-content max-w-[1200px] mx-auto p-4 flex flex-col sm:flex-row justify-between items-center w-full">
         <div class="w-full sm:w-1/2 text-left sm:pr-8 mb-8 sm:mb-0">
-            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Contact Us</h2>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#4a003e]">Contact Us</h2>
             <p class="text-base sm:text-lg mb-8">
                 Reach out to us for any inquiries or reservations. We're always here to help you get the most out of your experience.
             </p>
         </div>
 
-        <div class="w-full sm:w-1/2 flex justify-center space-x-8 sm:space-x-10">
+        <div class="w-full sm:w-1/2 flex flex-wrap justify-center space-x-8 sm:space-x-10">
             <div class="flex flex-col items-center fade-in mb-4 sm:mb-0">
-                <div class="w-24 h-24 bg-[#f2f2f2] rounded-full flex justify-center items-center mb-2 border-[3px] border-black">
-                    <span class="text-[#555555] text-3xl">F</span>
+                <div class="w-24 h-24 bg-slate-200 rounded-full flex justify-center items-center mb-2">
+                    <span class="text-blue-600 text-3xl"><i class="bi bi-facebook"></i></span>
                 </div>
                 <p class="text-sm text-[#555555]">Facebook</p>
             </div>
 
             <div class="flex flex-col items-center fade-in mb-4 sm:mb-0">
-                <div class="w-24 h-24 bg-[#f2f2f2] rounded-full flex justify-center items-center mb-2 border-[3px] border-black">
-                    <span class="text-[#555555] text-3xl">P</span>
+                <div class="w-24 h-24 bg-slate-200 rounded-full flex justify-center items-center mb-2">
+                    <span class="text-green-500 text-3xl"><i class="bi bi-telephone-inbound-fill"></i></span>
                 </div>
                 <p class="text-sm text-[#555555]">Phone</p>
             </div>
 
             <div class="flex flex-col items-center fade-in">
-                <div class="w-24 h-24 bg-[#f2f2f2] rounded-full flex justify-center items-center mb-2 border-[3px] border-black">
-                    <span class="text-[#555555] text-3xl">G</span>
+                <div class="w-24 h-24 bg-slate-200 rounded-full flex justify-center items-center mb-2">
+                    <span class="text-blue-500 text-3xl"><i class="bi bi-envelope-at-fill"></i></span>
                 </div>
                 <p class="text-sm text-[#555555]">Gmail</p>
             </div>

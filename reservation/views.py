@@ -16,7 +16,7 @@ import sweetify
 from datetime import datetime, date, timedelta
 
 def reservation_index(request):
-    return render(request, 'reservation.html')
+    return render(request, 'reservation_home.html')
 
 
 def user_feedback(request):

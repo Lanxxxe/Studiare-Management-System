@@ -17,41 +17,89 @@
     <title> {% block title %} {% endblock %}</title>
 </head>
 
-<body class="flex flex-col min-h-screen overflow-x-hidden">
+<body class="overflow-x-hidden">
+    <nav class="m-4 md:m-8 rounded-2xl bg-[#4a003e]">
+        <div class="p-4 md:p-6 flex  md:flex-row justify-between items-center text-black">
+          <!-- Left Section (Logo, User Name, Settings Icon) -->
+          <div class="flex items-center space-x-4">
+            <!-- Gray Placeholder -->
+            <img class="h-12 w-12 sm:h-16 sm:w-16 rounded-md" src="{% static 'images/user_profile.png' %}" alt="">
+            <span class="text-[#F7E7CE] text-xl sm:text-2xl">{{ user_name }}</span>
+            <a href="{% url 'user_profile' %}" class="text-white text-xl sm:text-2xl">
+              <i class="bi bi-gear"></i>
+            </a>
+          </div>
 
-    <nav class="my-8 mx-12 rounded-2xl bg-[#4a003e] px-4 py-6 top-0 z-10">
-        <div class="flex justify-between items-center text-black px-8">
-            <div class="flex items-center space-x-4">
-                <!-- Gray Placeholder -->
-                <img class="h-16 w-16 rounded-md" src="{% static 'images/user_profile.png' %}" alt="">
-                <span class="text-[#F7E7CE] text-2xl">{{ user_name }}</span>
-                <a href="{% url 'user_profile' %}" class="text-white text-2xl"><i class="bi bi-gear"></i></a>
-            </div>
-
-            <div class="flex space-x-4">
-                <a href="{% url 'user_feedback' %}"
-                    class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
-                    Provide Feedback
-                </a>
-                <!-- <a href="{% url 'user_feedback' %}"
-                    class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
-                    Provide Feedback
-                </a> -->
-                <a href="{% url 'logout' %}"
-                    class="bg-[#310029] text-[#FFFFFF] text-lg px-6 py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full">
-                    Log Out
-                </a>
-            </div>
+          <div class="flex items-center md:hidden px-4">
+            <button
+            id="mobile-menu-button"
+            class="text-slate-200 hover:text-[#F7E7CE] transition-colors focus:outline-none"
+            >
+            <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+            </svg>
+            </button>
         </div>
-    </nav>
+          
+          <!-- Right Section (Buttons) -->
+          <div class="hidden md:flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="{% url 'user_feedback' %}"
+              class="bg-[#310029] text-[#FFFFFF] text-base sm:text-lg px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full text-center">
+              Provide Feedback
+            </a>
+            <a href="{% url 'logout' %}"
+              class="bg-[#310029] text-[#FFFFFF] text-base sm:text-lg px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#F7E7CE] hover:text-[#4a003e] transition-colors rounded-full text-center">
+              Log Out
+            </a>
+          </div>
+
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden">
+          <div class="px-4 pt-2 pb-3 space-y-4 sm:px-3">
+            <a
+            href="{% url 'user_feedback' %}"
+            class="block text-slate-200 hover:text-[#F7E7CE] transition-colors"
+            >
+                Provide Feedback
+            </a>
+            <a
+                href="{% url 'logout' %}"
+                class="block text-slate-200 hover:text-[#F7E7CE] transition-colors"
+            >
+                Logout
+            </a>
+          </div>
+        </div>
+      </nav>
 
     <!-- Main content -->
-    <div class="flex-1">
+    <div >
         {% block content %}
         {% endblock %}
     </div>
 
-    {% block local_script %} {% endblock %}
+    {% block local_script %}
+    <script>
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobile-menu");
+          mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+    {% endblock %}
 
     {% load sweetify %}
     {% sweetify %}

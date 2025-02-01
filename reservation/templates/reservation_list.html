@@ -8,13 +8,13 @@
     <div>
         <h1 class="text-black text-2xl font-bold ms-14"><a href="{% url 'reservation_home' %}" class="text-black"><i class="bi bi-arrow-left-circle"></i></a> Your Reservations</h1>
     </div>
-    <div class="section-content flex flex-wrap mx-20 p-4 mt-8 w-full gap-6">
+    <div class="section-content flex flex-wrap mx-0 md:mx-20 p-4 mt-8 w-full gap-6">
         <!-- Dynamically Generated Rectangles -->
         {% if reservations %}
             {% for reservation in reservations %}
                 <div class="w-[420px] h-[150px] bg-[#4a003e] flex justify-between items-center px-8 rounded-md">
                     <div class="w-full flex flex-col justify-start items-start">
-                        <p class="text-2xl font-bold">{{ reservation.space.space_name }}</p>
+                        <p class="text-lg md:text-2xl font-bold">{{ reservation.space.space_name }}</p>
                         <p class="mt-2">{{ reservation.reservation_date }}</p>
                         <p class="mt-4 italic text-xs font-thin">
                             [{{ reservation.reservation_id }}]
@@ -23,7 +23,7 @@
                         </p>
                     </div>
                     <div class="w-full">
-                        <h1 class="text-3xl italic font-bold">
+                        <h1 class="text-2xl md:text-3xl italic font-bold">
                             {{ reservation.status }}
                         </h1>
 

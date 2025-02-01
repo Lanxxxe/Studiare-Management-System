@@ -7,10 +7,10 @@ Studiare - Reservation Process
 
 {% block content %}
 <section id="reservation-header"
-    class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center text-white px-4"
+    class="min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center text-white"
     style="background-image: url('{% static 'images/about_us.jpg' %}');">
     <!-- Title and Smaller Text Inside One Div -->
-    <div class="mb-8">
+    <div class="mb-8 mt-12">
         <div class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             How to Book a Reservation
         </div>
@@ -19,7 +19,7 @@ Studiare - Reservation Process
         </div>
     </div>
 
-    <div class="flex flex-wrap gap-4 justify-center">
+    <div class="flex flex-wrap gap-4 justify-center pb-12">
         <div class="w-full sm:w-[48%] lg:w-[30%] relative">
             <img src="{% static 'images/res1.png' %}" alt="Reservation Image 1"
                 class="w-full h-auto object-cover rounded-md cursor-pointer border-2 border-white transition-transform hover:scale-105"
